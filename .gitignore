@@ -3,3 +3,4 @@ main.py
 README_files/
 .DS_Store
 .python-version
+*.tsv
