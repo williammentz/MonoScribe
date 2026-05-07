@@ -1,0 +1,15 @@
+[project]
+name = "autoscha"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "gnn>=1.1.9",
+    "matplotlib>=3.10.8",
+    "music21>=9.9.1",
+    "numpy>=2.4.4",
+    "pandas>=3.0.1",
+    "torch>=2.11.0",
+    "torch-geometric>=2.7.0",
+]
