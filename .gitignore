@@ -1,1 +1,5 @@
 main.py
+*.html
+README_files/
+.DS_Store
+.python-version
