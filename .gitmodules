@@ -1,6 +1,6 @@
 [submodule "AutoSchA"]
 	path = AutoSchA
 	url = https://github.com/williammentz/AutoSchA.git
-[submodule "symbolic-texture-dataset"]
-	path = symbolic-texture-dataset
+[submodule "symbolic_texture_dataset"]
+	path = symbolic_texture_dataset
 	url = https://github.com/williammentz/symbolic-texture-dataset.git
