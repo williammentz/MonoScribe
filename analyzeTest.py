@@ -5,7 +5,7 @@ from matplotlib.patches import Rectangle
 
 
 # Mozart Data
-mozart_df = pd.read_csv('outputs/test.csv')
+mozart_df = pd.read_csv('outputs/mozart-12.csv')
 
 mReduced = mozart_df[mozart_df['layer_2_score'] > 0.55]
 mRemoved = mozart_df[mozart_df['layer_2_score'] <= 0.55]
@@ -64,3 +64,66 @@ plt.colorbar(sm, ax=ax, label="Structural score")
 plt.show()
 
 mozartSummary = mozart_df.groupby('pitch_name')['layer_2_score'].agg(['mean']).sort_values('mean', ascending = False)
+
+# Beethoven Data
+beethoven_df = pd.read_csv('outputs/beethoven.csv')
+
+bReduced = beethoven_df[beethoven_df['layer_2_score'] > 0.55]
+bRemoved = beethoven_df[beethoven_df['layer_2_score'] <= 0.55]
+
+fig, ax = plt.subplots(figsize=(14, 6))
+
+for _, row in beethoven_df.iterrows():
+    ax.add_patch(
+        Rectangle(
+            (row["time_position"], row["pitch_midi"] - 0.4),
+            row["duration_seconds"],
+            0.8,
+            color=plt.cm.inferno(row["layer_2_score"]),
+            alpha=0.95,
+        )
+    )
+
+ax.set_xlim(beethoven_df["time_position"].min(), (beethoven_df["time_position"] + beethoven_df["duration_seconds"]).max())
+ax.set_ylim(beethoven_df["pitch_midi"].min() - 2, beethoven_df["pitch_midi"].max() + 2)
+
+ax.set_xlabel("Time")
+ax.set_ylabel("Pitch MIDI")
+ax.set_title("Beethoven AutoSchA Full Heatmap")
+
+sm = plt.cm.ScalarMappable(cmap="inferno", norm=plt.Normalize(0, 1))
+sm.set_array([])
+plt.colorbar(sm, ax=ax, label="Structural score")
+
+plt.show()
+
+
+fig, ax = plt.subplots(figsize=(14, 6))
+
+for _, row in bReduced.iterrows():
+    ax.add_patch(
+        Rectangle(
+            (row["time_position"], row["pitch_midi"] - 0.4),
+            row["duration_seconds"],
+            0.8,
+            color=plt.cm.inferno(row["layer_2_score"]),
+            alpha=0.95,
+        )
+    )
+
+ax.set_xlim(bReduced["time_position"].min(), (bReduced["time_position"] + bReduced["duration_seconds"]).max())
+ax.set_ylim(bReduced["pitch_midi"].min() - 2, bReduced["pitch_midi"].max() + 2)
+
+ax.set_xlabel("Time")
+ax.set_ylabel("Pitch MIDI")
+ax.set_title("Beethoven AutoSchA Reduced Heatmap")
+
+sm = plt.cm.ScalarMappable(cmap="inferno", norm=plt.Normalize(0, 1))
+sm.set_array([])
+plt.colorbar(sm, ax=ax, label="Structural score")
+
+plt.show()
+
+Beethoven = beethoven_df.groupby('pitch_name')['layer_2_score'].agg(['mean']).sort_values('mean', ascending = False)
+
+bReduced.columns

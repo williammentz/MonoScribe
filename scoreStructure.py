@@ -60,7 +60,7 @@ def build_hetero_data_from_xml(xml_path: str):
         pyscoreparser_notes,
     )
 
-    return hetero_data, pyscoreparser_notes, analyzed_key
+    return hetero_data, pyscoreparser_notes, analyzed_key, xml_doc
 
 
 def load_model(checkpoint_path: str):
@@ -88,32 +88,142 @@ def run_inference(model, hetero_data):
     return x, cpu_scores, masks
 
 
-def note_to_dict(note, idx, layer_scores, layer_masks):
+def infer_time_signature(quarter_length):
+    if float(quarter_length).is_integer():
+        return f"{int(quarter_length)}/4"
+    return "4/4"
+
+
+def extract_measure_metadata(xml_path):
+    score = music21.converter.parse(str(xml_path))
+    measures = {}
+    for part in score.parts:
+        current_time_signature = None
+
+        for m in part.getElementsByClass(music21.stream.Measure):
+            if m.number is None:
+                continue
+
+            measure_number = int(m.number)
+            time_signature = m.timeSignature or m.getContextByClass(
+                music21.meter.TimeSignature
+            )
+
+            if time_signature is not None:
+                current_time_signature = time_signature.ratioString
+
+            if m.barDuration is not None:
+                quarter_length = float(m.barDuration.quarterLength)
+            else:
+                quarter_length = float(m.duration.quarterLength)
+
+            if measure_number not in measures:
+                measures[measure_number] = {
+                    "number": measure_number,
+                    "quarter_length": quarter_length,
+                    "time_signature": current_time_signature,
+                }
+            elif measures[measure_number]["time_signature"] is None:
+                measures[measure_number]["time_signature"] = current_time_signature
+
+    ordered_measures = [
+        measures[number]
+        for number in sorted(measures)
+    ]
+
+    first_time_signature = next(
+        (
+            m["time_signature"]
+            for m in ordered_measures
+            if m["time_signature"] is not None
+        ),
+        None,
+    )
+
+    for m in ordered_measures:
+        if m["time_signature"] is None:
+            m["time_signature"] = first_time_signature or infer_time_signature(
+                m["quarter_length"]
+            )
+
+    return ordered_measures
+
+
+def extract_symbolic_notes_from_pyscoreparser(notes, xml_doc):
+    measure_positions = xml_doc.get_measure_positions()
+    symbolic_notes = []
+
+    for n in notes:
+        state = n.state_fixed
+        divisions = float(state.divisions or 1)
+        measure_number = int(getattr(n, "measure_number", state.measure_number + 1))
+        measure_index = measure_number - 1
+
+        if 0 <= measure_index < len(measure_positions):
+            measure_start = measure_positions[measure_index]
+        else:
+            measure_start = 0
+
+        measure_offset = (float(state.xml_position) - float(measure_start)) / divisions
+        quarter_length = float(n.note_duration.duration) / divisions
+
+        symbolic_notes.append({
+            "pitch_name": n.pitch[0],
+            "pitch_midi": n.pitch[1],
+            "measure": measure_number,
+            "measure_offset": measure_offset,
+            "quarter_length": quarter_length,
+            "time_position": float(state.time_position),
+            "duration_seconds": float(n.note_duration.seconds),
+            "staff": getattr(n, "staff", None),
+        })
+
+    return symbolic_notes
+
+
+def note_to_dict(note, idx, layer_scores, layer_masks, symbolic_note):
     """
-    Minimal note metadata for downstream reduction/debugging.
-    Adjust fields if your pyScoreParser Note class exposes more useful info.
+    Export symbolic note representation suitable for reconstruction.
     """
-    state = getattr(note, "state_fixed", None)
 
     return {
         "note_index": idx,
-        "pitch_name": note.pitch[0],
-        "pitch_midi": note.pitch[1],
-        "time_position": note.state_fixed.time_position,
-        "duration_seconds": note.note_duration.seconds,
+
+        "pitch_name": symbolic_note["pitch_name"],
+        "pitch_midi": symbolic_note["pitch_midi"],
+
+        "measure": symbolic_note["measure"],
+
+        "measure_offset": symbolic_note["measure_offset"],
+
+        "quarter_length": symbolic_note["quarter_length"],
+
+        "time_position": symbolic_note["time_position"],
+        "duration_seconds": symbolic_note["duration_seconds"],
+        "staff": symbolic_note["staff"],
+
         "voice": getattr(note, "voice", None),
-        "layer_scores": [float(s[idx]) for s in layer_scores],
-        "layer_masks": [bool(m[idx]) for m in layer_masks],
+
+        "layer_scores": [
+            float(s[idx]) for s in layer_scores
+        ],
+
+        "layer_masks": [
+            bool(m[idx]) for m in layer_masks
+        ],
     }
 
 
 def write_outputs(
     output_prefix: str,
     notes,
+    symbolic_notes,
     analyzed_key,
     layer_scores,
     layer_masks,
     selected_layer: int,
+    measure_metadata,
+    source_xml,
 ):
     output_prefix = Path(output_prefix)
     output_prefix.parent.mkdir(parents=True, exist_ok=True)
@@ -123,7 +233,13 @@ def write_outputs(
     summary_path = output_prefix.with_name(output_prefix.name + "_summary.json")
 
     note_rows = [
-        note_to_dict(note, i, layer_scores, layer_masks)
+        note_to_dict(
+            note,
+            i,
+            layer_scores,
+            layer_masks,
+            symbolic_notes[i],
+        )
         for i, note in enumerate(notes)
     ]
 
@@ -132,10 +248,12 @@ def write_outputs(
         json.dump(
             {
                 "analyzed_key": str(analyzed_key),
+                "source_xml": str(source_xml),
                 "num_notes": len(notes),
                 "num_layers": len(layer_scores),
                 "selected_layer": selected_layer,
                 "threshold": 0.5,
+                "measures": measure_metadata,
                 "notes": note_rows,
             },
             f,
@@ -146,10 +264,13 @@ def write_outputs(
     fieldnames = [
         "note_index",
         'measure',
-        "pitch_name",
-        "pitch_midi",
+        'measure_offset',
+        'quarter_length',
         "time_position",
         "duration_seconds",
+        "pitch_name",
+        "pitch_midi",
+        "staff",
         "voice",
     ]
     for i in range(len(layer_scores)):
@@ -163,10 +284,14 @@ def write_outputs(
         for i, note in enumerate(notes):
             row = {
                 "note_index": i,
+                'measure': symbolic_notes[i]['measure'],
+                'measure_offset': symbolic_notes[i]['measure_offset'],
+                'quarter_length': symbolic_notes[i]['quarter_length'],
+                "time_position": symbolic_notes[i]["time_position"],
+                "duration_seconds": symbolic_notes[i]["duration_seconds"],
                 "pitch_name": note.pitch[0],
                 "pitch_midi": note.pitch[1],
-                "time_position": note.state_fixed.time_position,
-                "duration_seconds": note.note_duration.seconds,
+                "staff": symbolic_notes[i]["staff"],
                 "voice": getattr(note, "voice", None),
             }
             for layer_idx in range(len(layer_scores)):
@@ -215,12 +340,15 @@ def main():
     args = parser.parse_args()
 
     try:
-        hetero_data, notes, analyzed_key = build_hetero_data_from_xml(args.xml)
+        hetero_data, notes, analyzed_key, xml_doc = build_hetero_data_from_xml(args.xml)
     except EnharmonicError as e:
         raise RuntimeError(f"Failed during feature extraction: {e}") from e
 
     model = load_model(args.checkpoint)
     _, layer_scores, layer_masks = run_inference(model, hetero_data)
+
+    symbolic_notes = extract_symbolic_notes_from_pyscoreparser(notes, xml_doc)
+    measure_metadata = extract_measure_metadata(args.xml)
 
     if args.layer < 1 or args.layer > len(layer_scores):
         raise ValueError(
@@ -230,10 +358,13 @@ def main():
     json_path, csv_path, summary_path = write_outputs(
         args.output_prefix,
         notes,
+        symbolic_notes,
         analyzed_key,
         layer_scores,
         layer_masks,
         selected_layer=args.layer,
+        measure_metadata=measure_metadata,
+        source_xml=args.xml,
     )
 
     print(f"Done.")
