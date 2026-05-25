@@ -1,3 +1,4 @@
+import os
 import csv
 import music21 as m21
 import joblib
@@ -78,6 +79,11 @@ def extract_descriptors_from_musicxml(xml_path, output_tsv):
         d['repetitions']            = slices.melodic_intervals("u", onsets.onset_dict)
 
         descriptors_list.append(d)
+    
+    if os.path.exists('symbolic_texture_dataset/predictedDescriptors'):
+        pass
+    else:
+        os.makedirs('symbolic_texture_dataset/predictedDescriptors')
 
     with open(output_tsv, 'w', newline='\n') as f:
         writer = csv.DictWriter(f, fieldnames=meta + FEATURE_NAMES, delimiter='\t')
@@ -117,6 +123,12 @@ if __name__ == "__main__":
             results[d['m-measure_number']][element] = label
 
     # Step 4: write full annotation TSV
+
+    if os.path.exists('symbolic_texture_dataset/predictedAnnotations'):
+        pass
+    else:
+        os.makedirs('symbolic_texture_dataset/predictedAnnotations')
+
     with open(f"symbolic_texture_dataset/predictedAnnotations/{scoreName}.tsv", 'w', newline='\n') as f:
         writer = csv.DictWriter(f, fieldnames=['mn'] + elements, delimiter='\t')
         writer.writeheader()
