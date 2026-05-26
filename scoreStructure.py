@@ -20,7 +20,7 @@ from AutoSchA.pyScoreParser.musicxml_parser.mxp import MusicXMLDocument
 To run the scorer, run the following:
 
 uv run scoreStructure.py \
-  --xml reduction_scores/Mozart_12.musicxml \
+  --xml reduction_scores/beethoven.musicxml \
   --checkpoint AutoSchA/runs/base_model_epoch3.pt \
   --output-prefix outputs/test \
   --layer 2
