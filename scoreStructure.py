@@ -14,26 +14,19 @@ sys.path.insert(0, str(projRoot / "AutoSchA"))
 from AutoSchA.model.gnn import GroupMat
 from AutoSchA.utils.data_processing import HeterGraph, EnharmonicError
 from AutoSchA.utils.config import DEVICE, NUM_FEAT, EMB_DIM, HIDDEN_DIM, NUM_CLASS
-from AutoSchA.pyScoreParser.musicxml_parser.mxp import MusicXMLDocument
+from AutoSchA.utils.data_processing import HeterGraph, EnharmonicError, load_training_notes
 
 """
 To run the scorer, run the following:
 
 uv run scoreStructure.py \
-  --xml reduction_scores/beethoven.musicxml \
+  --xml reduction_scores/Mozart_12.musicxml \
   --checkpoint AutoSchA/runs/base_model_epoch3.pt \
-  --output-prefix outputs/test \
+  --output-prefix outputs/mozart_new \
   --layer 2
 """
 
 def build_hetero_data_from_xml(xml_path: str):
-    """
-    Reuses the repo's existing preprocessing logic so inference matches training.
-    Returns:
-        hetero_data: PyG HeteroData object
-        pyscoreparser_notes: original note objects in node order
-        analyzed_key: music21 key estimate used for scale-degree features
-    """
     xml_path = Path(xml_path)
 
     helper = HeterGraph(
@@ -42,25 +35,28 @@ def build_hetero_data_from_xml(xml_path: str):
         mode="inference",
     )
 
-    xml_doc = MusicXMLDocument(str(xml_path))
-    pyscoreparser_notes = xml_doc.get_notes()
+    # Partitura for note loading
+    notes, score = load_training_notes(str(xml_path))
 
+    # music21 for key analysis
     music21_score = music21.converter.parse(str(xml_path))
     analyzed_key = music21_score.analyze("key")
 
     hetero_data = HeteroData()
     hetero_data, notes_graph = helper.process_file_nodes(
         hetero_data,
-        pyscoreparser_notes,
+        notes,
         analyzed_key,
+        score,
     )
     hetero_data = helper.process_file_edges(
         hetero_data,
         notes_graph,
-        pyscoreparser_notes,
+        notes,
     )
 
-    return hetero_data, pyscoreparser_notes, analyzed_key, xml_doc
+    # Return notes (TrainingNote list) and score (partitura) instead of xml_doc
+    return hetero_data, notes, analyzed_key, score
 
 
 def load_model(checkpoint_path: str):
@@ -149,33 +145,44 @@ def extract_measure_metadata(xml_path):
     return ordered_measures
 
 
-def extract_symbolic_notes_from_pyscoreparser(notes, xml_doc):
-    measure_positions = xml_doc.get_measure_positions()
+def extract_symbolic_notes(notes, score):
+    """Build symbolic note dicts from TrainingNote objects."""
+    import partitura as pt
+
+    # Get measure start times from partitura
+    measure_starts = {}
+    for part in score.parts:
+        for m in part.iter_all(pt.score.Measure):
+            if m.number is not None and m.number not in measure_starts:
+                measure_starts[m.number] = m.start.t
+
+    # Get quarter duration for offset calculation
+    from AutoSchA.utils.data_processing import compute_quarter_duration
+    qd = compute_quarter_duration(score, "")  # xml_path not needed if score loaded
+
     symbolic_notes = []
-
     for n in notes:
-        state = n.state_fixed
-        divisions = float(state.divisions or 1)
-        measure_number = int(getattr(n, "measure_number", state.measure_number + 1))
-        measure_index = measure_number - 1
+        # Find which measure this note belongs to
+        measure_number = None
+        for mnum in sorted(measure_starts.keys(), reverse=True):
+            if n.onset >= measure_starts[mnum]:
+                measure_number = mnum
+                break
+        if measure_number is None:
+            measure_number = min(measure_starts.keys()) if measure_starts else 1
 
-        if 0 <= measure_index < len(measure_positions):
-            measure_start = measure_positions[measure_index]
-        else:
-            measure_start = 0
-
-        measure_offset = (float(state.xml_position) - float(measure_start)) / divisions
-        quarter_length = float(n.note_duration.duration) / divisions
+        measure_start = measure_starts.get(measure_number, 0)
+        measure_offset = (n.onset - measure_start) / qd
 
         symbolic_notes.append({
-            "pitch_name": n.pitch[0],
-            "pitch_midi": n.pitch[1],
+            "pitch_name": n.pitch_name,
+            "pitch_midi": n.midi_pitch,
             "measure": measure_number,
             "measure_offset": measure_offset,
-            "quarter_length": quarter_length,
-            "time_position": float(state.time_position),
-            "duration_seconds": float(n.note_duration.seconds),
-            "staff": getattr(n, "staff", None),
+            "quarter_length": n.duration_ql,
+            "time_position": n.onset,
+            "duration_seconds": n.duration,  # raw divisions, not seconds
+            "staff": None,  # not tracked in TrainingNote
         })
 
     return symbolic_notes
@@ -202,7 +209,7 @@ def note_to_dict(note, idx, layer_scores, layer_masks, symbolic_note):
         "duration_seconds": symbolic_note["duration_seconds"],
         "staff": symbolic_note["staff"],
 
-        "voice": getattr(note, "voice", None),
+        "voice": note.voice,
 
         "layer_scores": [
             float(s[idx]) for s in layer_scores
@@ -289,10 +296,10 @@ def write_outputs(
                 'quarter_length': symbolic_notes[i]['quarter_length'],
                 "time_position": symbolic_notes[i]["time_position"],
                 "duration_seconds": symbolic_notes[i]["duration_seconds"],
-                "pitch_name": note.pitch[0],
-                "pitch_midi": note.pitch[1],
+                "pitch_name": notes[i].pitch_name,
+                "pitch_midi": notes[i].midi_pitch,
                 "staff": symbolic_notes[i]["staff"],
-                "voice": getattr(note, "voice", None),
+                "voice": notes[i].voice
             }
             for layer_idx in range(len(layer_scores)):
                 row[f"layer_{layer_idx+1}_score"] = float(layer_scores[layer_idx][i])
@@ -340,14 +347,14 @@ def main():
     args = parser.parse_args()
 
     try:
-        hetero_data, notes, analyzed_key, xml_doc = build_hetero_data_from_xml(args.xml)
+        hetero_data, notes, analyzed_key, score = build_hetero_data_from_xml(args.xml)
     except EnharmonicError as e:
         raise RuntimeError(f"Failed during feature extraction: {e}") from e
 
     model = load_model(args.checkpoint)
     _, layer_scores, layer_masks = run_inference(model, hetero_data)
 
-    symbolic_notes = extract_symbolic_notes_from_pyscoreparser(notes, xml_doc)
+    symbolic_notes = extract_symbolic_notes(notes, score)
     measure_metadata = extract_measure_metadata(args.xml)
 
     if args.layer < 1 or args.layer > len(layer_scores):

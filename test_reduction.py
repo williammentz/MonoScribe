@@ -10,31 +10,12 @@ from music21 import chord, note, stream
 
 """
 uv run test_reduction.py \
-  --json outputs/rach.json \
-  --output-xml outputs/rach-test.musicxml \
+  --json outputs/mozart_new.json \
+  --output-xml outputs/mozart_new-test.musicxml \
   --layer 2
 """
 
 EPSILON = 1e-6
-
-@dataclass
-class ScoreEvent:
-    element: note.Note | chord.Chord
-    pitch_index: int | None
-    staff: int
-    measure: int
-    measure_offset: float
-    quarter_length: float
-    pitch_midi: int
-
-
-@dataclass
-class MatchedTone:
-    row: dict
-    event: ScoreEvent
-    utility: float
-    start_abs: float
-    end_abs: float
 
 
 @dataclass
@@ -43,6 +24,16 @@ class MeasureInfo:
     number: int
     start_abs: float
     end_abs: float
+    quarter_length: float
+
+
+@dataclass
+class ReducedTone:
+    row: dict
+    utility: float
+    start_abs: float
+    end_abs: float
+    pitch_midi: int
 
 
 @dataclass
@@ -51,63 +42,20 @@ class MeasureCell:
     end_local: float
     pitches: tuple[int, ...]
 
+@dataclass
+class SliceSelection:
+    measure_index: int
+    measure_number: int
+    start_local: float
+    end_local: float
+    start_abs: float
+    end_abs: float
+    tones: tuple[ReducedTone, ...]
+
+
 
 def q(value):
     return round(float(value), 6)
-
-
-def event_key(staff, measure, measure_offset, pitch_midi, quarter_length):
-    return (
-        int(staff),
-        int(measure),
-        q(measure_offset),
-        int(pitch_midi),
-        q(quarter_length),
-    )
-
-
-def loose_event_key(staff, measure, measure_offset, pitch_midi):
-    return (
-        int(staff),
-        int(measure),
-        q(measure_offset),
-        int(pitch_midi),
-    )
-
-
-def row_key(row):
-    return event_key(
-        row.get("staff") or 1,
-        row["measure"],
-        row["measure_offset"],
-        row["pitch_midi"],
-        row["quarter_length"],
-    )
-
-
-def row_loose_key(row):
-    return loose_event_key(
-        row.get("staff") or 1,
-        row["measure"],
-        row["measure_offset"],
-        row["pitch_midi"],
-    )
-
-
-def staff_measure_pitch_key(staff, measure, pitch_midi):
-    return (
-        int(staff),
-        int(measure),
-        int(pitch_midi),
-    )
-
-
-def event_identity(event):
-    return (
-        id(event.element),
-        event.pitch_index,
-        event.pitch_midi,
-    )
 
 
 def score_for_layer(row, layer):
@@ -141,51 +89,6 @@ def source_xml_path(data, json_path, source_xml):
     )
 
 
-def measure_offset_for(element, measure):
-    return float(element.getOffsetInHierarchy(measure))
-
-
-def measure_number_for(measure):
-    if measure.number is None:
-        return 0
-    return int(measure.number)
-
-
-def iter_score_events(score):
-    for part_index, part in enumerate(score.parts, start=1):
-        staff = part_index
-
-        for measure in part.getElementsByClass(stream.Measure):
-            measure_number = measure_number_for(measure)
-
-            for element in measure.recurse().notes:
-                measure_offset = measure_offset_for(element, measure)
-                quarter_length = float(element.duration.quarterLength)
-
-                if isinstance(element, note.Note):
-                    yield ScoreEvent(
-                        element=element,
-                        pitch_index=None,
-                        staff=staff,
-                        measure=measure_number,
-                        measure_offset=measure_offset,
-                        quarter_length=quarter_length,
-                        pitch_midi=element.pitch.midi,
-                    )
-
-                elif isinstance(element, chord.Chord):
-                    for pitch_index, pitch in enumerate(element.pitches):
-                        yield ScoreEvent(
-                            element=element,
-                            pitch_index=pitch_index,
-                            staff=staff,
-                            measure=measure_number,
-                            measure_offset=measure_offset,
-                            quarter_length=quarter_length,
-                            pitch_midi=pitch.midi,
-                        )
-
-
 def build_measure_lengths(data):
     return {
         int(m["number"]): float(m["quarter_length"])
@@ -193,177 +96,70 @@ def build_measure_lengths(data):
     }
 
 
-def row_positions(row, measure_lengths):
-    measure = int(row["measure"])
-    offset = float(row["measure_offset"])
-    positions = [(measure, offset)]
+def build_measure_infos_from_json(data):
+    measure_entries = data.get("measures", [])
+    if not measure_entries:
+        raise ValueError("JSON is missing measure metadata")
 
-    while measure in measure_lengths and offset >= measure_lengths[measure] - EPSILON:
-        offset -= measure_lengths[measure]
-        measure += 1
-        positions.append((measure, offset))
-
-    return positions
-
-
-def build_event_indexes(score):
-    exact_index = defaultdict(list)
-    loose_index = defaultdict(list)
-    pitch_index = defaultdict(list)
-
-    for event in iter_score_events(score):
-        exact_index[
-            event_key(
-                event.staff,
-                event.measure,
-                event.measure_offset,
-                event.pitch_midi,
-                event.quarter_length,
-            )
-        ].append(event)
-        loose_index[
-            loose_event_key(
-                event.staff,
-                event.measure,
-                event.measure_offset,
-                event.pitch_midi,
-            )
-        ].append(event)
-        pitch_index[
-            staff_measure_pitch_key(
-                event.staff,
-                event.measure,
-                event.pitch_midi,
-            )
-        ].append(event)
-
-    return exact_index, loose_index, pitch_index
-
-
-def choose_unmatched_event(candidates, used_events):
-    for event in candidates:
-        identity = event_identity(event)
-        if identity not in used_events:
-            used_events.add(identity)
-            return event
-    return None
-
-
-def choose_closest_unmatched_event(candidates, row, used_events):
-    available = [
-        event
-        for event in candidates
-        if event_identity(event) not in used_events
-    ]
-
-    if not available:
-        return None
-
-    row_offset = float(row["measure_offset"])
-    row_duration = float(row["quarter_length"])
-    event = min(
-        available,
-        key=lambda candidate: (
-            abs(candidate.measure_offset - row_offset),
-            abs(candidate.quarter_length - row_duration),
-        ),
-    )
-    used_events.add(event_identity(event))
-    return event
-
-
-def match_row_to_event(
-    row,
-    measure_lengths,
-    exact_index,
-    loose_index,
-    pitch_index,
-    used_events,
-):
-    positions = row_positions(row, measure_lengths)
-    staff = row.get("staff") or 1
-
-    for measure, offset in positions:
-        event = choose_unmatched_event(
-            exact_index.get(
-                event_key(
-                    staff,
-                    measure,
-                    offset,
-                    row["pitch_midi"],
-                    row["quarter_length"],
-                ),
-                [],
-            ),
-            used_events,
-        )
-        if event is not None:
-            return event, "exact"
-
-    for measure, offset in positions:
-        event = choose_unmatched_event(
-            loose_index.get(
-                loose_event_key(
-                    staff,
-                    measure,
-                    offset,
-                    row["pitch_midi"],
-                ),
-                [],
-            ),
-            used_events,
-        )
-        if event is not None:
-            return event, "loose"
-
-    for measure, _ in positions:
-        event = choose_closest_unmatched_event(
-            pitch_index.get(
-                staff_measure_pitch_key(
-                    staff,
-                    measure,
-                    row["pitch_midi"],
-                ),
-                [],
-            ),
-            row,
-            used_events,
-        )
-        if event is not None:
-            return event, "fuzzy"
-
-    return None, None
-
-
-def build_measure_infos(score):
-    first_part = score.parts[0]
     infos = []
+    cursor = 0.0
 
-    for index, measure in enumerate(first_part.getElementsByClass(stream.Measure)):
-        start_abs = float(measure.getOffsetInHierarchy(score))
-        ql = float(measure.duration.quarterLength)
+    for index, m in enumerate(sorted(measure_entries, key=lambda x: int(x["number"]))):
+        ql = float(m["quarter_length"])
         infos.append(
             MeasureInfo(
                 index=index,
-                number=measure_number_for(measure),
-                start_abs=start_abs,
-                end_abs=start_abs + ql,
+                number=int(m["number"]),
+                start_abs=cursor,
+                end_abs=cursor + ql,
+                quarter_length=ql,
             )
         )
+        cursor += ql
 
     return infos
 
 
+def build_measure_start_map(measure_infos):
+    return {m.number: m.start_abs for m in measure_infos}
+
+
+def row_to_reduced_tone(row, measure_start_map, layer):
+    measure = int(row["measure"])
+    if measure not in measure_start_map:
+        raise ValueError(f"Measure {measure} not found in measure metadata")
+
+    start_abs = measure_start_map[measure] + float(row["measure_offset"])
+    end_abs = start_abs + float(row["quarter_length"])
+
+    return ReducedTone(
+        row=row,
+        utility=score_for_layer(row, layer),
+        start_abs=start_abs,
+        end_abs=end_abs,
+        pitch_midi=int(row["pitch_midi"]),
+    )
+
+
 def tone_sort_key(tone, slice_start):
-    # Utility dominates.
-    # In ties, prefer continuing notes to reduce needless chopping.
-    # If you want to prefer new attacks in ties, swap `continuing`
-    # for `attacked_here`.
-    continuing = 1 if tone.start_abs < slice_start - EPSILON else 0
-    return (tone.utility, continuing, tone.event.pitch_midi)
+    attacked_here = 1 if abs(tone.start_abs - slice_start) <= EPSILON else 0
+    return (tone.utility, attacked_here, tone.pitch_midi)
 
 
-def build_cells_by_staff(matched_tones, measure_infos, staff_count):
+def format_tone_debug(tone, slice_start):
+    attacked_here = abs(tone.start_abs - slice_start) <= EPSILON
+    return (
+        f"m={tone.row['measure']} "
+        f"off={q(tone.row['measure_offset'])} "
+        f"pitch={tone.pitch_midi} "
+        f"util={tone.utility:.6f} "
+        f"start={q(tone.start_abs)} "
+        f"end={q(tone.end_abs)} "
+        f"{'ATTACK' if attacked_here else 'HELD'}"
+    )
+
+
+def build_selected_slices(matched_tones, measure_infos, debug_slices=False):
     boundaries = set()
 
     for measure in measure_infos:
@@ -375,13 +171,10 @@ def build_cells_by_staff(matched_tones, measure_infos, staff_count):
         boundaries.add(q(tone.end_abs))
 
     times = sorted(boundaries)
-    cells_by_staff = {
-        staff: defaultdict(list)
-        for staff in range(1, staff_count + 1)
-    }
+    slices = []
 
     if len(times) < 2:
-        return cells_by_staff, 0
+        return slices, 0
 
     measure_ptr = 0
     slice_count = 0
@@ -401,7 +194,7 @@ def build_cells_by_staff(matched_tones, measure_infos, staff_count):
         active = [
             tone
             for tone in matched_tones
-            if tone.start_abs <= t0 + EPSILON and tone.end_abs >= t1 - EPSILON
+            if tone.start_abs < t1 - EPSILON and tone.end_abs > t0 + EPSILON
         ]
 
         chosen = sorted(
@@ -410,26 +203,131 @@ def build_cells_by_staff(matched_tones, measure_infos, staff_count):
             reverse=True,
         )[:2]
 
-        by_staff = defaultdict(list)
-        for tone in chosen:
-            by_staff[tone.event.staff].append(tone.event.pitch_midi)
+        chosen = tuple(
+            sorted(chosen, key=lambda tone: tone.pitch_midi, reverse=True)
+        )
 
-        local_start = t0 - measure.start_abs
-        local_end = t1 - measure.start_abs
+        if debug_slices:
+            print()
+            print(
+                f"[slice {slice_count + 1}] "
+                f"measure={measure.number} "
+                f"abs=({q(t0)} -> {q(t1)}) "
+                f"local=({q(t0 - measure.start_abs)} -> {q(t1 - measure.start_abs)})"
+            )
+            print("  active:")
+            for tone in sorted(
+                active,
+                key=lambda tone: tone_sort_key(tone, t0),
+                reverse=True,
+            ):
+                print("   ", format_tone_debug(tone, t0))
 
-        for staff in range(1, staff_count + 1):
-            pitches = tuple(sorted(set(by_staff.get(staff, []))))
-            cells_by_staff[staff][measure.index].append(
+            print("  chosen:")
+            for tone in chosen:
+                print("   ", format_tone_debug(tone, t0))
+
+        slices.append(
+            SliceSelection(
+                measure_index=measure.index,
+                measure_number=measure.number,
+                start_local=t0 - measure.start_abs,
+                end_local=t1 - measure.start_abs,
+                start_abs=t0,
+                end_abs=t1,
+                tones=chosen,
+            )
+        )
+
+        slice_count += 1
+
+    return slices, slice_count
+
+def assign_slices_to_lanes(slices):
+    """
+    Convert per-slice top-2 selections into two persistent monophonic lanes.
+    Each lane is merged independently, so a sustained note can continue
+    while the other lane changes.
+    """
+    lane_cells = {
+        1: defaultdict(list),  # upper lane
+        2: defaultdict(list),  # lower lane
+    }
+
+    prev_pitch = {
+        1: None,
+        2: None,
+    }
+
+    for sl in slices:
+        tones = list(sl.tones)
+        assignment = {1: None, 2: None}
+        remaining = tones[:]
+
+        # First preserve exact pitch continuity in each lane when possible.
+        for lane in (1, 2):
+            if prev_pitch[lane] is None:
+                continue
+
+            for tone in list(remaining):
+                if tone.pitch_midi == prev_pitch[lane]:
+                    assignment[lane] = tone
+                    remaining.remove(tone)
+                    break
+
+        unassigned_lanes = [lane for lane in (1, 2) if assignment[lane] is None]
+
+        if len(remaining) == 2:
+            # Assign higher pitch to upper lane, lower pitch to lower lane.
+            remaining = sorted(remaining, key=lambda t: t.pitch_midi, reverse=True)
+
+            if len(unassigned_lanes) == 2:
+                assignment[1] = remaining[0]
+                assignment[2] = remaining[1]
+            else:
+                # Defensive fallback; shouldn't normally happen.
+                for lane, tone in zip(unassigned_lanes, remaining):
+                    assignment[lane] = tone
+
+        elif len(remaining) == 1:
+            tone = remaining[0]
+
+            if len(unassigned_lanes) == 2:
+                # Choose the lane whose previous pitch is closer.
+                candidates = []
+                for lane in unassigned_lanes:
+                    if prev_pitch[lane] is None:
+                        dist = 0
+                    else:
+                        dist = abs(tone.pitch_midi - prev_pitch[lane])
+                    candidates.append((dist, lane))
+
+                chosen_lane = min(candidates)[1]
+                assignment[chosen_lane] = tone
+            elif len(unassigned_lanes) == 1:
+                assignment[unassigned_lanes[0]] = tone
+
+        # Emit cells for both lanes.
+        for lane in (1, 2):
+            pitches = ()
+            if assignment[lane] is not None:
+                pitches = (assignment[lane].pitch_midi,)
+
+            lane_cells[lane][sl.measure_index].append(
                 MeasureCell(
-                    start_local=local_start,
-                    end_local=local_end,
+                    start_local=sl.start_local,
+                    end_local=sl.end_local,
                     pitches=pitches,
                 )
             )
 
-        slice_count += 1
+            prev_pitch[lane] = (
+                assignment[lane].pitch_midi
+                if assignment[lane] is not None
+                else None
+            )
 
-    return cells_by_staff, slice_count
+    return lane_cells
 
 
 def merge_measure_cells(cells):
@@ -490,46 +388,50 @@ def make_general_note(pitches, quarter_length):
     return element
 
 
-def build_reduced_score(score, cells_by_staff):
+def build_reduced_score_single_staff(source_score, lane_cells):
     reduced = stream.Score()
 
-    if score.metadata is not None:
-        reduced.metadata = copy.deepcopy(score.metadata)
+    if source_score.metadata is not None:
+        reduced.metadata = copy.deepcopy(source_score.metadata)
 
-    for staff_index, part in enumerate(score.parts, start=1):
-        new_part = stream.Part(id=part.id)
-        new_part.partName = part.partName
-        new_part.partAbbreviation = part.partAbbreviation
-        new_part.insert(0, music21.instrument.Piano())
+    source_part = source_score.parts[0]
+    new_part = stream.Part(id=source_part.id or "Reduction")
+    new_part.partName = "Reduction"
+    new_part.partAbbreviation = "Red."
+    new_part.insert(0, music21.instrument.Piano())
 
-        measures = list(part.getElementsByClass(stream.Measure))
+    measures = list(source_part.getElementsByClass(stream.Measure))
 
-        for measure_index, measure in enumerate(measures):
-            new_measure = clone_measure_shell(measure)
-            raw_cells = cells_by_staff[staff_index].get(measure_index, [])
+    for measure_index, measure in enumerate(measures):
+        new_measure = clone_measure_shell(measure)
 
+        for lane in (1, 2):
+            voice_stream = stream.Voice(id=str(lane))
+            raw_cells = lane_cells[lane].get(measure_index, [])
             merged_cells = merge_measure_cells(raw_cells)
 
             if not merged_cells:
                 rest = note.Rest()
                 rest.duration.quarterLength = float(measure.duration.quarterLength)
-                new_measure.insert(0, rest)
+                voice_stream.insert(0, rest)
             else:
                 for cell in merged_cells:
                     dur = cell.end_local - cell.start_local
                     if dur <= EPSILON:
                         continue
 
-                    new_measure.insert(
+                    voice_stream.insert(
                         cell.start_local,
                         make_general_note(cell.pitches, dur),
                     )
 
-            new_part.append(new_measure)
+            new_measure.insert(0, voice_stream)
 
-        reduced.append(new_part)
+        new_part.append(new_measure)
 
+    reduced.append(new_part)
     return reduced
+
 
 
 def build_reduction(
@@ -537,6 +439,7 @@ def build_reduction(
     output_xml,
     layer,
     source_xml=None,
+    debug_slices=False,
 ):
     json_path = Path(json_path)
 
@@ -544,90 +447,37 @@ def build_reduction(
         data = json.load(f)
 
     source_path = source_xml_path(data, json_path, source_xml)
-    score = music21.converter.parse(str(source_path))
+    source_score = music21.converter.parse(str(source_path))
 
     notes = data["notes"]
-    measure_lengths = build_measure_lengths(data)
-    exact_index, loose_index, pitch_index = build_event_indexes(score)
+    measure_infos = build_measure_infos_from_json(data)
+    measure_start_map = build_measure_start_map(measure_infos)
 
-    matched = 0
-    exact_matches = 0
-    loose_matches = 0
-    fuzzy_matches = 0
-    unmatched_rows = []
+    reduced_tones = [
+        row_to_reduced_tone(row, measure_start_map, layer)
+        for row in notes
+    ]
 
-    used_events = set()
-    matched_tones = []
+    selected_slices, slice_count = build_selected_slices(
+    matched_tones=reduced_tones,
+    measure_infos=measure_infos,
+    debug_slices=debug_slices,
+)
 
-    for row in notes:
-        event, match_kind = match_row_to_event(
-            row=row,
-            measure_lengths=measure_lengths,
-            exact_index=exact_index,
-            loose_index=loose_index,
-            pitch_index=pitch_index,
-            used_events=used_events,
-        )
+    lane_cells = assign_slices_to_lanes(selected_slices)
 
-        if event is None:
-            unmatched_rows.append(row)
-            continue
-
-        matched += 1
-
-        if match_kind == "exact":
-            exact_matches += 1
-        elif match_kind == "loose":
-            loose_matches += 1
-        elif match_kind == "fuzzy":
-            fuzzy_matches += 1
-
-        utility = score_for_layer(row, layer)
-        start_abs = float(event.element.getOffsetInHierarchy(score))
-        end_abs = start_abs + float(event.quarter_length)
-
-        matched_tones.append(
-            MatchedTone(
-                row=row,
-                event=event,
-                utility=utility,
-                start_abs=start_abs,
-                end_abs=end_abs,
-            )
-        )
-
-    measure_infos = build_measure_infos(score)
-    cells_by_staff, slice_count = build_cells_by_staff(
-        matched_tones=matched_tones,
-        measure_infos=measure_infos,
-        staff_count=len(score.parts),
+    reduced_score = build_reduced_score_single_staff(
+        source_score=source_score,
+        lane_cells=lane_cells,
     )
-
-    reduced_score = build_reduced_score(score, cells_by_staff)
     reduced_score.write("musicxml", fp=output_xml)
 
     print(f"Source: {source_path}")
-    print(f"Matched {matched} / {len(notes)} scored notes")
-    print(
-        f"  exact matches: {exact_matches}; "
-        f"onset/pitch fallback: {loose_matches}; "
-        f"measure/pitch fuzzy: {fuzzy_matches}"
-    )
+    print(f"Loaded {len(notes)} notes from JSON")
     print(f"Built {slice_count} time slices")
     print("Guaranteed maximum simultaneous sounding tones: 2")
-
-    if unmatched_rows:
-        print(f"WARNING: {len(unmatched_rows)} scored notes could not be matched")
-        for row in unmatched_rows[:10]:
-            print(
-                "  unmatched "
-                f"index={row['note_index']} "
-                f"staff={row.get('staff')} "
-                f"measure={row['measure']} "
-                f"offset={row['measure_offset']} "
-                f"pitch={row['pitch_name']} "
-                f"dur={row['quarter_length']}"
-            )
+    print("Selection rule: top-2 active tones globally per slice")
+    print("Output format: single staff")
 
     print(f"Wrote reduction to {output_xml}")
 
@@ -656,6 +506,12 @@ def main():
         help="Optional override for the source MusicXML path stored in the JSON.",
     )
 
+    parser.add_argument(
+        "--debug-slices",
+        action="store_true",
+        help="Print active/chosen tones for every time slice.",
+    )
+
     args = parser.parse_args()
 
     build_reduction(
@@ -663,6 +519,7 @@ def main():
         output_xml=args.output_xml,
         layer=args.layer,
         source_xml=args.source_xml,
+        debug_slices=args.debug_slices,
     )
 
 
