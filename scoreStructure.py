@@ -393,7 +393,7 @@ def scorer(xml):
 
     layer = 2
 
-    model = load_model('AutoSchA/runs/base_model_epoch3.pt')
+    model = load_model('AutoSchA/runs/base_model_epoch2.pt')
     _, layer_scores, layer_masks = run_inference(model, hetero_data)
 
     symbolic_notes = extract_symbolic_notes(notes, score)
