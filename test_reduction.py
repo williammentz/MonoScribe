@@ -10,13 +10,16 @@ from music21 import chord, note, stream
 
 """
 uv run test_reduction.py \
-  --json outputs/mozart_new.json \
-  --output-xml outputs/mozart_new-test.musicxml \
+  --json scoring_outputs/Mozart_12.json \
+  --output-xml outputs/mozart_new-test.musicxml \ (unnecessary)
   --layer 2
 """
 
 EPSILON = 1e-6
 
+projRoot = Path(__file__).resolve().parent
+outputDir = projRoot / 'AutoSchA_reduction_outputs'
+outputDir.mkdir(parents = True, exist_ok = True)
 
 @dataclass
 class MeasureInfo:
@@ -442,6 +445,13 @@ def build_reduction(
     debug_slices=False,
 ):
     json_path = Path(json_path)
+    if not json_path.is_absolute():
+        json_path = projRoot / json_path
+    
+    if output_xml is None:
+        output_xml = outputDir / f"{json_path.stem}-reduction.musicxml"
+    else:
+        output_xml = outputDir / Path(output_xml).name
 
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -492,7 +502,9 @@ def main():
 
     parser.add_argument(
         "--output-xml",
-        required=True,
+        required=False,
+        default=None,
+        help="Optional output filename. File is always written to the fixed output folder."
     )
 
     parser.add_argument(

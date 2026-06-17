@@ -9,6 +9,7 @@ import torch
 from torch_geometric.data import HeteroData
 
 projRoot = Path(__file__).resolve().parent
+outputDir = projRoot / 'scoring_outputs'
 sys.path.insert(0, str(projRoot / "AutoSchA"))
 
 from AutoSchA.model.gnn import GroupMat
@@ -22,7 +23,7 @@ To run the scorer, run the following:
 uv run scoreStructure.py \
   --xml reduction_scores/Mozart_12.musicxml \
   --checkpoint AutoSchA/runs/base_model_epoch3.pt \
-  --output-prefix outputs/mozart_new \
+  --output-prefix outputs/mozart_new \ (unnecessary)
   --layer 2
 """
 
@@ -334,7 +335,8 @@ def main():
     parser.add_argument("--checkpoint", required=True, help="Path to trained .pt checkpoint")
     parser.add_argument(
         "--output-prefix",
-        required=True,
+        required=False,
+        default=None,
         help="Prefix for output files, e.g. outputs/fugue1_structural",
     )
     parser.add_argument(
@@ -362,8 +364,11 @@ def main():
             f"--layer must be between 1 and {len(layer_scores)}, got {args.layer}"
         )
 
+    output_name = args.output_prefix or Path(args.xml).stem
+    output_prefix = outputDir / output_name
+
     json_path, csv_path, summary_path = write_outputs(
-        args.output_prefix,
+        output_prefix,
         notes,
         symbolic_notes,
         analyzed_key,
