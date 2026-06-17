@@ -226,8 +226,8 @@ def plot_piano_roll(df, title, color="darkorange", cmap=None, score_col=None, st
 
 # Mozart
 
-mozart_original_df = score_to_dataframe("reduction_scores/mozart_12.musicxml")
-mozart_reduced_df = score_to_dataframe("outputs/mozart_new-test.musicxml")
+mozart_original_df = score_to_dataframe("reduction_scores/Mozart_12.musicxml")
+mozart_reduced_df = score_to_dataframe("outputs/reductions/Mozart_12-reduction.musicxml")
 
 mozart_compare_df = classify_original_against_reduced(
     mozart_original_df,

@@ -9,16 +9,16 @@ import music21
 from music21 import chord, note, stream
 
 """
-uv run test_reduction.py \
-  --json scoring_outputs/Mozart_12.json \
-  --output-xml outputs/mozart_new-test.musicxml \ (unnecessary)
+uv run reductionAutoSchA.py \
+  --json outputs/inference/Mozart_12.json \
+  --output-xml outputs/reductions/mozart_new-test.musicxml \ (unnecessary)
   --layer 2
 """
 
 EPSILON = 1e-6
 
 projRoot = Path(__file__).resolve().parent
-outputDir = projRoot / 'AutoSchA_reduction_outputs'
+outputDir = projRoot / 'outputs/reductions/'
 outputDir.mkdir(parents = True, exist_ok = True)
 
 @dataclass
@@ -482,12 +482,12 @@ def build_reduction(
     )
     reduced_score.write("musicxml", fp=output_xml)
 
-    print(f"Source: {source_path}")
-    print(f"Loaded {len(notes)} notes from JSON")
-    print(f"Built {slice_count} time slices")
-    print("Guaranteed maximum simultaneous sounding tones: 2")
-    print("Selection rule: top-2 active tones globally per slice")
-    print("Output format: single staff")
+    # print(f"Source: {source_path}")
+    # print(f"Loaded {len(notes)} notes from JSON")
+    # print(f"Built {slice_count} time slices")
+    # print("Guaranteed maximum simultaneous sounding tones: 2")
+    # print("Selection rule: top-2 active tones globally per slice")
+    # print("Output format: single staff")
 
     print(f"Wrote reduction to {output_xml}")
 

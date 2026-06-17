@@ -216,7 +216,7 @@ def reduce_measure(measure, bass_measure, show_ts = False):
     )
 
 def range_check(part, instrument = 'piano'):
-    with open("instruments.json") as f:
+    with open("utils/instruments.json") as f:
         ranges = {k: tuple(v) for k, v in json.load(f).items()}
 
     instrument = instrument.lower()

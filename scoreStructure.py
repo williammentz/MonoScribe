@@ -9,7 +9,7 @@ import torch
 from torch_geometric.data import HeteroData
 
 projRoot = Path(__file__).resolve().parent
-outputDir = projRoot / 'scoring_outputs'
+outputDir = projRoot / "outputs/inference"
 sys.path.insert(0, str(projRoot / "AutoSchA"))
 
 from AutoSchA.model.gnn import GroupMat
@@ -31,7 +31,7 @@ def build_hetero_data_from_xml(xml_path: str):
     xml_path = Path(xml_path)
 
     helper = HeterGraph(
-        root="processed/inference_tmp",
+        root="AutoSchA/processed_new_scores/inference_tmp",
         train_names=[],
         mode="inference",
     )
@@ -383,6 +383,42 @@ def main():
     print(f"JSON: {json_path}")
     print(f"CSV: {csv_path}")
     print(f"Summary: {summary_path}")
+
+def scorer(xml):
+
+    try:
+        hetero_data, notes, analyzed_key, score = build_hetero_data_from_xml(xml)
+    except EnharmonicError as e:
+        raise RuntimeError(f"Failed during feature extraction: {e}") from e
+
+    layer = 2
+
+    model = load_model('AutoSchA/runs/base_model_epoch3.pt')
+    _, layer_scores, layer_masks = run_inference(model, hetero_data)
+
+    symbolic_notes = extract_symbolic_notes(notes, score)
+    measure_metadata = extract_measure_metadata(xml)
+
+    if layer < 1 or layer > len(layer_scores):
+        raise ValueError(
+            f"--layer must be between 1 and {len(layer_scores)}, got {layer}"
+        )
+
+    output_name = Path(xml).stem
+    output_prefix = outputDir / output_name
+
+    json_path, csv_path, summary_path = write_outputs(
+        output_prefix,
+        notes,
+        symbolic_notes,
+        analyzed_key,
+        layer_scores,
+        layer_masks,
+        selected_layer=2,
+        measure_metadata=measure_metadata,
+        source_xml=xml,
+    )
+    print(f"Piece scored.")
 
 
 if __name__ == "__main__":
