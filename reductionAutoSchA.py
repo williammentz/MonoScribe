@@ -451,7 +451,8 @@ def build_reduction(
     if output_xml is None:
         output_xml = outputDir / f"{json_path.stem}-reduction.musicxml"
     else:
-        output_xml = outputDir / Path(output_xml).name
+        # output_xml = outputDir / Path(output_xml).name
+        output_xml = output_xml
 
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
