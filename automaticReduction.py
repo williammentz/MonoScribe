@@ -25,15 +25,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # Assign AutoSchA score to piece
-    scorer(args.xml)
-
-    json_path = 'outputs/inference/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '') + '.json'
-    autoscha_path = 'outputs/autoscha_reductions/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '-reduction.musicxml')
-
-    # AutoSchA Reducer (Over Whole Piece)
-    build_reduction(json_path, layer = 2, output_xml = autoscha_path)
-
     # Annotate Score Textural Elements
     annotateScore(xml_path = args.xml)
 
@@ -44,8 +35,18 @@ if __name__ == "__main__":
     elements = pd.read_csv(f'symbolic_texture_dataset/predictedAnnotations/{score}.tsv', delimiter = '\t')
 
     result = classifyTexture(descriptors, elements)
-    print(result.texture_type.value_counts())
-    print(result.head(n = 10))
+    # print(result.texture_type.value_counts())
+    # print(result.head(n = 10))
+    result.to_csv(f'outputs/textures/{args.xml.replace('reduction_scores/', '').replace('.musicxml', '-textures')}.csv', index=False)
+
+    # Assign AutoSchA score to piece
+    scorer(args.xml)
+
+    json_path = 'outputs/inference/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '') + '.json'
+    autoscha_path = 'outputs/autoscha_reductions/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '-reduction.musicxml')
+
+    # AutoSchA Reducer (Over Whole Piece)
+    build_reduction(json_path, layer = 2, output_xml = autoscha_path)
 
     sch_score, upper_lane, lower_lane = load_score_as_lanes(str(autoscha_path))
     final_part = reduce_score(sch_score, upper_lane, lower_lane, instrument = args.instrument)
