@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 import music21
+import partitura as pt
 import torch
 from torch_geometric.data import HeteroData
 
@@ -13,9 +14,8 @@ outputDir = projRoot / "outputs/inference"
 sys.path.insert(0, str(projRoot / "AutoSchA"))
 
 from AutoSchA.model.gnn import GroupMat
-from AutoSchA.utils.data_processing import HeterGraph, EnharmonicError
+from AutoSchA.utils.data_processing import HeterGraph, EnharmonicError, load_training_notes, compute_quarter_duration
 from AutoSchA.utils.config import DEVICE, NUM_FEAT, EMB_DIM, HIDDEN_DIM, NUM_CLASS
-from AutoSchA.utils.data_processing import HeterGraph, EnharmonicError, load_training_notes
 
 """
 To run the scorer, run the following:
@@ -91,59 +91,69 @@ def infer_time_signature(quarter_length):
     return "4/4"
 
 
-def extract_measure_metadata(xml_path):
-    score = music21.converter.parse(str(xml_path))
-    measures = {}
-    for part in score.parts:
-        current_time_signature = None
+def extract_measure_metadata(score):
+    """
+    Extract measure metadata (number, quarter_length, time_signature)
+    using the same partitura Score object used for note loading.
 
-        for m in part.getElementsByClass(music21.stream.Measure):
+    Replaces the music21-based extract_measure_metadata().
+    """
+    qd = compute_quarter_duration(score, "")
+
+    measures = {}
+
+    for part in score.parts:
+        # ---- build a time-signature map:  onset_tick → "beats/beat_type" ----
+        ts_map = {}
+        for ts in part.iter_all(pt.score.TimeSignature):
+            ts_map[ts.start.t] = f"{ts.beats}/{ts.beat_type}"
+
+        ts_onsets = sorted(ts_map)          # ascending tick order
+
+        # ---- walk measures ----
+        for m in part.iter_all(pt.score.Measure):
             if m.number is None:
                 continue
 
-            measure_number = int(m.number)
-            time_signature = m.timeSignature or m.getContextByClass(
-                music21.meter.TimeSignature
-            )
+            mnum = int(m.number)
+            quarter_length = (m.end.t - m.start.t) / qd
 
-            if time_signature is not None:
-                current_time_signature = time_signature.ratioString
+            # find the most recent time signature at or before this measure
+            active_ts = None
+            for onset in ts_onsets:
+                if onset <= m.start.t:
+                    active_ts = ts_map[onset]
+                else:
+                    break
 
-            if m.barDuration is not None:
-                quarter_length = float(m.barDuration.quarterLength)
-            else:
-                quarter_length = float(m.duration.quarterLength)
-
-            if measure_number not in measures:
-                measures[measure_number] = {
-                    "number": measure_number,
+            if mnum not in measures:
+                measures[mnum] = {
+                    "number": mnum,
                     "quarter_length": quarter_length,
-                    "time_signature": current_time_signature,
+                    "time_signature": active_ts,
                 }
-            elif measures[measure_number]["time_signature"] is None:
-                measures[measure_number]["time_signature"] = current_time_signature
+            elif measures[mnum]["time_signature"] is None:
+                measures[mnum]["time_signature"] = active_ts
 
-    ordered_measures = [
-        measures[number]
-        for number in sorted(measures)
-    ]
+    # ---- ordered output with fallback ----
+    ordered = [measures[n] for n in sorted(measures)]
 
-    first_time_signature = next(
-        (
-            m["time_signature"]
-            for m in ordered_measures
-            if m["time_signature"] is not None
-        ),
+    first_ts = next(
+        (m["time_signature"] for m in ordered if m["time_signature"] is not None),
         None,
     )
-
-    for m in ordered_measures:
+    for m in ordered:
         if m["time_signature"] is None:
-            m["time_signature"] = first_time_signature or infer_time_signature(
-                m["quarter_length"]
-            )
+            m["time_signature"] = first_ts or infer_time_signature(m["quarter_length"])
 
-    return ordered_measures
+    return ordered
+
+
+def infer_time_signature(quarter_length):
+    """Fallback: guess a simple time signature from bar length."""
+    if float(quarter_length).is_integer():
+        return f"{int(quarter_length)}/4"
+    return "4/4"
 
 
 def extract_symbolic_notes(notes, score):
@@ -357,7 +367,7 @@ def main():
     _, layer_scores, layer_masks = run_inference(model, hetero_data)
 
     symbolic_notes = extract_symbolic_notes(notes, score)
-    measure_metadata = extract_measure_metadata(args.xml)
+    measure_metadata = extract_measure_metadata(score)
 
     if args.layer < 1 or args.layer > len(layer_scores):
         raise ValueError(
@@ -391,13 +401,13 @@ def scorer(xml):
     except EnharmonicError as e:
         raise RuntimeError(f"Failed during feature extraction: {e}") from e
 
-    layer = 2
+    layer = 3
 
-    model = load_model('AutoSchA/runs/base_model_epoch2.pt')
+    model = load_model('AutoSchA/runs/base_model_epoch3.pt')
     _, layer_scores, layer_masks = run_inference(model, hetero_data)
 
     symbolic_notes = extract_symbolic_notes(notes, score)
-    measure_metadata = extract_measure_metadata(xml)
+    measure_metadata = extract_measure_metadata(score)
 
     if layer < 1 or layer > len(layer_scores):
         raise ValueError(
@@ -414,7 +424,7 @@ def scorer(xml):
         analyzed_key,
         layer_scores,
         layer_masks,
-        selected_layer=2,
+        selected_layer=layer,
         measure_metadata=measure_metadata,
         source_xml=xml,
     )
