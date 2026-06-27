@@ -132,8 +132,8 @@ def row_to_reduced_tone(row, measure_start_map, layer):
     if measure not in measure_start_map:
         raise ValueError(f"Measure {measure} not found in measure metadata")
 
-    start_abs = measure_start_map[measure] + float(row["measure_offset"])
-    end_abs = start_abs + float(row["quarter_length"])
+    start_abs = q(measure_start_map[measure] + float(row["measure_offset"]))
+    end_abs   = q(start_abs + float(row["quarter_length"]))
 
     return ReducedTone(
         row=row,
@@ -146,7 +146,7 @@ def row_to_reduced_tone(row, measure_start_map, layer):
 
 def tone_sort_key(tone, slice_start):
     attacked_here = 1 if abs(tone.start_abs - slice_start) <= EPSILON else 0
-    return (tone.utility, attacked_here, tone.pitch_midi)
+    return (tone.utility, attacked_here)
 
 
 def format_tone_debug(tone, slice_start):
@@ -200,11 +200,23 @@ def build_selected_slices(matched_tones, measure_infos, debug_slices=False):
             if tone.start_abs < t1 - EPSILON and tone.end_abs > t0 + EPSILON
         ]
 
-        chosen = sorted(
+        ranked = sorted(
             active,
             key=lambda tone: tone_sort_key(tone, t0),
             reverse=True,
-        )[:2]
+        )
+
+        chosen = []
+        if ranked:
+            chosen.append(ranked[0])
+            for tone in ranked[1:]:
+                if tone.pitch_midi != chosen[0].pitch_midi:
+                    chosen.append(tone)
+                    break
+            # If every active tone shares the same pitch, fall back
+            # to a duplicate so we don't artificially drop a voice.
+            if len(chosen) < 2 and len(ranked) > 1:
+                chosen.append(ranked[1])
 
         chosen = tuple(
             sorted(chosen, key=lambda tone: tone.pitch_midi, reverse=True)
@@ -300,7 +312,8 @@ def assign_slices_to_lanes(slices):
                 candidates = []
                 for lane in unassigned_lanes:
                     if prev_pitch[lane] is None:
-                        dist = 0
+                        if prev_pitch[lane] is None:
+                            dist = float('inf')
                     else:
                         dist = abs(tone.pitch_midi - prev_pitch[lane])
                     candidates.append((dist, lane))
@@ -309,6 +322,14 @@ def assign_slices_to_lanes(slices):
                 assignment[chosen_lane] = tone
             elif len(unassigned_lanes) == 1:
                 assignment[unassigned_lanes[0]] = tone
+
+        # Prevent voice crossing: lane 1 must be >= lane 2 in pitch.
+        if (
+            assignment[1] is not None
+            and assignment[2] is not None
+            and assignment[1].pitch_midi < assignment[2].pitch_midi
+        ):
+            assignment[1], assignment[2] = assignment[2], assignment[1]
 
         # Emit cells for both lanes.
         for lane in (1, 2):
@@ -391,7 +412,7 @@ def make_general_note(pitches, quarter_length):
     return element
 
 
-def build_reduced_score_single_staff(source_score, lane_cells):
+def build_reduced_score_single_staff(source_score, lane_cells, measure_infos):
     reduced = stream.Score()
 
     if source_score.metadata is not None:
@@ -403,19 +424,27 @@ def build_reduced_score_single_staff(source_score, lane_cells):
     new_part.partAbbreviation = "Red."
     new_part.insert(0, music21.instrument.Piano())
 
-    measures = list(source_part.getElementsByClass(stream.Measure))
+    source_measures_by_num = {}
+    for m in source_part.getElementsByClass(stream.Measure):
+        source_measures_by_num.setdefault(m.number, m)
 
-    for measure_index, measure in enumerate(measures):
-        new_measure = clone_measure_shell(measure)
+    for mi in measure_infos:
+        source_measure = source_measures_by_num.get(mi.number)
+        if source_measure is None:
+            continue
+
+        new_measure = clone_measure_shell(source_measure)
 
         for lane in (1, 2):
             voice_stream = stream.Voice(id=str(lane))
-            raw_cells = lane_cells[lane].get(measure_index, [])
+            raw_cells = lane_cells[lane].get(mi.index, [])
             merged_cells = merge_measure_cells(raw_cells)
 
             if not merged_cells:
                 rest = note.Rest()
-                rest.duration.quarterLength = float(measure.duration.quarterLength)
+                rest.duration.quarterLength = float(
+                    source_measure.duration.quarterLength
+                )
                 voice_stream.insert(0, rest)
             else:
                 for cell in merged_cells:
@@ -480,6 +509,7 @@ def build_reduction(
     reduced_score = build_reduced_score_single_staff(
         source_score=source_score,
         lane_cells=lane_cells,
+        measure_infos=measure_infos
     )
     reduced_score.write("musicxml", fp=output_xml)
 
