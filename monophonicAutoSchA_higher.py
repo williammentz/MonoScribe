@@ -431,7 +431,7 @@ def build_monophonic_part(source_score, stream_cells, measure_infos):
     return reduced_part
 
 
-def build_reduction(
+def build_reduction_higher(
     json_path,
     output_xml,
     layer,
@@ -443,7 +443,7 @@ def build_reduction(
         json_path = projRoot / json_path
 
     if output_xml is None:
-        output_xml = outputDir / f"{json_path.stem}-monophonic.musicxml"
+        output_xml = outputDir / f"{json_path.stem}-monophonic_higher.musicxml"
     else:
         output_xml = Path(output_xml)
 
@@ -522,7 +522,7 @@ def main():
 
     args = parser.parse_args()
 
-    build_reduction(
+    build_reduction_higher(
         json_path=args.json,
         output_xml=args.output_xml,
         layer=args.layer,
