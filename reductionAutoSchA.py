@@ -44,6 +44,7 @@ class MeasureCell:
     start_local: float
     end_local: float
     pitches: tuple[int, ...]
+    attacked: bool = False
 
 @dataclass
 class SliceSelection:
@@ -334,14 +335,18 @@ def assign_slices_to_lanes(slices):
         # Emit cells for both lanes.
         for lane in (1, 2):
             pitches = ()
+            attacked = False
+
             if assignment[lane] is not None:
                 pitches = (assignment[lane].pitch_midi,)
+                attacked = abs(assignment[lane].start_abs - sl.start_abs) <= EPSILON
 
             lane_cells[lane][sl.measure_index].append(
                 MeasureCell(
                     start_local=sl.start_local,
                     end_local=sl.end_local,
                     pitches=pitches,
+                    attacked=attacked,
                 )
             )
 
@@ -360,7 +365,7 @@ def merge_measure_cells(cells):
     for cell in cells:
         if not merged:
             merged.append(
-                MeasureCell(cell.start_local, cell.end_local, cell.pitches)
+                MeasureCell(cell.start_local, cell.end_local, cell.pitches, cell.attacked)
             )
             continue
 
@@ -368,11 +373,12 @@ def merge_measure_cells(cells):
         if (
             prev.pitches == cell.pitches
             and abs(prev.end_local - cell.start_local) <= EPSILON
+            and not cell.attacked
         ):
             prev.end_local = cell.end_local
         else:
             merged.append(
-                MeasureCell(cell.start_local, cell.end_local, cell.pitches)
+                MeasureCell(cell.start_local, cell.end_local, cell.pitches, cell.attacked)
             )
 
     return merged
