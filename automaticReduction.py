@@ -68,7 +68,7 @@ if __name__ == "__main__":
     remove_grace_notes(args.xml, clean_score)
 
     # Annotate Score Textural Elements
-    annotateScore(xml_path = args.xml)
+    annotateScore(xml_path = clean_score)
 
     # Take the new annotations/descriptors and predcit the texture of each measure of the piece
     descriptors = pd.read_csv(f'symbolic_texture_dataset/predictedDescriptors/{score}.tsv', delimiter = '\t')
@@ -80,8 +80,8 @@ if __name__ == "__main__":
     result.to_csv(f'outputs/textures/{args.xml.replace('reduction_scores/', '').replace('.musicxml', '-textures')}.csv', index=False)
 
     # Assign AutoSchA score to piece
-    # scorer(clean_score)
-    scorer(args.xml)
+    scorer(clean_score)
+    # scorer(args.xml)
 
     json_path = 'outputs/inference/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '') + '.json'
     autoscha_path = 'outputs/autoscha_reductions/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '-reduction.musicxml')
