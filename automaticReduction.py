@@ -8,7 +8,9 @@ from scoreStructure import scorer
 from reductionAutoSchA import build_reduction
 from monophonicAutoSchA_higher import build_reduction_higher
 from monophonicAutoSchA_lower import build_reduction_lower
-from predictTexture import annotateScore
+from reduceVoice import build_reduction_voice
+from reduceAdaptive import build_reduction_adaptive
+from predictTextureElements import annotateScore
 from symbolic_texture_dataset.predictScoreTexture import classifyTexture
 from reduction import load_score_as_lanes, reduce_score
 from music21 import stream
@@ -104,3 +106,9 @@ if __name__ == "__main__":
 
     # Rules-based keeping the higher scored note as the primary tone
     build_reduction_lower(json_path, output_xml = None, layer = 2)
+
+    # Voice-driven reduction
+    build_reduction_voice(json_path, output_xml = None, layer = 2)
+
+    # Adaptive strand reduction
+    build_reduction_adaptive(json_path, output_xml = None, layer = 2)

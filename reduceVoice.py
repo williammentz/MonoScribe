@@ -35,7 +35,7 @@ uv run reduceVoice.py \
 """
 
 
-# Conservative first-pass defaults.
+# Conservative first-pass defaults
 DEFAULT_SAME_VOICE_BONUS = 0.08
 DEFAULT_SWITCH_THRESHOLD = 0.05
 DEFAULT_ATTACK_BONUS = 0.01
@@ -878,7 +878,7 @@ def build_monophonic_part(source_score, stream_cells, measure_infos):
     return reduced_part
 
 
-def build_reduction_higher(
+def build_reduction_voice(
     json_path,
     output_xml,
     layer,
@@ -894,7 +894,7 @@ def build_reduction_higher(
         json_path = projRoot / json_path
 
     if output_xml is None:
-        output_xml = outputDir / f"{json_path.stem}-monophonic_higher.musicxml"
+        output_xml = outputDir / f"{json_path.stem}-monophonic_voice.musicxml"
     else:
         output_xml = Path(output_xml)
 
@@ -1015,7 +1015,7 @@ def main():
 
     args = parser.parse_args()
 
-    build_reduction_higher(
+    build_reduction_voice(
         json_path=args.json,
         output_xml=args.output_xml,
         layer=args.layer,

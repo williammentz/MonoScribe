@@ -10,9 +10,8 @@ from music21 import chord, note, stream
 
 """
 uv run reductionAutoSchA.py \
-  --json outputs/inference/Mozart_12.json \
-  --output-xml outputs/reductions/mozart_new-test.musicxml \ (unnecessary)
-  --layer 2
+  --json outputs/inference/Bach_883.json \
+  --output-xml outputs/autoscha_reductions/Bach_883-test.musicxml
 """
 
 EPSILON = 1e-6
