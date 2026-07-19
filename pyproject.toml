@@ -8,6 +8,7 @@ dependencies = [
     "gnn>=1.1.9",
     "matplotlib>=3.10.8",
     "music21>=9.9.1",
+    "networkx>=3.6.1",
     "numpy>=2.4.4",
     "pandas>=3.0.1",
     "partitura>=1.9.0",

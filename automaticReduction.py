@@ -5,14 +5,10 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 
 from scoreStructure import scorer
-from reductionAutoSchA import build_reduction
-from monophonicAutoSchA_higher import build_reduction_higher
-from monophonicAutoSchA_lower import build_reduction_lower
-from reduceVoice import build_reduction_voice
-from reduceAdaptive import build_reduction_adaptive
 from predictTextureElements import annotateScore
 from symbolic_texture_dataset.predictScoreTexture import classifyTexture
-from reduction import load_score_as_lanes, reduce_score
+from reduceHomophonic import load_score_as_lanes, reduce_score
+# NEED TO ADD REDUCEGRAPH HERE ONCE FINALIZED
 from music21 import stream
 
 projRoot = Path(__file__).resolve().parent
@@ -86,9 +82,6 @@ if __name__ == "__main__":
     json_path = 'outputs/inference/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '') + '.json'
     autoscha_path = 'outputs/autoscha_reductions/' + args.xml.replace('reduction_scores/', '').replace('.musicxml', '-reduction.musicxml')
 
-    # AutoSchA Reducer (Over Whole Piece)
-    build_reduction(json_path, layer = 2, output_xml = autoscha_path)
-
     # Homophonic Rules-based reduction
     sch_score, upper_lane, lower_lane = load_score_as_lanes(str(autoscha_path))
     final_part = reduce_score(sch_score, upper_lane, lower_lane, instrument = args.instrument)
@@ -100,15 +93,3 @@ if __name__ == "__main__":
     final_score.write("musicxml", fp=str(final_xml_path))
 
     print(f"Final reduction written to {final_xml_path}")
-
-    # Rules-based keeping the higher scored note as the primary tone
-    build_reduction_higher(json_path, output_xml = None, layer = 2)
-
-    # Rules-based keeping the higher scored note as the primary tone
-    build_reduction_lower(json_path, output_xml = None, layer = 2)
-
-    # Voice-driven reduction
-    build_reduction_voice(json_path, output_xml = None, layer = 2)
-
-    # Adaptive strand reduction
-    build_reduction_adaptive(json_path, output_xml = None, layer = 2)

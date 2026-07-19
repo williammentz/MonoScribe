@@ -193,7 +193,8 @@ def extract_symbolic_notes(notes, score):
             "quarter_length": n.duration_ql,
             "time_position": n.onset,
             "duration_seconds": n.duration,  # raw divisions, not seconds
-            "staff": None,  # not tracked in TrainingNote
+            "staff": n.staff,  # not tracked in TrainingNote
+            "note_id": n.note_id
         })
 
     return symbolic_notes
@@ -206,6 +207,8 @@ def note_to_dict(note, idx, layer_scores, layer_masks, symbolic_note):
 
     return {
         "note_index": idx,
+
+        "note_id": getattr(note, "note_id", None),
 
         "pitch_name": symbolic_note["pitch_name"],
         "pitch_midi": symbolic_note["pitch_midi"],
@@ -281,6 +284,7 @@ def write_outputs(
     # CSV
     fieldnames = [
         "note_index",
+        "note_id",
         'measure',
         'measure_offset',
         'quarter_length',
@@ -302,6 +306,7 @@ def write_outputs(
         for i, note in enumerate(notes):
             row = {
                 "note_index": i,
+                "note_id": symbolic_notes[i]['note_id'],
                 'measure': symbolic_notes[i]['measure'],
                 'measure_offset': symbolic_notes[i]['measure_offset'],
                 'quarter_length': symbolic_notes[i]['quarter_length'],
