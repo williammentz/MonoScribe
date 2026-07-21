@@ -286,10 +286,10 @@ def build_feature_vector(node, inference_json):
         if note_id in inference_json:
             entry = inference_json[note_id]
             if 'layer_scores' in entry:
-                features.setdefault('utility', []).append(entry['layer_scores'][2]) # Hardcoded layer 2
+                features.setdefault('utility', []).append(entry['layer_scores'][2]) # Hardcoded layer 3
 
     features['mean_utility'] = np.mean(features.get('utility', [0.0]))
-    features['duration_density'] = features['note_count'] / features['total_duration']
+    features['onset_density'] = features['note_count'] / (node['end_q'] - node['start_q'])
     
     # utility_density = np.dot(features['utility'], features['durations']) #COME BACK
 
@@ -307,13 +307,13 @@ def normalize_interval(semitones, max_interval = 24):
     return min(semitones / max_interval, 1.0)
 
 def normalize_density(graph):
-    densities = [graph.nodes[n]['features']['duration_density'] for n in graph.nodes]
+    densities = [graph.nodes[n]['features']['onset_density'] for n in graph.nodes]
 
     density_min = min(densities)
     density_max = max(densities)
 
     for n in graph.nodes:
-        density = graph.nodes[n]['features']['duration_density']
+        density = graph.nodes[n]['features']['onset_density']
 
         if density_max == density_min:
             normalized_density = 0.0
@@ -321,7 +321,7 @@ def normalize_density(graph):
         else:
             normalized_density = (density - density_min) / (density_max - density_min)
 
-        graph.nodes[n]['features']['normalized_duration_density'] = normalized_density
+        graph.nodes[n]['features']['normalized_onset_density'] = normalized_density
 
 
 def edge(source_node, destination_node, args):
@@ -333,8 +333,8 @@ def edge(source_node, destination_node, args):
     continuity_cost = normalize_interval(abs(final_pitch - first_pitch), 12)
 
     # Min-max normalized duration density
-    duration_density = destination_node['features']['normalized_duration_density']
-    density_cost = 1.0 - duration_density
+    onset_density = destination_node['features']['normalized_onset_density']
+    density_cost = 1.0 - onset_density
 
     intervals = destination_node['features'].get('intervals', 0.0)
     
@@ -553,19 +553,36 @@ def graph_reducer(args):
     cost = nx.path_weight(graph, path, weight = 'weight')
     
     # For debugging:
-    node_features = [graph.nodes[n]['features'] for n in graph.nodes]
+    # node_features = [graph.nodes[n]['features'] for n in graph.nodes]
 
     # print(f"Cost: {cost:.15f}")
     # print("Path:")
     # for p in path:
     #     print("   ", p)
 
-    # # Extract secondary choices
-    # inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_transitions.json')
 
-    # primary_secondary_pairs = extract_pairs(graph, path, 'sink')
-    # inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_primary_secondary_nodes.json')
-    # save_primary_secondary_by_layer(primary_secondary_pairs, inference_json)
+    # Range Check for features['onset_density']
+    # for node_id, data in graph.nodes(data=True):
+    #     if 'features' not in data:
+    #         continue
+
+    #     f = data['features']
+
+    #     print(
+    #         node_id,
+    #         "notes:", f['note_count'],
+    #         "duration:", f['total_duration'],
+    #         "density:", f['onset_density'],
+    #         'normalized', f['normalized_onset_density'],
+    #         "segment:", data['end_q'] - data['start_q']
+    #     )
+
+    # # Extract secondary choices
+    inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_transitions.json')
+
+    primary_secondary_pairs = extract_pairs(graph, path, 'sink')
+    inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_primary_secondary_nodes.json')
+    save_primary_secondary_by_layer(primary_secondary_pairs, inference_json)
 
     # # Remove 'sink' node
     path = path[:-1]
@@ -583,8 +600,8 @@ def graph_reducer(args):
     )
 
     # # Interweaving primary and secondary nodes
-    # interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
-    # render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
+    interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
+    render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
 
 
 if __name__ == '__main__':
