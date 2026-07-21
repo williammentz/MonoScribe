@@ -1,3 +1,4 @@
+from utils.renderGraphPath import render_interwoven_primary_secondary
 from collections import OrderedDict
 import partitura as pt
 import argparse
@@ -8,11 +9,13 @@ import numpy as np
 from copy import deepcopy
 from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
 
-from utils.renderGraphPath import extract_score_context, attach_render_payload, render_best_path
+from utils.renderGraphPath import extract_score_context, attach_render_payload, render_best_path, render_interwoven_primary_secondary
+from utils.visualizeGraph import visualize_subgraph
 
 INFERENCE_DIR = 'outputs/inference/'
-SCORE_DIR = 'reduction_scores/'
+SCORE_DIR = 'outputs/clean_scores/'
 OUTPUT_DIR = 'outputs/reductions/'
+INFERENCE_DIR = 'outputs/graph_selections/'
 RAW_DIR = 'outputs/raw_graph_reductions/'
 
 # Split scores by voices
@@ -269,7 +272,6 @@ def build_feature_vector(node, inference_json):
         'durations': durations,
         'mean_duration': np.mean(durations),
         'total_duration': sum(durations),
-        'duration_density': 1 - (np.mean(durations) / sum(durations)),
 
         'intervals': [pitches[i + 1] - pitches[i] for i in range(len(pitches) - 1)],
         'mean_interval': np.mean([abs(pitches[i + 1] - pitches[i]) for i in range(len(pitches) - 1)]) if len(pitches) > 1 else 0,
@@ -287,9 +289,9 @@ def build_feature_vector(node, inference_json):
                 features.setdefault('utility', []).append(entry['layer_scores'][2]) # Hardcoded layer 2
 
     features['mean_utility'] = np.mean(features.get('utility', [0.0]))
+    features['duration_density'] = features['note_count'] / features['total_duration']
     
     # utility_density = np.dot(features['utility'], features['durations']) #COME BACK
-    
 
     return features
 
@@ -304,6 +306,24 @@ def attach_features(graph, inference_lookup):
 def normalize_interval(semitones, max_interval = 24):
     return min(semitones / max_interval, 1.0)
 
+def normalize_density(graph):
+    densities = [graph.nodes[n]['features']['duration_density'] for n in graph.nodes]
+
+    density_min = min(densities)
+    density_max = max(densities)
+
+    for n in graph.nodes:
+        density = graph.nodes[n]['features']['duration_density']
+
+        if density_max == density_min:
+            normalized_density = 0.0
+        
+        else:
+            normalized_density = (density - density_min) / (density_max - density_min)
+
+        graph.nodes[n]['features']['normalized_duration_density'] = normalized_density
+
+
 def edge(source_node, destination_node, args):
     utility = destination_node['features'].get('mean_utility', 0.0)
     utility_cost = 1.0 - utility    
@@ -312,7 +332,9 @@ def edge(source_node, destination_node, args):
     first_pitch = destination_node['notes'][0].midi_pitch
     continuity_cost = normalize_interval(abs(final_pitch - first_pitch), 12)
 
-    duration_density = destination_node['features'].get('duration_density', 0.0)
+    # Min-max normalized duration density
+    duration_density = destination_node['features']['normalized_duration_density']
+    density_cost = 1.0 - duration_density
 
     intervals = destination_node['features'].get('intervals', 0.0)
     
@@ -327,120 +349,167 @@ def edge(source_node, destination_node, args):
     return(
         args.utility * utility_cost + 
         args.contour * contour_cost + 
-        args.continuity * continuity_cost
+        args.continuity * continuity_cost +
+        args.density * density_cost
     )
 
 def assign_edge_weights(graph, args):
     for source_id, destination_id in graph.edges:
         graph.edges[source_id, destination_id]['weight'] = edge(graph.nodes[source_id], graph.nodes[destination_id], args)
 
-# Visualizing the graph
-def visualize_subgraph(graph, start_measure, end_measure, path=None):
-    sub_nodes = [
-        n for n in graph.nodes
-        if 'measure' in graph.nodes[n]
-        and start_measure <= int(graph.nodes[n]['measure'].split('_')[1]) <= end_measure
-    ]
+# Select primary/secondary nodes for each time layer in the optimized graph
 
-    subgraph = graph.subgraph(sub_nodes)
+def build_layer_index(graph):
+    layers = OrderedDict()
 
-    for node in subgraph.nodes:
-        subgraph.nodes[node]['subset'] = int(subgraph.nodes[node]['measure'].split('_')[1])
+    for node_id, data in graph.nodes(data = True):
+        if node_id == 'sink':
+            continue
 
-    pos = nx.multipartite_layout(subgraph, subset_key='subset')
+        layer = data.get('layer_index')
+        if layer is None:
+            continue
 
-    plt.figure(figsize=(16, 6))
+        layers.setdefault(layer, []).append(node_id)
 
-    # Determine which nodes and edges are on the path
-    path_set = set(path) if path else set()
-    path_edges = set()
-    if path:
-        for i in range(len(path) - 1):
-            if path[i] in sub_nodes and path[i + 1] in sub_nodes:
-                path_edges.add((path[i], path[i + 1]))
+    for layer in layers:
+        layers[layer] = sorted(layers[layer])
 
-    # Node colors
-    node_colors = ['#FF6B6B' if n in path_set else 'lightblue' for n in subgraph.nodes]
+    return layers
 
-    nx.draw_networkx_nodes(subgraph, pos, node_size=300, node_color=node_colors)
+def extract_pairs(graph, path, sink = 'sink'):
+    if not path:
+        return []
 
-    # Draw non-path edges
-    other_edges = [e for e in subgraph.edges if e not in path_edges]
-    nx.draw_networkx_edges(subgraph, pos, edgelist=other_edges, width=0.5, alpha=0.3, edge_color='gray')
+    real_path = [n for n in path if n != sink]
 
-    # Draw path edges
-    if path_edges:
-        nx.draw_networkx_edges(subgraph, pos, edgelist=list(path_edges), width=3.0, alpha=1.0, edge_color='#FF6B6B')
+    if not real_path:
+        return []
 
-    # Node labels
-    labels = {}
-    for n in subgraph.nodes:
-        s = graph.nodes[n]['staff'].split('_')[1]
-        v = graph.nodes[n]['voice'].split('_')[1]
-        u = f"{graph.nodes[n]['features']['mean_utility']:.2f}"
-        labels[n] = f"s{s}v{v}\n{u}"
+    layers = build_layer_index(graph)
+    rows = []
 
-    nx.draw_networkx_labels(subgraph, pos, labels, font_size=7)
+    for i, primary_node in enumerate(real_path):
+        primary_layer = graph.nodes[primary_node]['layer_index']
+        layer_nodes = layers.get(primary_layer, [])
 
-    # Edge labels with offset
-    from collections import defaultdict
-    layer_pairs = defaultdict(list)
-    for src, dst in subgraph.edges:
-        src_layer = int(graph.nodes[src]['measure'].split('_')[1])
-        dst_layer = int(graph.nodes[dst]['measure'].split('_')[1])
-        layer_pairs[(src_layer, dst_layer)].append((src, dst))
+        alternatives = [n for n in layer_nodes if n != primary_node]
 
-    for pair, edges in layer_pairs.items():
-        n_edges = len(edges)
-        for idx, (src, dst) in enumerate(edges):
-            spread = 0.03
-            offset = (idx - (n_edges - 1) / 2) * spread
 
-            src_pos = np.array(pos[src])
-            dst_pos = np.array(pos[dst])
-            mid = (src_pos + dst_pos) / 2
-
-            direction = dst_pos - src_pos
-            perp = np.array([-direction[1], direction[0]])
-            norm = np.linalg.norm(perp)
-            if norm > 0:
-                perp = perp / norm
-
-            label_pos = mid + offset * perp
-
-            is_path_edge = (src, dst) in path_edges
-            plt.annotate(
-                f"{subgraph.edges[src, dst]['weight']:.2f}",
-                xy=label_pos,
-                fontsize=5,
-                ha='center',
-                va='center',
-                color='#CC0000' if is_path_edge else 'black',
-                fontweight='bold' if is_path_edge else 'normal'
+        # i == 0: Starting node logic (matches graph optimizer)
+        if i == 0:
+            ranked = sorted(
+                layer_nodes,
+                key=lambda n: (-graph.nodes[n]['features'].get('mean_utility', 0.0), n)
             )
 
-    plt.title(f"Measures {start_measure}–{end_measure}")
-    plt.tight_layout()
-    plt.show()
+            primary_rank_entry = None
+            secondary_rank_entry = None
+
+            for n in ranked:
+                if n == primary_node:
+                    primary_rank_entry = {
+                        'node': n,
+                        'score': graph.nodes[n]['features'].get('mean_utility', 0.0)
+                    }
+                    break
+
+            for n in ranked:
+                if n != primary_node:
+                    secondary_rank_entry = {
+                        'node': n,
+                        'score': graph.nodes[n]['features'].get('mean_utility', 0.0)
+                    }
+                    break
+
+            rows.append({
+                'layer_index': primary_layer,
+                'measure_num': graph.nodes[primary_node].get('measure_num'),
+                'segment_label': graph.nodes[primary_node].get('segment_label'),
+
+                'primary_node': primary_node,
+                'primary_score_type': 'start_utility',
+                'primary_score': primary_rank_entry['score'] if primary_rank_entry else None,
+
+                'secondary_node': secondary_rank_entry['node'] if secondary_rank_entry else None,
+                'secondary_score_type': 'start_utility',
+                'secondary_score': secondary_rank_entry['score'] if secondary_rank_entry else None,
+
+                'delta_to_secondary': (
+                    (primary_rank_entry['score'] - secondary_rank_entry['score'])
+                    if primary_rank_entry and secondary_rank_entry else None
+                )
+            })
+            continue
+
+        # Rest of graph
+        prev_primary = real_path[i - 1]
+        ranked = []
+
+        for alt in layer_nodes:
+            if not graph.has_edge(prev_primary, alt):
+                continue
+
+            incoming_cost = graph.edges[prev_primary, alt]['weight']
+            ranked.append({
+                'node': alt,
+                'incoming_cost': incoming_cost
+            })
+
+        ranked.sort(key=lambda x: (x['incoming_cost'], x['node']))
+
+        primary_rank_entry = None
+        secondary_rank_entry = None
+
+        for entry in ranked:
+            if entry['node'] == primary_node:
+                primary_rank_entry = entry
+                break
+
+        for entry in ranked:
+            if entry['node'] != primary_node:
+                secondary_rank_entry = entry
+                break
+
+        rows.append({
+            'layer_index': primary_layer,
+            'measure_num': graph.nodes[primary_node].get('measure_num'),
+            'segment_label': graph.nodes[primary_node].get('segment_label'),
+
+            'previous_primary': prev_primary,
+
+            'primary_node': primary_node,
+            'primary_score_type': 'incoming_edge',
+            'primary_score': primary_rank_entry['incoming_cost'] if primary_rank_entry else None,
+
+            'secondary_node': secondary_rank_entry['node'] if secondary_rank_entry else None,
+            'secondary_score_type': 'incoming_edge',
+            'secondary_score': secondary_rank_entry['incoming_cost'] if secondary_rank_entry else None,
+
+            'delta_to_secondary': (
+                (secondary_rank_entry['incoming_cost'] - primary_rank_entry['incoming_cost'])
+                if primary_rank_entry and secondary_rank_entry else None
+            )
+        })
+
+    return rows
+
+def save_primary_secondary_by_layer(rows, out_path):
+    with open(out_path, 'w') as f:
+        json.dump(rows, f, indent=2)
+
+def save_second_choice_transitions(rows, out_path):
+    with open(out_path, 'w') as f:
+        json.dump(rows, f, indent=2)
 
 
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('--piece', required = True)
-    parser.add_argument('--utility', type = float, default = 0.7)
-    parser.add_argument('--continuity', type = float, default = 0.2)
-    parser.add_argument('--duration', type = float, default = 0.4)
-    parser.add_argument('--contour', type = float, default = 0.5)
-    parser.add_argument('--method', default = 'measure')
-    args = parser.parse_args()
-
+# Main Reducer
+def graph_reducer(args):
     input_score = SCORE_DIR + args.piece
-    render_context = extract_score_context(input_score)
     mono_raw = RAW_DIR + args.piece
     mono_score = OUTPUT_DIR + args.piece
+    
+    render_context = extract_score_context(input_score)
     results, part = split_voices(input_score)
 
     segments = build_slices(part, mode = args.method)
@@ -460,12 +529,8 @@ if __name__ == '__main__':
         inference_lookup[note['note_id']] = note
 
     attach_features(graph, inference_lookup)
-
-    # print(graph.nodes['staff_1_voice_2_measure_89']['features']) # Checking one strand
-
+    normalize_density(graph)
     assign_edge_weights(graph, args)
-
-    # starting_nodes = [n for n in graph.nodes if graph.nodes[n]['layer_index'] == 1]
 
     first_layer = min(
         graph.nodes[n]["layer_index"]
@@ -486,13 +551,28 @@ if __name__ == '__main__':
     # Dijkstra
     path = nx.shortest_path(graph, starting_node, 'sink', weight = 'weight')
     cost = nx.path_weight(graph, path, weight = 'weight')
-    path = path[:-1]
+    
+    # For debugging:
+    node_features = [graph.nodes[n]['features'] for n in graph.nodes]
 
     # print(f"Cost: {cost:.15f}")
     # print("Path:")
     # for p in path:
     #     print("   ", p)
 
+    # # Extract secondary choices
+    # inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_transitions.json')
+
+    # primary_secondary_pairs = extract_pairs(graph, path, 'sink')
+    # inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_primary_secondary_nodes.json')
+    # save_primary_secondary_by_layer(primary_secondary_pairs, inference_json)
+
+    # # Remove 'sink' node
+    path = path[:-1]
+
+    # visualize_subgraph(graph, 1, 20, path)
+
+    # # Raw graph monophonic rendering
     attach_render_payload(graph, part, simultaneous = "highest")
     render_best_path(
         path,
@@ -502,5 +582,21 @@ if __name__ == '__main__':
         input_score
     )
 
-    # Subgraph visual
-    # visualize_subgraph(graph, 1, 30, path)
+    # # Interweaving primary and secondary nodes
+    # interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
+    # render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--piece', required = True)
+    parser.add_argument('--utility', type = float, default = 0.7)
+    parser.add_argument('--continuity', type = float, default = 0.2) # Higher <=> More pitch continuity between nodes
+    parser.add_argument('--density', type = float, default = 0.4) # Higher <=> Denser
+    parser.add_argument('--contour', type = float, default = 0.5) # Higher <=> More contour within each node
+    parser.add_argument('--method', default = 'measure') # Horizontal slicing method, default: method
+
+    args = parser.parse_args()
+
+    graph_reducer(args)

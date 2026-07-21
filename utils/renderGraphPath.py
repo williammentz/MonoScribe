@@ -1,12 +1,9 @@
 from collections import OrderedDict
-import partitura as pt
-import argparse
-import json
-import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 from copy import deepcopy
 from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
+
+EPSILON = 1e-9
 
 # Build Selected (Raw) Reduction
 
@@ -279,8 +276,7 @@ def path_to_render_events(path, graph):
     path_events.sort(key=lambda x: (x["onset"], x["pitch"]))
 
     return normalize_path_events(
-        path_events,
-        merge_adjacent_same_pitch=True
+        path_events
     )
 
 
@@ -298,7 +294,7 @@ def render_best_path(path, graph, out_path, render_context, source_score_path):
         composer = render_context.get('composer'),
     )
 
-def normalize_path_events(path_events, merge_adjacent_same_pitch=True):
+def normalize_path_events(path_events, merge_adjacent_same_pitch=False):
     events = sorted(path_events, key=lambda x: (x["onset"], x["pitch"]))
     cleaned = []
 
@@ -415,7 +411,7 @@ def render_raw_path(
     part_name="Reduction",
     inst=None,
 ):
-    path_events = normalize_path_events(path_events)
+    path_events = normalize_path_events(path_events, merge_adjacent_same_pitch = False)
 
     src_score = converter.parse(source_score_path)
     if len(src_score.parts) == 0:
@@ -513,5 +509,300 @@ def render_raw_path(
         pass
 
     sc.write("musicxml", fp=out_path)
-    print("Raw path reduction written.")
+    print("Reduction written.")
     return sc
+
+# Primary/Secondary node pairs from graph path
+def build_measure_context_table(source_score_path):
+    """
+    Map measure number -> beat_q_len / measure_len using the source score.
+    """
+    src_score = converter.parse(source_score_path)
+    if len(src_score.parts) == 0:
+        raise ValueError("Source score contains no parts.")
+
+    src_part = src_score.parts[0]
+    table = {}
+
+    for m in src_part.getElementsByClass(stream.Measure):
+        ts = m.getContextByClass(meter.TimeSignature)
+
+        if ts is not None:
+            beat_q_len = float(ts.beatDuration.quarterLength)
+            measure_len = float(ts.barDuration.quarterLength)
+        else:
+            beat_q_len = 1.0
+            measure_len = float(m.barDuration.quarterLength) if m.barDuration is not None else 4.0
+
+        table[m.number] = {
+            'beat_q_len': beat_q_len,
+            'measure_len': measure_len
+        }
+
+    return table
+
+
+def clip_node_events_to_layer(node_id, graph, layer_start_q, layer_end_q, event_key):
+    """
+    Clip one node's render events to the current layer bounds.
+    Returns absolute-time events.
+    """
+    if node_id is None:
+        return []
+
+    node = graph.nodes[node_id]
+    render_payload = node.get('render', {})
+    raw_events = render_payload.get(event_key, [])
+
+    clipped = []
+
+    for ev in raw_events:
+        onset = float(ev['onset'])
+        end = onset + float(ev['duration'])
+
+        start = max(onset, layer_start_q)
+        stop = min(end, layer_end_q)
+        dur = stop - start
+
+        if dur <= EPSILON:
+            continue
+
+        clipped.append({
+            'pitch': int(ev['pitch']),
+            'onset': float(start),
+            'duration': float(dur),
+        })
+
+    clipped.sort(key=lambda x: (x['onset'], x['pitch']))
+    return clipped
+
+
+def choose_primary_protected_duration(primary_event, secondary_candidates, beat_q_len, span_len):
+    """
+    First-pass graph analog of the homophonic heuristic:
+
+    - if there is secondary material and primary span is longer than the first
+      secondary duration, protect only that shorter chunk
+    - otherwise protect one beat
+    """
+    if span_len <= EPSILON:
+        return 0.0
+
+    if secondary_candidates:
+        first_secondary_dur = float(secondary_candidates[0]['duration'])
+        if span_len > first_secondary_dur:
+            return min(span_len, first_secondary_dur)
+
+    return min(span_len, beat_q_len)
+
+
+def collapse_monophonic_with_priority(events, end_limit=None):
+    """
+    Resolve a mixed primary/secondary event list into one monophonic stream.
+
+    Priority:
+      primary before secondary at same onset
+    """
+    if not events:
+        return []
+
+    def priority(ev):
+        return 0 if ev.get('source') == 'primary' else 1
+
+    events = sorted(events, key=lambda e: (e['onset'], priority(e), e['pitch']))
+    cleaned = []
+    current_time = events[0]['onset']
+
+    for i, ev in enumerate(events):
+        start = max(float(ev['onset']), current_time)
+
+        next_onset = float('inf')
+        if i + 1 < len(events):
+            next_onset = float(events[i + 1]['onset'])
+
+        raw_end = float(ev['onset']) + float(ev['duration'])
+        end = min(raw_end, next_onset)
+
+        if end_limit is not None:
+            end = min(end, end_limit)
+
+        dur = end - start
+        if dur <= EPSILON:
+            continue
+
+        cleaned.append({
+            'pitch': int(ev['pitch']),
+            'onset': float(start),
+            'duration': float(dur),
+            'source': ev.get('source')
+        })
+
+        current_time = start + dur
+
+    return cleaned
+
+
+def interweave_layer_events(primary_events, secondary_events, layer_start_q, layer_end_q, beat_q_len):
+    """
+    Layer-level primary/secondary interweaving.
+
+    Logic analog to the reference homophonic reducer:
+    - primary owns the onset
+    - primary gets a protected duration
+    - secondary fills after that protected duration within the primary span
+    """
+    if not primary_events:
+        return []
+
+    selected = []
+
+    for i, p in enumerate(primary_events):
+        p_onset = float(p['onset'])
+        p_end = p_onset + float(p['duration'])
+
+        next_primary_onset = layer_end_q
+        if i + 1 < len(primary_events):
+            next_primary_onset = float(primary_events[i + 1]['onset'])
+
+        span_end = min(p_end, next_primary_onset, layer_end_q)
+        span_len = span_end - p_onset
+
+        if span_len <= EPSILON:
+            continue
+
+        # Secondary events that belong to this primary span
+        candidates = [
+            {
+                'pitch': int(s['pitch']),
+                'onset': float(s['onset']),
+                'duration': min(float(s['duration']), span_end - float(s['onset']))
+            }
+            for s in secondary_events
+            if p_onset <= float(s['onset']) < span_end
+        ]
+
+        candidates = [c for c in candidates if c['duration'] > EPSILON]
+        candidates.sort(key=lambda x: (x['onset'], x['pitch']))
+
+        protected = choose_primary_protected_duration(
+            p,
+            candidates,
+            beat_q_len,
+            span_len
+        )
+
+        if protected <= EPSILON:
+            continue
+
+        # Primary gets first claim
+        selected.append({
+            'pitch': int(p['pitch']),
+            'onset': p_onset,
+            'duration': protected,
+            'source': 'primary'
+        })
+
+        fill_start = p_onset + protected
+        fill_end = span_end
+
+        for c in candidates:
+            if float(c['onset']) < fill_start:
+                continue
+
+            clipped_end = min(float(c['onset']) + float(c['duration']), fill_end)
+            clipped_dur = clipped_end - float(c['onset'])
+
+            if clipped_dur <= EPSILON:
+                continue
+
+            selected.append({
+                'pitch': int(c['pitch']),
+                'onset': float(c['onset']),
+                'duration': float(clipped_dur),
+                'source': 'secondary'
+            })
+
+    return collapse_monophonic_with_priority(selected, end_limit=layer_end_q)
+
+
+def build_interwoven_path_events(primary_secondary_rows, graph, source_score_path):
+    """
+    Build one monophonic event stream by interweaving primary/secondary nodes
+    layer by layer.
+    """
+    measure_context = build_measure_context_table(source_score_path)
+    path_events = []
+
+    for row in primary_secondary_rows:
+        primary_node = row['primary_node']
+        secondary_node = row.get('secondary_node')
+
+        node_data = graph.nodes[primary_node]
+        layer_start_q = float(node_data['start_q'])
+        layer_end_q = float(node_data['end_q'])
+        measure_num = int(node_data['measure_num'])
+
+        beat_q_len = measure_context.get(measure_num, {}).get('beat_q_len', 1.0)
+
+        primary_events = clip_node_events_to_layer(
+            primary_node,
+            graph,
+            layer_start_q,
+            layer_end_q,
+            event_key='primary_events'
+        )
+
+        secondary_events = clip_node_events_to_layer(
+            secondary_node,
+            graph,
+            layer_start_q,
+            layer_end_q,
+            event_key='render_events'
+        ) if secondary_node is not None else []
+
+        layer_events = interweave_layer_events(
+            primary_events,
+            secondary_events,
+            layer_start_q,
+            layer_end_q,
+            beat_q_len
+        )
+
+        path_events.extend(layer_events)
+
+    # Strip source before final normalization if desired
+    flat = [
+        {
+            'pitch': int(ev['pitch']),
+            'onset': float(ev['onset']),
+            'duration': float(ev['duration'])
+        }
+        for ev in path_events
+    ]
+
+    flat.sort(key=lambda x: (x['onset'], x['pitch']))
+    return normalize_path_events(flat, merge_adjacent_same_pitch=False)
+
+def render_interwoven_primary_secondary(
+    primary_secondary_rows,
+    graph,
+    source_score_path,
+    out_path,
+    render_context
+):
+    path_events = build_interwoven_path_events(
+        primary_secondary_rows,
+        graph,
+        source_score_path
+    )
+
+    if not path_events:
+        raise ValueError("No interwoven events were produced.")
+
+    return render_raw_path(
+        path_events,
+        source_score_path=source_score_path,
+        out_path=out_path,
+        title=render_context.get('title'),
+        composer=render_context.get('composer'),
+    )
