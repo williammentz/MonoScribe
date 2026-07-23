@@ -1,9 +1,42 @@
 from collections import OrderedDict
 import numpy as np
 from copy import deepcopy
-from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
+from fractions import Fraction
+from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter, duration as m21_duration
+import partitura as pt
 
-EPSILON = 1e-9
+EPSILON = 1e-7
+
+def rational_value(x, max_denominator=96, allow_zero=True):
+    if x is None:
+        return None
+    q = Fraction(float(x)).limit_denominator(max_denominator)
+    if allow_zero:
+        if q < 0:
+            return None
+    else:
+        if q <= 0:
+            return None
+    return q
+
+def snap_value_float(x, max_denominator=96, allow_zero=True):
+    q = rational_value(x, max_denominator=max_denominator, allow_zero=allow_zero)
+    return float(q) if q is not None else None
+
+def first_measure_q_origin(part):
+    measures = sorted(part.iter_all(pt.score.Measure), key=lambda m: m.start.t)
+    if not measures:
+        return 0.0
+
+    first_measure = measures[0]
+
+    try:
+        if hasattr(part, "quarter_map"):
+            return float(scalar(part.quarter_map(first_measure.start.t)))
+    except Exception:
+        pass
+
+    return float(first_measure.start.t)
 
 # Build Selected (Raw) Reduction
 
@@ -157,11 +190,89 @@ def note_duration_quarter(n, part):
     return None
 
 
+# def build_render_payload(notes, part, simultaneous="highest"):
+#     notes_sorted = sorted(
+#         notes,
+#         key=lambda n: (n.start.t, getattr(n, "midi_pitch", -999))
+#     )
+
+#     render_events = []
+#     onset_buckets = OrderedDict()
+#     note_ids = []
+
+#     for n in notes_sorted:
+#         onset_q = note_onset_quarter(n, part)
+#         dur_q = note_duration_quarter(n, part)
+
+#         if onset_q is None or dur_q is None or dur_q <= 0:
+#             continue
+
+#         onset_q = float(onset_q)
+#         dur_q = float(dur_q)
+
+#         ev = {
+#             "note_id": getattr(n, "id", None),
+#             "pitch": int(n.midi_pitch),
+#             "onset": onset_q,
+#             "duration": dur_q,
+#             "onset_t": float(n.start.t),
+#             "end_t": float(n.end.t) if hasattr(n, "end") and n.end is not None else None,
+#         }
+
+#         render_events.append(ev)
+#         note_ids.append(ev["note_id"])
+#         onset_buckets.setdefault(round(ev["onset"], 8), []).append(ev)
+
+#     primary_events = []
+#     max_simultaneity = 0
+
+#     for _, bucket in onset_buckets.items():
+#         max_simultaneity = max(max_simultaneity, len(bucket))
+
+#         if simultaneous == "lowest":
+#             chosen = min(bucket, key=lambda e: e["pitch"])
+#         elif simultaneous == "first":
+#             chosen = bucket[0]
+#         else:
+#             chosen = max(bucket, key=lambda e: e["pitch"])  # default highest
+
+#         primary_events.append({
+#             "note_id": chosen["note_id"],
+#             "pitch": chosen["pitch"],
+#             "onset": chosen["onset"],
+#             "duration": chosen["duration"],
+#         })
+
+#     if render_events:
+#         start_q = min(ev["onset"] for ev in render_events)
+#         end_q = max(ev["onset"] + ev["duration"] for ev in render_events)
+#     else:
+#         start_q = None
+#         end_q = None
+
+#     representative = primary_events[0] if primary_events else None
+
+#     return {
+#         "note_ids": note_ids,
+#         "start_q": start_q,
+#         "end_q": end_q,
+#         "duration_q": (end_q - start_q) if start_q is not None and end_q is not None else None,
+#         "render_events": render_events,
+#         "primary_events": primary_events,
+#         "representative_pitch": representative["pitch"] if representative else None,
+#         "representative_onset": representative["onset"] if representative else None,
+#         "representative_duration": representative["duration"] if representative else None,
+#         "max_simultaneity": max_simultaneity,
+#         "is_monophonic": max_simultaneity <= 1,
+#     }
+
 def build_render_payload(notes, part, simultaneous="highest"):
     notes_sorted = sorted(
         notes,
         key=lambda n: (n.start.t, getattr(n, "midi_pitch", -999))
     )
+
+    q_origin = first_measure_q_origin(part)
 
     render_events = []
     onset_buckets = OrderedDict()
@@ -174,8 +285,11 @@ def build_render_payload(notes, part, simultaneous="highest"):
         if onset_q is None or dur_q is None or dur_q <= 0:
             continue
 
-        onset_q = round(float(onset_q), 8)
-        dur_q = round(float(dur_q), 8)
+        onset_q = float(onset_q) - q_origin
+        dur_q = float(dur_q)
+
+        if abs(onset_q) <= EPSILON:
+            onset_q = 0.0
 
         ev = {
             "note_id": getattr(n, "id", None),
@@ -201,7 +315,7 @@ def build_render_payload(notes, part, simultaneous="highest"):
         elif simultaneous == "first":
             chosen = bucket[0]
         else:
-            chosen = max(bucket, key=lambda e: e["pitch"])  # default highest
+            chosen = max(bucket, key=lambda e: e["pitch"])
 
         primary_events.append({
             "note_id": chosen["note_id"],
@@ -263,6 +377,7 @@ def path_to_render_events(path, graph):
                 "pitch": int(ev["pitch"]),
                 "onset": float(ev["onset"]),
                 "duration": float(ev["duration"]),
+                'node_id': node_id
             })
 
     if not path_events:
@@ -314,16 +429,19 @@ def normalize_path_events(path_events, merge_adjacent_same_pitch=False):
         prev_end = prev["onset"] + prev["duration"]
 
         # If this note starts before previous ends, truncate previous
-        if onset < prev_end:
+        if onset < prev_end - EPSILON:
             raise ValueError(
                 f"Overlapping notes detected: "
                 f"{prev} overlaps {ev}"
             )
 
+        if abs(onset - prev_end) <= EPSILON:
+            onset = prev_end
+
         # Merge adjacent same-pitch notes if desired
         if merge_adjacent_same_pitch:
             prev_end = prev["onset"] + prev["duration"]
-            if abs(onset - prev_end) < 1e-9 and p == prev["pitch"]:
+            if abs(onset - prev_end) < EPSILON and p == prev["pitch"]:
                 prev["duration"] += dur
                 continue
 
@@ -413,11 +531,50 @@ def render_raw_path(
 ):
     path_events = normalize_path_events(path_events, merge_adjacent_same_pitch = False)
 
+    for ev in path_events[:10]:
+        print(ev)
+
     src_score = converter.parse(source_score_path)
     if len(src_score.parts) == 0:
         raise ValueError("Source score contains no parts.")
 
     src_part = src_score.parts[0]
+    measures = list(src_part.getElementsByClass(stream.Measure))
+    measure0 = next((m for m in measures if m.number == 0), None)
+    measure1 = next((m for m in measures if m.number == 1), None)
+
+    if measure0 is not None and measure1 is not None:
+        source_measure0_has_notes = len(list(measure0.notes)) > 0
+        if not source_measure0_has_notes:
+            measure1_start = float(measure1.getOffsetInHierarchy(src_part))
+            path_events = [
+                ev for ev in path_events
+                if float(ev["onset"]) >= measure1_start - EPSILON
+            ]
+
+    # m1 = list(src_part.getElementsByClass(stream.Measure))[0]
+
+    # print("SOURCE MEASURE 1")
+    # print("number:", m1.number)
+    # print("offset in part:", float(m1.getOffsetInHierarchy(src_part)))
+    # print("paddingLeft:", getattr(m1, "paddingLeft", None))
+    # print("paddingRight:", getattr(m1, "paddingRight", None))
+    # print("barDuration:", float(m1.barDuration.quarterLength) if m1.barDuration else None)
+
+    # print("SOURCE MEASURE 1 NOTES/RESTS")
+    # for x in m1.notesAndRests:
+    #     print(type(x).__name__, "offset=", float(x.offset), "ql=", float(x.duration.quarterLength))
+
+    # print("FIRST SOURCE NOTES (music21)")
+    # for n in list(src_part.recurse().notes)[:10]:
+    #     meas = n.getContextByClass(stream.Measure)
+    #     print(
+    #         n,
+    #         "part_offset=", float(n.getOffsetInHierarchy(src_part)),
+    #         "measure=", meas.number if meas else None,
+    #         "measure_offset=", float(n.offset)
+    #     )
+
     measure_table = build_source_measure_table(src_part)
 
     sc = stream.Score()
@@ -443,28 +600,29 @@ def render_raw_path(
 
     # Insert each event into the appropriate source measure(s)
     for ev in path_events:
-        start = float(ev["onset"])
-        dur = float(ev["duration"])
+        start = snap_value_float(ev["onset"], allow_zero = True)
+        dur = snap_value_float(ev["duration"], allow_zero = False)
         pitch_value = ev["pitch"]
 
-        if dur <= 0:
+        if start is None or dur is None or dur <= 0:
             continue
 
-        end = start + dur
+        end = snap_value_float(start + dur, allow_zero = True)
         cursor = start
 
-        while cursor < end - 1e-9:
+
+        while cursor < end - EPSILON:
             containing = None
 
             for row in measure_table:
-                if row["start"] <= cursor < row["end"] - 1e-9:
+                if row["start"] <= cursor < row["end"] - EPSILON:
                     containing = row
                     break
 
             # Edge case: event lands exactly on final boundary
             if containing is None:
                 for row in reversed(measure_table):
-                    if abs(cursor - row["end"]) < 1e-9:
+                    if abs(cursor - row["end"]) < EPSILON:
                         continue
                     if row["start"] <= cursor <= row["end"]:
                         containing = row
@@ -473,10 +631,10 @@ def render_raw_path(
             if containing is None:
                 break
 
-            seg_end = min(end, containing["end"])
-            seg_dur = seg_end - cursor
+            seg_end = snap_value_float(min(end, containing["end"]), allow_zero = True)
+            seg_dur = snap_value_float(seg_end - cursor, allow_zero = False)
 
-            if seg_dur <= 1e-9:
+            if seg_end is None or seg_dur is None or seg_dur <= EPSILON:
                 break
 
             n = m21_note.Note()
@@ -485,19 +643,18 @@ def render_raw_path(
             else:
                 n.pitch = m21.Pitch(pitch_value)
 
-            n.duration.quarterLength = seg_dur
+            n.duration = m21_duration.Duration(rational_value(seg_dur, allow_zero = False))
 
-            local_offset = cursor - containing["start"]
+            local_offset = snap_value_float(max(0.0, cursor - containing["start"]), allow_zero = True)
             target_measures[containing["number"]].insert(local_offset, n)
-
             cursor = seg_end
 
     # Fill gaps with rests inside the already-correct measure shells
-    for m in reduced_part.getElementsByClass(stream.Measure):
-        try:
-            m.makeRests(fillGaps=True, inPlace=True)
-        except Exception:
-            pass
+    # for m in reduced_part.getElementsByClass(stream.Measure):
+    #     try:
+    #         m.makeRests(fillGaps=True, inPlace=True)
+    #     except Exception:
+    #         pass
 
     tempo_marks(src_score, reduced_part)
 

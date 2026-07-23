@@ -119,7 +119,9 @@ def build_slices(part, mode = 'measure', subdivisions = 2, window_ql = 1.0):
         m_end_q = qmap(m_end_t)
         m_len_q = m_end_q - m_start_q
 
-        measure_num = i + 1
+        measure_num = getattr(m, "number", None)
+        if measure_num is None:
+            measure_num = i + 1
 
         if mode == 'measure':
             segments.append({
@@ -553,12 +555,11 @@ def graph_reducer(args):
     cost = nx.path_weight(graph, path, weight = 'weight')
     
     # For debugging:
-    # node_features = [graph.nodes[n]['features'] for n in graph.nodes]
 
-    # print(f"Cost: {cost:.15f}")
-    # print("Path:")
-    # for p in path:
-    #     print("   ", p)
+    print(f"Cost: {cost:.15f}")
+    print("Path:")
+    for p in path:
+        print("   ", p)
 
 
     # Range Check for features['onset_density']
@@ -600,8 +601,8 @@ def graph_reducer(args):
     )
 
     # # Interweaving primary and secondary nodes
-    interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
-    render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
+    # interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
+    # render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
 
 
 if __name__ == '__main__':
