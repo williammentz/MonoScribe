@@ -96,6 +96,22 @@ def get_measure_ts(part, measure):
     
     return beats, beat_type
 
+def get_beat_structure(part, measure):
+    beats, beat_type = get_measure_ts(part, measure)
+
+    denominator_unit_q = 4.0 / beat_type
+
+    is_compound = beats >= 6 and beats % 3 == 0
+
+    if is_compound:
+        beat_count = beats // 3
+        beat_len_q = 3 * denominator_unit_q
+    else:
+        beat_count = beats
+        beat_len_q = denominator_unit_q
+
+    return beat_count, beat_len_q
+
 
 def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
     measures = sorted(part.iter_all(pt.score.Measure), key=lambda m: m.start.t)
@@ -154,7 +170,7 @@ def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
 
             segments.append({
                 'id': f'seg_{seg_idx}',
-                'label': f'measure_{measure_num}_offset{offset:g}',
+                'label': f'measure_{measure_num}_offset_{offset:g}',
                 'measure_num': measure_num,
                 'start_t': m_start_t,
                 'end_t': m_end_t,
@@ -169,23 +185,31 @@ def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
             seg_idx += 1
 
         elif mode == "beat":
-            beats, beat_type = get_measure_ts(part, m)
-            beat_len_q = 4.0 / beat_type
+            beat_count, beat_len_q = get_beat_structure(part, m)
 
-            for b in range(beats):
-                start_q = m_start_q + b * beat_len_q
+            for beat_index in range(beat_count):
+                start_q = m_start_q + beat_index * beat_len_q
+
+                if start_q >= m_end_q - 1e-9:
+                    break
+                
                 end_q = min(start_q + beat_len_q, m_end_q)
 
+                if end_q <= start_q + 1e-9:
+                    continue
+
                 segments.append({
-                    "id": f"seg_{seg_idx}",
-                    "label": f"measure_{measure_num}_beat_{b + 1}",
-                    "measure_num": measure_num,
-                    "beat_index": b + 1,
-                    "start_t": m_start_t,
-                    "end_t": m_end_t,
-                    "start_q": start_q,
-                    "end_q": end_q,
-                    "layer_index": seg_idx,
+                    'id': f'seg_{seg_idx}',
+                    'label': f'measure_{measure_num}_beat_{beat_index + 1}',
+                    'measure_num': measure_num,
+                    'beat_index': beat_index + 1,
+                    'beat_count': beat_count,
+                    'beat_len_q': beat_len_q,
+                    'start_t': m_start_t,
+                    'end_t': m_end_t,
+                    'start_q': start_q,
+                    'end_q': end_q,
+                    'layer_index': seg_idx
                 })
 
                 seg_idx += 1
@@ -593,7 +617,7 @@ def graph_reducer(args):
 
     try:
         attach_render_payload(graph, part, simultaneous='highest')
-        render_best_path(path, graph, mono_raw, render_context, input_score)
+        render_best_path(path, graph, mono_raw, render_context, input_score, truncate_overlaps = (args.method == 'beat'))
 
     finally:
         restore_path_notes(graph, original_path_notes)
@@ -636,7 +660,7 @@ if __name__ == '__main__':
     parser.add_argument('--continuity', type = float, default = 0.2) # Higher <=> More pitch continuity between nodes
     parser.add_argument('--density', type = float, default = 0.4) # Higher <=> Denser
     parser.add_argument('--contour', type = float, default = 0.5) # Higher <=> More contour within each node
-    parser.add_argument('--method', default = 'measure') # Horizontal slicing method, default: method
+    parser.add_argument('--method', default = 'measure', choices = ['measure', 'measure_offset', 'beat']) # Horizontal slicing method, default: method
     parser.add_argument('--offset', type = float, default = 0.25)
 
     args = parser.parse_args()

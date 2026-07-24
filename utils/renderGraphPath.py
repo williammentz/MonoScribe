@@ -190,82 +190,6 @@ def note_duration_quarter(n, part):
     return None
 
 
-# def build_render_payload(notes, part, simultaneous="highest"):
-#     notes_sorted = sorted(
-#         notes,
-#         key=lambda n: (n.start.t, getattr(n, "midi_pitch", -999))
-#     )
-
-#     render_events = []
-#     onset_buckets = OrderedDict()
-#     note_ids = []
-
-#     for n in notes_sorted:
-#         onset_q = note_onset_quarter(n, part)
-#         dur_q = note_duration_quarter(n, part)
-
-#         if onset_q is None or dur_q is None or dur_q <= 0:
-#             continue
-
-#         onset_q = float(onset_q)
-#         dur_q = float(dur_q)
-
-#         ev = {
-#             "note_id": getattr(n, "id", None),
-#             "pitch": int(n.midi_pitch),
-#             "onset": onset_q,
-#             "duration": dur_q,
-#             "onset_t": float(n.start.t),
-#             "end_t": float(n.end.t) if hasattr(n, "end") and n.end is not None else None,
-#         }
-
-#         render_events.append(ev)
-#         note_ids.append(ev["note_id"])
-#         onset_buckets.setdefault(round(ev["onset"], 8), []).append(ev)
-
-#     primary_events = []
-#     max_simultaneity = 0
-
-#     for _, bucket in onset_buckets.items():
-#         max_simultaneity = max(max_simultaneity, len(bucket))
-
-#         if simultaneous == "lowest":
-#             chosen = min(bucket, key=lambda e: e["pitch"])
-#         elif simultaneous == "first":
-#             chosen = bucket[0]
-#         else:
-#             chosen = max(bucket, key=lambda e: e["pitch"])  # default highest
-
-#         primary_events.append({
-#             "note_id": chosen["note_id"],
-#             "pitch": chosen["pitch"],
-#             "onset": chosen["onset"],
-#             "duration": chosen["duration"],
-#         })
-
-#     if render_events:
-#         start_q = min(ev["onset"] for ev in render_events)
-#         end_q = max(ev["onset"] + ev["duration"] for ev in render_events)
-#     else:
-#         start_q = None
-#         end_q = None
-
-#     representative = primary_events[0] if primary_events else None
-
-#     return {
-#         "note_ids": note_ids,
-#         "start_q": start_q,
-#         "end_q": end_q,
-#         "duration_q": (end_q - start_q) if start_q is not None and end_q is not None else None,
-#         "render_events": render_events,
-#         "primary_events": primary_events,
-#         "representative_pitch": representative["pitch"] if representative else None,
-#         "representative_onset": representative["onset"] if representative else None,
-#         "representative_duration": representative["duration"] if representative else None,
-#         "max_simultaneity": max_simultaneity,
-#         "is_monophonic": max_simultaneity <= 1,
-#     }
-
 def build_render_payload(notes, part, simultaneous="highest"):
     notes_sorted = sorted(
         notes,
@@ -360,7 +284,7 @@ def attach_render_payload(graph, part, simultaneous="highest"):
         )
 
 
-def path_to_render_events(path, graph):
+def path_to_render_events(path, graph, truncate_overlaps = False):
     path_events = []
 
     for node_id in path:
@@ -390,13 +314,11 @@ def path_to_render_events(path, graph):
 
     path_events.sort(key=lambda x: (x["onset"], x["pitch"]))
 
-    return normalize_path_events(
-        path_events
-    )
+    return normalize_path_events(path_events, truncate_overlaps = truncate_overlaps)
 
 
-def render_best_path(path, graph, out_path, render_context, source_score_path):
-    path_events = path_to_render_events(path, graph)
+def render_best_path(path, graph, out_path, render_context, source_score_path, truncate_overlaps = False):
+    path_events = path_to_render_events(path, graph, truncate_overlaps = truncate_overlaps)
 
     if not path_events:
         raise ValueError("No renderable events found in the selected path.")
@@ -409,7 +331,7 @@ def render_best_path(path, graph, out_path, render_context, source_score_path):
         composer = render_context.get('composer'),
     )
 
-def normalize_path_events(path_events, merge_adjacent_same_pitch=False):
+def normalize_path_events(path_events, merge_adjacent_same_pitch = False, truncate_overlaps = False):
     events = sorted(path_events, key=lambda x: (x["onset"], x["pitch"]))
     cleaned = []
 
@@ -428,12 +350,21 @@ def normalize_path_events(path_events, merge_adjacent_same_pitch=False):
         prev = cleaned[-1]
         prev_end = prev["onset"] + prev["duration"]
 
-        # If this note starts before previous ends, truncate previous
+        # Current event begins before previous ends
         if onset < prev_end - EPSILON:
-            raise ValueError(
-                f"Overlapping notes detected: "
-                f"{prev} overlaps {ev}"
-            )
+            if not truncate_overlaps:
+                raise ValueError(
+                    f"Overlapping notes detected: "
+                    f"{prev} overlaps {ev}"
+                )
+
+            truncated_duration = onset - prev["onset"]
+
+            if truncated_duration <= EPSILON:
+                raise ValueError(f"Cannot truncate overlapping notes with identical onsets: {prev} overlaps {ev}")
+            
+            prev["duration"] = truncated_duration
+            prev_end = onset
 
         if abs(onset - prev_end) <= EPSILON:
             onset = prev_end
