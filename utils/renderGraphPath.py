@@ -963,3 +963,29 @@ def render_interwoven_primary_secondary(
         title=render_context.get('title'),
         composer=render_context.get('composer'),
     )
+
+def restrict_path_to_core(graph, path, part):
+    original_notes = {}
+
+    def note_onset_q(n):
+        if hasattr(part, 'quarter_map'):
+            return float(np.asarray(part.quarter_map(n.start.t)).reshape(-1)[0])
+        return float(n.start.t)
+
+    for node_id in path:
+        if node_id == 'sink':
+            continue
+        
+        node = graph.nodes[node_id]
+        original_notes[node_id] = node['notes']
+
+        core_start_q = node['start_q']
+        core_end_q = node.get('measure_end_q', node['end_q'])
+
+        node['notes'] = [n for n in node['notes'] if core_start_q <= note_onset_q(n) < core_end_q]
+
+    return original_notes
+
+def restore_path_notes(graph, original_notes):
+    for node_id, notes in original_notes.items():
+        graph.nodes[node_id]['notes'] = notes

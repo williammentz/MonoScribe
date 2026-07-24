@@ -9,8 +9,9 @@ import numpy as np
 from copy import deepcopy
 from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
 
-from utils.renderGraphPath import extract_score_context, attach_render_payload, render_best_path, render_interwoven_primary_secondary
+from utils.renderGraphPath import extract_score_context, attach_render_payload, render_best_path, render_interwoven_primary_secondary, restrict_path_to_core, restore_path_notes
 from utils.visualizeGraph import visualize_subgraph
+from pprint import pprint
 
 INFERENCE_DIR = 'outputs/inference/'
 SCORE_DIR = 'outputs/clean_scores/'
@@ -96,15 +97,28 @@ def get_measure_ts(part, measure):
     return beats, beat_type
 
 
-def build_slices(part, mode = 'measure', subdivisions = 2, window_ql = 1.0):
+def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
     measures = sorted(part.iter_all(pt.score.Measure), key=lambda m: m.start.t)
     segments = []
     seg_idx = 1
+
+    if offset < 0:
+        raise ValueError(f"Entered offset must be nonnegative; received {offset}")
 
     def qmap(t):
         if hasattr(part, "quarter_map"):
             return float(np.asarray(part.quarter_map(t)).reshape(-1)[0])
         return float(t)
+    
+    if not measures:
+        return segments
+
+    last_measure = measures[-1]
+
+    if hasattr(last_measure, 'end') and last_measure.end is not None:
+        score_end_q = qmap(float(last_measure.end.t))
+    else:
+        score_end_q = qmap(float(last_measure.start.t))
 
     for i, m in enumerate(measures):
         m_start_t = float(m.start.t)
@@ -117,7 +131,6 @@ def build_slices(part, mode = 'measure', subdivisions = 2, window_ql = 1.0):
 
         m_start_q = qmap(m_start_t)
         m_end_q = qmap(m_end_t)
-        m_len_q = m_end_q - m_start_q
 
         measure_num = getattr(m, "number", None)
         if measure_num is None:
@@ -134,6 +147,25 @@ def build_slices(part, mode = 'measure', subdivisions = 2, window_ql = 1.0):
                 'end_q': m_end_q,
                 'layer_index': seg_idx
             })
+            seg_idx += 1
+
+        elif mode == 'measure_offset':
+            segment_end_q = min(m_end_q + offset, score_end_q)
+
+            segments.append({
+                'id': f'seg_{seg_idx}',
+                'label': f'measure_{measure_num}_offset{offset:g}',
+                'measure_num': measure_num,
+                'start_t': m_start_t,
+                'end_t': m_end_t,
+                'start_q': m_start_q,
+                'measure_end_q': m_end_q,
+                'end_q': segment_end_q,
+                'offset': segment_end_q - m_end_q,
+                'requested_offset': offset,
+                'layer_index': seg_idx
+            })
+
             seg_idx += 1
 
         elif mode == "beat":
@@ -158,53 +190,8 @@ def build_slices(part, mode = 'measure', subdivisions = 2, window_ql = 1.0):
 
                 seg_idx += 1
 
-        elif mode == "subbeat":
-
-            beats, beat_type = get_measure_ts(part, m)
-            beat_len_q = 4.0 / beat_type
-
-            sub_len_q = beat_len_q / subdivisions
-            n_sub = int(round(m_len_q / sub_len_q))
-
-            for s in range(n_sub):
-                start_q = m_start_q + s * sub_len_q
-                end_q = min(start_q + sub_len_q, m_end_q)
-
-                segments.append({
-                    "id": f"seg_{seg_idx}",
-                    "label": f"measure_{measure_num}_sub_{s + 1}",
-                    "measure_num": measure_num,
-                    "sub_index": s + 1,
-                    "start_t": m_start_t,
-                    "end_t": m_end_t,
-                    "start_q": start_q,
-                    "end_q": end_q,
-                    "layer_index": seg_idx,
-                })
-
-                seg_idx += 1
-
-        elif mode == 'fixed':
-            start_q = m_start_q
-            local_idx = 1
-            while start_q < m_end_q - 1e-9:
-                end_q = min(start_q + window_ql, m_end_q)
-
-                segments.append({
-                    'id': f'seg_{seg_idx}',
-                    'label': f'measure_{measure_num}_win_{local_idx}',
-                    'measure_num': measure_num,
-                    'window_index': local_idx,
-                    'start_t': m_start_t,
-                    'end_t': m_end_t,
-                    'start_q': start_q,
-                    'end_q': end_q,
-                    'layer_index': seg_idx
-                })
-
-                seg_idx += 1
-                local_idx += 1
-                start_q = end_q
+        else:
+            raise ValueError(f'Unsupported horizontal slicing method: {mode}')
 
     return segments
 
@@ -229,6 +216,7 @@ def build_dag(strands):
                     'measure_num': seg['measure_num'],
                     'layer_index': seg['layer_index'],
                     'start_q': seg['start_q'],
+                    'measure_end_q': seg.get('measure_end_q', seg['end_q']),
                     'end_q': seg['end_q'],
                     'notes': notes
                 }
@@ -514,7 +502,7 @@ def graph_reducer(args):
     render_context = extract_score_context(input_score)
     results, part = split_voices(input_score)
 
-    segments = build_slices(part, mode = args.method)
+    segments = build_slices(part, mode = args.method, offset = args.offset)
     candidates = split_into_candidates(results, part, segments)
     graph = build_dag(candidates)
 
@@ -532,6 +520,7 @@ def graph_reducer(args):
 
     attach_features(graph, inference_lookup)
     normalize_density(graph)
+    print_segment_features(graph, 'seg_3')
     assign_edge_weights(graph, args)
 
     first_layer = min(
@@ -556,10 +545,10 @@ def graph_reducer(args):
     
     # For debugging:
 
-    print(f"Cost: {cost:.15f}")
-    print("Path:")
-    for p in path:
-        print("   ", p)
+    # print(f"Cost: {cost:.15f}")
+    # print("Path:")
+    # for p in path:
+    #     print("   ", p)
 
 
     # Range Check for features['onset_density']
@@ -591,19 +580,53 @@ def graph_reducer(args):
     # visualize_subgraph(graph, 1, 20, path)
 
     # # Raw graph monophonic rendering
-    attach_render_payload(graph, part, simultaneous = "highest")
-    render_best_path(
-        path,
-        graph,
-        mono_raw,
-        render_context,
-        input_score
-    )
+    # attach_render_payload(graph, part, simultaneous = "highest")
+    # render_best_path(
+    #     path,
+    #     graph,
+    #     mono_raw,
+    #     render_context,
+    #     input_score
+    # )
+
+    original_path_notes = restrict_path_to_core(graph, path, part)
+
+    try:
+        attach_render_payload(graph, part, simultaneous='highest')
+        render_best_path(path, graph, mono_raw, render_context, input_score)
+
+    finally:
+        restore_path_notes(graph, original_path_notes)
+
 
     # # Interweaving primary and secondary nodes
     # interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
     # render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
 
+# Debugging
+def print_segment_features(graph, segment_identifier):
+    matches = []
+
+    for node_id, node_data in graph.nodes(data=True):
+        if (
+            node_data.get('segment_id') == segment_identifier
+            or node_data.get('segment_label') == segment_identifier
+        ):
+            matches.append((node_id, node_data))
+
+    if not matches:
+        print(f'No nodes found for segment: {segment_identifier}')
+        return
+
+    print(f'\nFeature vectors for segment: {segment_identifier}')
+
+    for node_id, node_data in matches:
+        print('\n' + '=' * 70)
+        print(f'Node:    {node_id}')
+        print(f'Staff:   {node_data["staff"]}')
+        print(f'Voice:   {node_data["voice"]}')
+        print(f'Segment: {node_data["segment_label"]}')
+        pprint(node_data['features'], sort_dicts=False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -614,6 +637,7 @@ if __name__ == '__main__':
     parser.add_argument('--density', type = float, default = 0.4) # Higher <=> Denser
     parser.add_argument('--contour', type = float, default = 0.5) # Higher <=> More contour within each node
     parser.add_argument('--method', default = 'measure') # Horizontal slicing method, default: method
+    parser.add_argument('--offset', type = float, default = 0.25)
 
     args = parser.parse_args()
 
