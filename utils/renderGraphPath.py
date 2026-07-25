@@ -462,8 +462,9 @@ def render_raw_path(
 ):
     path_events = normalize_path_events(path_events, merge_adjacent_same_pitch = False)
 
-    for ev in path_events[:10]:
-        print(ev)
+    # Optional printout for debugging
+    # for ev in path_events[:10]:
+    #     print(ev)
 
     src_score = converter.parse(source_score_path)
     if len(src_score.parts) == 0:
@@ -597,7 +598,7 @@ def render_raw_path(
         pass
 
     sc.write("musicxml", fp=out_path)
-    print("Reduction written.")
+    print("Path optimization reduction written.")
     return sc
 
 # Primary/Secondary node pairs from graph path

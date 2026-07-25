@@ -6,8 +6,8 @@ import json
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-from copy import deepcopy
-from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
+# from copy import deepcopy
+# from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
 
 from utils.renderGraphPath import extract_score_context, attach_render_payload, render_best_path, render_interwoven_primary_secondary, restrict_path_to_core, restore_path_notes
 from utils.visualizeGraph import visualize_subgraph
@@ -70,14 +70,29 @@ def split_into_candidates(score_dictionary, part, segments):
             strands[staff_key][voice_key] = OrderedDict()
 
             for seg in segments:
-                seg_notes = [
-                    n for n in notes if seg['start_q'] <= note_onset_q(n) < seg['end_q']
-                ]
+                segment_start_q = seg['start_q']
+                analysis_end_q = seg['end_q']
+                core_end_q = seg.get('measure_end_q', analysis_end_q)
 
-                if seg_notes:
+                analysis_notes = []
+                core_notes = []
+
+                for n in notes:
+                    onset_q = note_onset_q(n)
+
+                    if segment_start_q <= onset_q < analysis_end_q:
+                        analysis_notes.append(n)
+
+                        if onset_q < core_end_q:
+                            core_notes.append(n)
+
+                # A node must own at least one onset in its core window.
+                # Once eligible, its lookahead notes remain available for analysis.
+                if core_notes:
                     strands[staff_key][voice_key][seg['id']] = {
                         'segment': seg,
-                        'notes': seg_notes
+                        'notes': analysis_notes,
+                        'core_notes': core_notes
                     }
 
     return strands
@@ -166,7 +181,11 @@ def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
             seg_idx += 1
 
         elif mode == 'measure_offset':
+            segment_start_q = m_start_q if i == 0 else m_start_q + offset
             segment_end_q = min(m_end_q + offset, score_end_q)
+
+            if segment_end_q <= segment_start_q + 1e-9:
+                continue
 
             segments.append({
                 'id': f'seg_{seg_idx}',
@@ -174,8 +193,8 @@ def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
                 'measure_num': measure_num,
                 'start_t': m_start_t,
                 'end_t': m_end_t,
-                'start_q': m_start_q,
-                'measure_end_q': m_end_q,
+                'start_q': segment_start_q,
+                # 'measure_end_q': m_end_q,
                 'end_q': segment_end_q,
                 'offset': segment_end_q - m_end_q,
                 'requested_offset': offset,
@@ -184,7 +203,7 @@ def build_slices(part, mode = 'measure', subdivisions = 2, offset = 0.25):
 
             seg_idx += 1
 
-        elif mode == "beat":
+        elif mode == 'beat':
             beat_count, beat_len_q = get_beat_structure(part, m)
 
             for beat_index in range(beat_count):
@@ -516,6 +535,90 @@ def save_second_choice_transitions(rows, out_path):
     with open(out_path, 'w') as f:
         json.dump(rows, f, indent=2)
 
+def range_check(part, instrument='piano'):
+    with open("utils/instruments.json") as f:
+        ranges = {k: tuple(v) for k, v in json.load(f).items()}
+
+    instrument = instrument.lower()
+
+    for n in part.flatten().notes:
+        while n.pitch.midi < ranges[instrument][0] or n.pitch.midi > ranges[instrument][1]:
+            if n.pitch.midi < ranges[instrument][0]:
+                n.pitch.midi = n.pitch.midi + 12
+            elif n.pitch.midi > ranges[instrument][1]:
+                n.pitch.midi = n.pitch.midi - 12
+
+def playability_check(graph, path, args):
+    with open('utils/instruments.json') as f:
+        ranges = {
+            key.lower(): tuple(value)
+            for key, value in json.load(f).items()
+        }
+
+    instrument_name = args.instrument.lower()
+
+    if instrument_name not in ranges:
+        raise ValueError(
+            f'Unknown instrument: {instrument_name}'
+        )
+
+    lower_limit, upper_limit = ranges[instrument_name]
+
+    for node_id in path:
+        if node_id == 'sink':
+            continue
+
+        node_data = graph.nodes[node_id]
+        render_payload = node_data.get('render')
+
+        if not render_payload:
+            continue
+
+        primary_events = render_payload.get('primary_events', [])
+        pitches = [event['pitch'] for event in primary_events]
+
+        if not pitches:
+            continue
+
+        # Basic rule: transpose the entire selected node by one octave.
+        if any(pitch < lower_limit for pitch in pitches):
+            octave_shift = 12
+        elif any(pitch > upper_limit for pitch in pitches):
+            octave_shift = -12
+        else:
+            octave_shift = 0
+
+        if octave_shift == 0:
+            continue
+
+        # Transpose all events, not only the out-of-range pitch.
+        for event in render_payload.get('render_events', []):
+            event['pitch'] += octave_shift
+
+        for event in render_payload.get('primary_events', []):
+            event['pitch'] += octave_shift
+
+        representative_pitch = render_payload.get(
+            'representative_pitch'
+        )
+
+        if representative_pitch is not None:
+            render_payload['representative_pitch'] = (
+                representative_pitch + octave_shift
+            )
+
+        render_payload['octave_shift'] = octave_shift
+
+        print(
+            f'{node_id}: {pitches} -> '
+            f'{[p + octave_shift for p in pitches]}'
+        )
+
+    print(
+        f'Instrument: {instrument_name}\n'
+        f'Upper limit: {upper_limit}\n'
+        f'Lower limit: {lower_limit}'
+    )
 
 # Main Reducer
 def graph_reducer(args):
@@ -544,7 +647,7 @@ def graph_reducer(args):
 
     attach_features(graph, inference_lookup)
     normalize_density(graph)
-    print_segment_features(graph, 'seg_3')
+    # print_segment_features(graph, 'staff_2_voice_2_seg_65')
     assign_edge_weights(graph, args)
 
     first_layer = min(
@@ -603,29 +706,34 @@ def graph_reducer(args):
 
     # visualize_subgraph(graph, 1, 20, path)
 
-    # # Raw graph monophonic rendering
-    # attach_render_payload(graph, part, simultaneous = "highest")
-    # render_best_path(
-    #     path,
-    #     graph,
-    #     mono_raw,
-    #     render_context,
-    #     input_score
-    # )
-
     original_path_notes = restrict_path_to_core(graph, path, part)
+
+    # for node_id in path:
+    #     if not graph.nodes[node_id]['notes']:
+    #         print(
+    #             'SELECTED NODE EMPTY AFTER CORE RESTRICTION:',
+    #             node_id,
+    #             graph.nodes[node_id].get('segment_label'),
+    #             'analysis pitches:',
+    #             [
+    #                 n.midi_pitch
+    #                 for n in original_path_notes[node_id]
+    #             ]
+    #         )
 
     try:
         attach_render_payload(graph, part, simultaneous='highest')
-        render_best_path(path, graph, mono_raw, render_context, input_score, truncate_overlaps = (args.method == 'beat'))
+        # Playability Check
+        playability_check(graph, path, args)
+        render_best_path(path, graph, mono_raw, render_context, input_score, truncate_overlaps = (args.method in ('beat', 'measure_offset')))
 
     finally:
         restore_path_notes(graph, original_path_notes)
 
-
-    # # Interweaving primary and secondary nodes
-    # interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
-    # render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
+    # Interweaving primary and secondary nodes (optional)
+    if args.interweave:
+        interwoven_out = OUTPUT_DIR + args.piece.replace('.musicxml', '_interwoven.musicxml')
+        render_interwoven_primary_secondary(primary_secondary_pairs, graph, input_score, interwoven_out, render_context)
 
 # Debugging
 def print_segment_features(graph, segment_identifier):
@@ -662,6 +770,8 @@ if __name__ == '__main__':
     parser.add_argument('--contour', type = float, default = 0.5) # Higher <=> More contour within each node
     parser.add_argument('--method', default = 'measure', choices = ['measure', 'measure_offset', 'beat']) # Horizontal slicing method, default: method
     parser.add_argument('--offset', type = float, default = 0.25)
+    parser.add_argument('--interweave', type = bool, default = False)
+    parser.add_argument('--instrument', default = 'piano') # For final playability check/processing
 
     args = parser.parse_args()
 
