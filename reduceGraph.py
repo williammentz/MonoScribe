@@ -535,6 +535,8 @@ def save_second_choice_transitions(rows, out_path):
     with open(out_path, 'w') as f:
         json.dump(rows, f, indent=2)
 
+# Playability checks and rearrangement for args.instrument
+
 def range_check(part, instrument='piano'):
     with open("utils/instruments.json") as f:
         ranges = {k: tuple(v) for k, v in json.load(f).items()}
@@ -547,6 +549,120 @@ def range_check(part, instrument='piano'):
                 n.pitch.midi = n.pitch.midi + 12
             elif n.pitch.midi > ranges[instrument][1]:
                 n.pitch.midi = n.pitch.midi - 12
+
+def get_primary(graph, node_id):
+    render_payload = graph.nodes[node_id].get('render')
+
+    if not render_payload:
+        return []
+    
+    return [event['pitch'] for event in render_payload.get('primary_events', [])]
+
+def get_required_shift(pitches, lower_limit, upper_limit):
+    if not pitches:
+        return 0
+    
+    if all(lower_limit <= pitch <= upper_limit for pitch in pitches):
+        return 0
+    
+    if any(pitch < lower_limit for pitch in pitches):
+        return 12
+    
+    if any(pitch > upper_limit for pitch in pitches):
+        return -12
+
+    return 0
+
+def is_stepwise(previous_pitches, previous_shift, current_pitches, current_shift, max_step = 2):
+    if not previous_pitches or not current_pitches:
+        return False
+
+    previous_last = previous_pitches[-1] + previous_shift
+    current_first = current_pitches[0] + current_shift
+
+    interval = abs(current_first - previous_last)
+
+    return interval <= max_step
+
+def analyze_playability(graph, path, lower_limit, upper_limit, max_step = 2):
+    path = [node_id for node_id in path if node_id != 'sink']
+
+    baseline_shifts = {}
+    pitches = {}
+
+    for node_id in path:
+        pitches[node_id] = get_primary(graph, node_id)
+        baseline_shifts[node_id] = get_required_shift(pitches[node_id], lower_limit, upper_limit)
+
+    final_shifts = dict(baseline_shifts)
+
+    for anchor_index, anchor_id in enumerate(path):
+        anchor_shift = baseline_shifts[anchor_id]
+        if anchor_shift == 0:
+            continue
+    
+        for i in range(anchor_index - 1, -1, -1):
+            previous_id = path[i]
+            next_id = path[i + 1]
+
+            if baseline_shifts[previous_id] != 0:
+                break
+                
+            if not is_stepwise(pitches[previous_id], anchor_shift, pitches[next_id], final_shifts[next_id], max_step):
+                break
+
+            final_shifts[previous_id] = anchor_shift
+
+        
+        for i in range(anchor_index + 1, len(path)):
+            previous_id = path[i - 1]
+            current_id = path[i]
+
+            if baseline_shifts[current_id] != 0:
+                break
+                
+            if not is_stepwise(pitches[previous_id], final_shifts[previous_id], pitches[current_id], anchor_shift, max_step):
+                break
+
+            final_shifts[current_id] = anchor_shift
+
+    return {
+        node_id: {
+        'baseline_shift': baseline_shifts[node_id],
+        'final_shift': final_shifts[node_id],
+        'pitches': pitches[node_id]
+        } for node_id in path
+    }
+
+def apply_playability_shifts(graph, decisions):
+    for node_id, decision in decisions.items():
+
+        octave_shift = decision['final_shift']
+
+        if octave_shift == 0:
+            continue
+
+        render_payload = graph.nodes[node_id].get('render')
+
+        if not render_payload:
+            continue
+
+        # Shift all rendered events
+        for event in render_payload.get('render_events',[]):
+            event['pitch'] += octave_shift
+
+        # Shift primary events
+        for event in render_payload.get('primary_events', []):
+            event['pitch'] += octave_shift
+
+        # Shift representative pitch
+        representative_pitch = (render_payload.get('representative_pitch'))
+
+        if representative_pitch is not None:
+            render_payload['representative_pitch'] = (representative_pitch + octave_shift)
+
+        # Store the final applied shift
+        render_payload['octave_shift'] = octave_shift
 
 def playability_check(graph, path, args):
     with open('utils/instruments.json') as f:
@@ -564,61 +680,10 @@ def playability_check(graph, path, args):
 
     lower_limit, upper_limit = ranges[instrument_name]
 
-    for node_id in path:
-        if node_id == 'sink':
-            continue
+    decisions = analyze_playability(graph, path, lower_limit, upper_limit, max_step = 2)
+    apply_playability_shifts(graph, decisions)
 
-        node_data = graph.nodes[node_id]
-        render_payload = node_data.get('render')
-
-        if not render_payload:
-            continue
-
-        primary_events = render_payload.get('primary_events', [])
-        pitches = [event['pitch'] for event in primary_events]
-
-        if not pitches:
-            continue
-
-        # Basic rule: transpose the entire selected node by one octave.
-        if any(pitch < lower_limit for pitch in pitches):
-            octave_shift = 12
-        elif any(pitch > upper_limit for pitch in pitches):
-            octave_shift = -12
-        else:
-            octave_shift = 0
-
-        if octave_shift == 0:
-            continue
-
-        # Transpose all events, not only the out-of-range pitch.
-        for event in render_payload.get('render_events', []):
-            event['pitch'] += octave_shift
-
-        for event in render_payload.get('primary_events', []):
-            event['pitch'] += octave_shift
-
-        representative_pitch = render_payload.get(
-            'representative_pitch'
-        )
-
-        if representative_pitch is not None:
-            render_payload['representative_pitch'] = (
-                representative_pitch + octave_shift
-            )
-
-        render_payload['octave_shift'] = octave_shift
-
-        print(
-            f'{node_id}: {pitches} -> '
-            f'{[p + octave_shift for p in pitches]}'
-        )
-
-    print(
-        f'Instrument: {instrument_name}\n'
-        f'Upper limit: {upper_limit}\n'
-        f'Lower limit: {lower_limit}'
-    )
+    return decisions
 
 # Main Reducer
 def graph_reducer(args):
@@ -723,7 +788,6 @@ def graph_reducer(args):
 
     try:
         attach_render_payload(graph, part, simultaneous='highest')
-        # Playability Check
         playability_check(graph, path, args)
         render_best_path(path, graph, mono_raw, render_context, input_score, truncate_overlaps = (args.method in ('beat', 'measure_offset')))
 
