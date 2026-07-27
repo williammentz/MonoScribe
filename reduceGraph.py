@@ -558,20 +558,23 @@ def get_primary(graph, node_id):
     
     return [event['pitch'] for event in render_payload.get('primary_events', [])]
 
-def get_required_shift(pitches, lower_limit, upper_limit):
+def get_required_shift(pitches, lower_limit, upper_limit, max_octaves = 10):
     if not pitches:
         return 0
     
-    if all(lower_limit <= pitch <= upper_limit for pitch in pitches):
-        return 0
-    
-    if any(pitch < lower_limit for pitch in pitches):
-        return 12
-    
-    if any(pitch > upper_limit for pitch in pitches):
-        return -12
+    candidate_shifts = [0]
 
-    return 0
+    for octave in range(1, max_octaves + 1):
+        candidate_shifts.append(octave * 12)
+        candidate_shifts.append(-octave * 12)
+
+    for shift in candidate_shifts:
+        shifted_pitches = [pitch + shift for pitch in pitches]
+
+        if all(lower_limit <= pitch <= upper_limit for pitch in shifted_pitches):
+            return shift
+
+    raise ValueError(f'No playable octave placement found for pitches {pitches} within range [{lower_limit}, {upper_limit}]')
 
 def is_stepwise(previous_pitches, previous_shift, current_pitches, current_shift, max_step = 2):
     if not previous_pitches or not current_pitches:
