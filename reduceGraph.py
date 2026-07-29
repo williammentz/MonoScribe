@@ -1,4 +1,3 @@
-from utils.renderGraphPath import render_interwoven_primary_secondary
 from collections import OrderedDict
 import partitura as pt
 import argparse
@@ -6,11 +5,13 @@ import json
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 # from copy import deepcopy
 # from music21 import stream, note as m21_note, meter, tempo, key, metadata, instrument, pitch as m21, converter
 
 from utils.renderGraphPath import extract_score_context, attach_render_payload, render_best_path, render_interwoven_primary_secondary, restrict_path_to_core, restore_path_notes
 from utils.visualizeGraph import visualize_subgraph
+from utils.highlightReduction import save_selected_path_manifest, write_highlighted_score
 from pprint import pprint
 
 INFERENCE_DIR = 'outputs/inference/'
@@ -18,6 +19,7 @@ SCORE_DIR = 'outputs/clean_scores/'
 OUTPUT_DIR = 'outputs/reductions/'
 INFERENCE_DIR = 'outputs/graph_selections/'
 RAW_DIR = 'outputs/raw_graph_reductions/'
+ANNOTATED_DIR = 'outputs/annotated_scores/'
 
 # Split scores by voices
 
@@ -791,6 +793,14 @@ def graph_reducer(args):
 
     try:
         attach_render_payload(graph, part, simultaneous='highest')
+
+        if args.annotate:
+            selection_path = (Path(f'{ANNOTATED_DIR}{piece_name}_{args.method}_selected_notes.json'))
+            save_selected_path_manifest(graph, path, input_score, args.method, selection_path)
+
+            annotated_out = Path(f'{ANNOTATED_DIR}{piece_name}_{args.method}_selected_notes.xml')
+            _, report = write_highlighted_score(graph, path, input_score, annotated_out)
+
         playability_check(graph, path, args)
         render_best_path(path, graph, mono_raw, render_context, input_score, truncate_overlaps = (args.method in ('beat', 'measure_offset')))
 
@@ -839,6 +849,7 @@ if __name__ == '__main__':
     parser.add_argument('--offset', type = float, default = 0.25)
     parser.add_argument('--interweave', type = bool, default = False)
     parser.add_argument('--instrument', default = 'piano') # For final playability check/processing
+    parser.add_argument('--annotate', type = bool, default = False) # Optional original-score highlighting of reduced line
 
     args = parser.parse_args()
 
