@@ -360,38 +360,19 @@ def normalize_density(graph):
         graph.nodes[n]['features']['normalized_onset_density'] = normalized_density
 
 
-def edge(source_node, destination_node, args):
-    utility = destination_node['features'].get('mean_utility', 0.0)
-    utility_cost = 1.0 - utility    
+# Randomzied Experiment
+def random_path(graph, seed = 602):
+    rng = random.Random(seed)
 
-    final_pitch = source_node['notes'][-1].midi_pitch
-    first_pitch = destination_node['notes'][0].midi_pitch
-    continuity_cost = normalize_interval(abs(final_pitch - first_pitch), 12)
+    layers = build_layer_index(graph)
 
-    # Min-max normalized duration density
-    onset_density = destination_node['features']['normalized_onset_density']
-    density_cost = 1.0 - onset_density
+    path = []
 
-    intervals = destination_node['features'].get('intervals', 0.0)
+    for layer in sorted(layers):
+        node = rng.choice(layers[layer])
+        path.append(node)
     
-    if intervals:
-        contour_cost = normalize_interval(
-            np.mean(np.abs(intervals)),
-            12
-        )
-    else:
-        contour_cost = 0.0
-
-    return(
-        args.utility * utility_cost + 
-        args.contour * contour_cost + 
-        args.continuity * continuity_cost +
-        args.density * density_cost
-    )
-
-def assign_edge_weights(graph, args):
-    for source_id, destination_id in graph.edges:
-        graph.edges[source_id, destination_id]['weight'] = edge(graph.nodes[source_id], graph.nodes[destination_id], args)
+    return path
 
 # Select primary/secondary nodes for each time layer in the optimized graph
 
@@ -719,7 +700,6 @@ def graph_reducer(args):
     attach_features(graph, inference_lookup)
     normalize_density(graph)
     # print_segment_features(graph, 'staff_2_voice_2_seg_65')
-    assign_edge_weights(graph, args)
 
     first_layer = min(
         graph.nodes[n]["layer_index"]
@@ -733,47 +713,36 @@ def graph_reducer(args):
     starting_node = max(starting_nodes, key = lambda n: graph.nodes[n]['features']['mean_pitch']) # This is the first chosen node of the graph
     end_nodes = [n for n in graph.nodes if graph.out_degree(n) == 0]
 
-    graph.add_node('sink')
-    for n in end_nodes:
-        graph.add_edge(n, 'sink', weight = 0)
+    if args.baseline == "graph":
+
+        graph.add_node("sink")
+
+        for n in end_nodes:
+            graph.add_edge(n, "sink", weight=0)
+
+        path = nx.shortest_path(
+            graph,
+            starting_node,
+            "sink",
+            weight="weight"
+        )
+
+        cost = nx.path_weight(graph, path, weight="weight")
+
+        path = path[:-1]
+
+    else:
+
+        path = random_path(graph)
+        cost = None
     
-    # Dijkstra
-    path = nx.shortest_path(graph, starting_node, 'sink', weight = 'weight')
-    cost = nx.path_weight(graph, path, weight = 'weight')
     
-    # For debugging:
-
-    # print(f"Cost: {cost:.15f}")
-    # print("Path:")
-    # for p in path:
-    #     print("   ", p)
-
-
-    # Range Check for features['onset_density']
-    # for node_id, data in graph.nodes(data=True):
-    #     if 'features' not in data:
-    #         continue
-
-    #     f = data['features']
-
-    #     print(
-    #         node_id,
-    #         "notes:", f['note_count'],
-    #         "duration:", f['total_duration'],
-    #         "density:", f['onset_density'],
-    #         'normalized', f['normalized_onset_density'],
-    #         "segment:", data['end_q'] - data['start_q']
-    #     )
-
     # # Extract secondary choices
     inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_transitions.json')
 
     primary_secondary_pairs = extract_pairs(graph, path, 'sink')
     inference_json = INFERENCE_DIR + args.piece.replace('.musicxml', '_primary_secondary_nodes.json')
     save_primary_secondary_by_layer(primary_secondary_pairs, inference_json)
-
-    # # Remove 'sink' node
-    path = path[:-1]
 
     # visualize_subgraph(graph, 1, 20, path)
 
@@ -842,15 +811,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--piece', required = True)
-    parser.add_argument('--utility', type = float, default = 0.6)
-    parser.add_argument('--continuity', type = float, default = 0.5) # Higher <=> More pitch continuity between nodes
-    parser.add_argument('--density', type = float, default = 0.4) # Higher <=> Denser
-    parser.add_argument('--contour', type = float, default = 0.5) # Higher <=> More contour within each node
     parser.add_argument('--method', default = 'measure', choices = ['measure', 'measure_offset', 'beat']) # Horizontal slicing method, default: method
     parser.add_argument('--offset', type = float, default = 0.25)
     parser.add_argument('--interweave', type = bool, default = False)
     parser.add_argument('--instrument', default = 'piano') # For final playability check/processing
     parser.add_argument('--annotate', action = 'store_true') # Optional original-score highlighting of reduced line
+    parser.add_argument("--baseline",choices=["graph", "random"],default="random")
+    parser.add_argument("--random", action="store_true")
 
     args = parser.parse_args()
 

@@ -8,7 +8,7 @@ from scoreStructure import scorer
 # from predictTextureElements import annotateScore
 # from symbolic_texture_dataset.predictScoreTexture import classifyTexture
 # from reduceHomophonic import load_score_as_lanes, reduce_score
-# from reduceGraph import graph_reducer
+from reduceGraph import graph_reducer
 from music21 import stream
 
 projRoot = Path(__file__).resolve().parent
@@ -53,14 +53,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description = "Run AutoSchA-based GNN reduction on a MusicXML score."
     )
-    parser.add_argument("--piece", required = True) # format: '--piece Bach_880.musicxml' // So long as the file is in `reduction_scores/`
-    parser.add_argument("--instrument", default = 'piano')
-
-    parser.add_argument('--utility', type = float, default = 0.7)
-    parser.add_argument('--continuity', type = float, default = 0.2) # Higher <=> More pitch continuity between nodes
+    parser.add_argument('--piece', required = True)
+    parser.add_argument('--utility', type = float, default = 0.6)
+    parser.add_argument('--continuity', type = float, default = 0.5) # Higher <=> More pitch continuity between nodes
     parser.add_argument('--density', type = float, default = 0.4) # Higher <=> Denser
     parser.add_argument('--contour', type = float, default = 0.5) # Higher <=> More contour within each node
-    parser.add_argument('--method', default = 'measure') # Horizontal slicing method, default: method
+    parser.add_argument('--method', default = 'measure', choices = ['measure', 'measure_offset', 'beat']) # Horizontal slicing method, default: method
+    parser.add_argument('--offset', type = float, default = 0.25)
+    parser.add_argument('--interweave', type = bool, default = False)
+    parser.add_argument('--instrument', default = 'piano') # For final playability check/processing
+    parser.add_argument('--annotate', action = 'store_true') # Optional original-score highlighting of reduced line
 
     args = parser.parse_args()
 
@@ -75,6 +77,6 @@ if __name__ == "__main__":
     json_path = 'outputs/inference/' + score + '.json'
 
     # Graph-based reducer
-    # graph_reducer(args)
+    graph_reducer(args)
 
-    # print(f"Final reduction written.")
+    print(f"Final reduction written.")
