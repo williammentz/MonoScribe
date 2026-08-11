@@ -1,0 +1,4093 @@
+{
+  "source_score": "outputs/clean_scores/Mendelssohn_Duetto.musicxml",
+  "method": "beat",
+  "note_count": 454,
+  "selected_notes": [
+    {
+      "note_id": "p0n3",
+      "pitch": 48,
+      "onset": 0.16666666666666666,
+      "duration": 0.16666666666666666,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n4",
+      "pitch": 51,
+      "onset": 0.3333333333333333,
+      "duration": 0.16666666666666669,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n5",
+      "pitch": 56,
+      "onset": 0.5,
+      "duration": 0.16666666666666663,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n6",
+      "pitch": 51,
+      "onset": 0.6666666666666666,
+      "duration": 0.16666666666666663,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n7",
+      "pitch": 56,
+      "onset": 0.8333333333333333,
+      "duration": 0.16666666666666674,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n9",
+      "pitch": 60,
+      "onset": 1.0,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n10",
+      "pitch": 56,
+      "onset": 1.1666666666666665,
+      "duration": 0.16666666666666674,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n11",
+      "pitch": 51,
+      "onset": 1.3333333333333333,
+      "duration": 0.16666666666666674,
+      "node_id": "staff_2_voice_5_seg_1",
+      "segment_label": "measure_1_beat_1",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n15",
+      "pitch": 51,
+      "onset": 1.6666666666666665,
+      "duration": 0.16666666666666674,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n16",
+      "pitch": 56,
+      "onset": 1.8333333333333333,
+      "duration": 0.16666666666666674,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n17",
+      "pitch": 60,
+      "onset": 2.0,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n18",
+      "pitch": 56,
+      "onset": 2.1666666666666665,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n19",
+      "pitch": 60,
+      "onset": 2.333333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n22",
+      "pitch": 60,
+      "onset": 2.6666666666666665,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n23",
+      "pitch": 56,
+      "onset": 2.833333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_2_voice_5_seg_2",
+      "segment_label": "measure_1_beat_2",
+      "measure_num": 1
+    },
+    {
+      "note_id": "p0n28",
+      "pitch": 56,
+      "onset": 3.1666666666666665,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n29",
+      "pitch": 60,
+      "onset": 3.333333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n30",
+      "pitch": 63,
+      "onset": 3.5,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n31",
+      "pitch": 60,
+      "onset": 3.6666666666666665,
+      "duration": 0.16666666666666652,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n32",
+      "pitch": 63,
+      "onset": 3.833333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n34",
+      "pitch": 67,
+      "onset": 4.0,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n35",
+      "pitch": 63,
+      "onset": 4.166666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n36",
+      "pitch": 61,
+      "onset": 4.333333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_3",
+      "segment_label": "measure_2_beat_1",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n39",
+      "pitch": 60,
+      "onset": 4.666666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n40",
+      "pitch": 63,
+      "onset": 4.833333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n42",
+      "pitch": 70,
+      "onset": 5.0,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n43",
+      "pitch": 61,
+      "onset": 5.166666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n44",
+      "pitch": 65,
+      "onset": 5.333333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n46",
+      "pitch": 72,
+      "onset": 5.5,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n47",
+      "pitch": 63,
+      "onset": 5.666666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n48",
+      "pitch": 66,
+      "onset": 5.833333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_4",
+      "segment_label": "measure_2_beat_2",
+      "measure_num": 2
+    },
+    {
+      "note_id": "p0n53",
+      "pitch": 65,
+      "onset": 6.166666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n54",
+      "pitch": 68,
+      "onset": 6.333333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n56",
+      "pitch": 70,
+      "onset": 6.5,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n57",
+      "pitch": 68,
+      "onset": 6.666666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n58",
+      "pitch": 63,
+      "onset": 6.833333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n60",
+      "pitch": 75,
+      "onset": 7.0,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n61",
+      "pitch": 67,
+      "onset": 7.166666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n62",
+      "pitch": 63,
+      "onset": 7.333333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_5",
+      "segment_label": "measure_3_beat_1",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n67",
+      "pitch": 63,
+      "onset": 7.666666666666666,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n68",
+      "pitch": 70,
+      "onset": 7.833333333333333,
+      "duration": 0.16666666666666696,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n70",
+      "pitch": 72,
+      "onset": 8.0,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n71",
+      "pitch": 68,
+      "onset": 8.166666666666666,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n72",
+      "pitch": 63,
+      "onset": 8.333333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n74",
+      "pitch": 70,
+      "onset": 8.5,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n76",
+      "pitch": 67,
+      "onset": 8.666666666666666,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n77",
+      "pitch": 61,
+      "onset": 8.833333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_6",
+      "segment_label": "measure_3_beat_2",
+      "measure_num": 3
+    },
+    {
+      "note_id": "p0n79",
+      "pitch": 41,
+      "onset": 9.0,
+      "duration": 1.5,
+      "node_id": "staff_2_voice_5_seg_7",
+      "segment_label": "measure_4_beat_1",
+      "measure_num": 4
+    },
+    {
+      "note_id": "p0n91",
+      "pitch": 37,
+      "onset": 10.5,
+      "duration": 1.5,
+      "node_id": "staff_2_voice_5_seg_8",
+      "segment_label": "measure_4_beat_2",
+      "measure_num": 4
+    },
+    {
+      "note_id": "p0n104",
+      "pitch": 39,
+      "onset": 12.0,
+      "duration": 3.0,
+      "node_id": "staff_2_voice_5_seg_9",
+      "segment_label": "measure_5_beat_1",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n116",
+      "pitch": 55,
+      "onset": 13.666666666666666,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n117",
+      "pitch": 58,
+      "onset": 13.833333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n118",
+      "pitch": 63,
+      "onset": 14.0,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n119",
+      "pitch": 58,
+      "onset": 14.166666666666666,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n120",
+      "pitch": 55,
+      "onset": 14.333333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n122",
+      "pitch": 61,
+      "onset": 14.5,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n123",
+      "pitch": 58,
+      "onset": 14.666666666666666,
+      "duration": 0.16666666666666607,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n124",
+      "pitch": 55,
+      "onset": 14.833333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_10",
+      "segment_label": "measure_5_beat_2",
+      "measure_num": 5
+    },
+    {
+      "note_id": "p0n131",
+      "pitch": 56,
+      "onset": 15.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_11",
+      "segment_label": "measure_6_beat_1",
+      "measure_num": 6
+    },
+    {
+      "note_id": "p0n135",
+      "pitch": 58,
+      "onset": 16.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_11",
+      "segment_label": "measure_6_beat_1",
+      "measure_num": 6
+    },
+    {
+      "note_id": "p0n140",
+      "pitch": 60,
+      "onset": 16.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_12",
+      "segment_label": "measure_6_beat_2",
+      "measure_num": 6
+    },
+    {
+      "note_id": "p0n149",
+      "pitch": 58,
+      "onset": 17.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_12",
+      "segment_label": "measure_6_beat_2",
+      "measure_num": 6
+    },
+    {
+      "note_id": "p0n154",
+      "pitch": 61,
+      "onset": 18.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_13",
+      "segment_label": "measure_7_beat_1",
+      "measure_num": 7
+    },
+    {
+      "note_id": "p0n163",
+      "pitch": 60,
+      "onset": 19.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_13",
+      "segment_label": "measure_7_beat_1",
+      "measure_num": 7
+    },
+    {
+      "note_id": "p0n168",
+      "pitch": 60,
+      "onset": 19.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_14",
+      "segment_label": "measure_7_beat_2",
+      "measure_num": 7
+    },
+    {
+      "note_id": "p0n176",
+      "pitch": 58,
+      "onset": 20.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_14",
+      "segment_label": "measure_7_beat_2",
+      "measure_num": 7
+    },
+    {
+      "note_id": "p0n180",
+      "pitch": 56,
+      "onset": 21.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_15",
+      "segment_label": "measure_8_beat_1",
+      "measure_num": 8
+    },
+    {
+      "note_id": "p0n185",
+      "pitch": 56,
+      "onset": 21.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_15",
+      "segment_label": "measure_8_beat_1",
+      "measure_num": 8
+    },
+    {
+      "note_id": "p0n190",
+      "pitch": 56,
+      "onset": 22.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_15",
+      "segment_label": "measure_8_beat_1",
+      "measure_num": 8
+    },
+    {
+      "note_id": "p0n195",
+      "pitch": 56,
+      "onset": 22.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_16",
+      "segment_label": "measure_8_beat_2",
+      "measure_num": 8
+    },
+    {
+      "note_id": "p0n200",
+      "pitch": 61,
+      "onset": 23.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_16",
+      "segment_label": "measure_8_beat_2",
+      "measure_num": 8
+    },
+    {
+      "note_id": "p0n205",
+      "pitch": 60,
+      "onset": 23.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_16",
+      "segment_label": "measure_8_beat_2",
+      "measure_num": 8
+    },
+    {
+      "note_id": "p0n210",
+      "pitch": 60,
+      "onset": 24.0,
+      "duration": 0.25,
+      "node_id": "staff_1_voice_2_seg_17",
+      "segment_label": "measure_9_beat_1",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n213",
+      "pitch": 58,
+      "onset": 24.25,
+      "duration": 0.25,
+      "node_id": "staff_1_voice_2_seg_17",
+      "segment_label": "measure_9_beat_1",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n216",
+      "pitch": 56,
+      "onset": 24.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_17",
+      "segment_label": "measure_9_beat_1",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n221",
+      "pitch": 55,
+      "onset": 25.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_17",
+      "segment_label": "measure_9_beat_1",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n226",
+      "pitch": 56,
+      "onset": 25.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_18",
+      "segment_label": "measure_9_beat_2",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n234",
+      "pitch": 63,
+      "onset": 26.5,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_18",
+      "segment_label": "measure_9_beat_2",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n235",
+      "pitch": 61,
+      "onset": 26.666666666666664,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_18",
+      "segment_label": "measure_9_beat_2",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n236",
+      "pitch": 58,
+      "onset": 26.833333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_18",
+      "segment_label": "measure_9_beat_2",
+      "measure_num": 9
+    },
+    {
+      "note_id": "p0n240",
+      "pitch": 56,
+      "onset": 27.166666666666664,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n241",
+      "pitch": 60,
+      "onset": 27.333333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n242",
+      "pitch": 63,
+      "onset": 27.5,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n243",
+      "pitch": 60,
+      "onset": 27.666666666666664,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n244",
+      "pitch": 63,
+      "onset": 27.833333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n246",
+      "pitch": 67,
+      "onset": 28.0,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n247",
+      "pitch": 63,
+      "onset": 28.166666666666664,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n248",
+      "pitch": 61,
+      "onset": 28.333333333333332,
+      "duration": 0.16666666666666785,
+      "node_id": "staff_1_voice_2_seg_19",
+      "segment_label": "measure_10_beat_1",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n249",
+      "pitch": 68,
+      "onset": 28.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_20",
+      "segment_label": "measure_10_beat_2",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n255",
+      "pitch": 70,
+      "onset": 29.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_20",
+      "segment_label": "measure_10_beat_2",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n259",
+      "pitch": 72,
+      "onset": 29.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_20",
+      "segment_label": "measure_10_beat_2",
+      "measure_num": 10
+    },
+    {
+      "note_id": "p0n263",
+      "pitch": 73,
+      "onset": 30.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_21",
+      "segment_label": "measure_11_beat_1",
+      "measure_num": 11
+    },
+    {
+      "note_id": "p0n269",
+      "pitch": 70,
+      "onset": 30.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_21",
+      "segment_label": "measure_11_beat_1",
+      "measure_num": 11
+    },
+    {
+      "note_id": "p0n273",
+      "pitch": 75,
+      "onset": 31.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_21",
+      "segment_label": "measure_11_beat_1",
+      "measure_num": 11
+    },
+    {
+      "note_id": "p0n277",
+      "pitch": 73,
+      "onset": 31.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_22",
+      "segment_label": "measure_11_beat_2",
+      "measure_num": 11
+    },
+    {
+      "note_id": "p0n283",
+      "pitch": 72,
+      "onset": 32.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_22",
+      "segment_label": "measure_11_beat_2",
+      "measure_num": 11
+    },
+    {
+      "note_id": "p0n288",
+      "pitch": 70,
+      "onset": 32.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_22",
+      "segment_label": "measure_11_beat_2",
+      "measure_num": 11
+    },
+    {
+      "note_id": "p0n293",
+      "pitch": 68,
+      "onset": 33.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_1_seg_23",
+      "segment_label": "measure_12_beat_1",
+      "measure_num": 12
+    },
+    {
+      "note_id": "p0n301",
+      "pitch": 68,
+      "onset": 34.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_23",
+      "segment_label": "measure_12_beat_1",
+      "measure_num": 12
+    },
+    {
+      "note_id": "p0n306",
+      "pitch": 72,
+      "onset": 34.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_24",
+      "segment_label": "measure_12_beat_2",
+      "measure_num": 12
+    },
+    {
+      "note_id": "p0n311",
+      "pitch": 70,
+      "onset": 35.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_24",
+      "segment_label": "measure_12_beat_2",
+      "measure_num": 12
+    },
+    {
+      "note_id": "p0n315",
+      "pitch": 68,
+      "onset": 35.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_24",
+      "segment_label": "measure_12_beat_2",
+      "measure_num": 12
+    },
+    {
+      "note_id": "p0n320",
+      "pitch": 68,
+      "onset": 36.0,
+      "duration": 1.5,
+      "node_id": "staff_1_voice_1_seg_25",
+      "segment_label": "measure_13_beat_1",
+      "measure_num": 13
+    },
+    {
+      "note_id": "p0n331",
+      "pitch": 67,
+      "onset": 37.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_1_seg_26",
+      "segment_label": "measure_13_beat_2",
+      "measure_num": 13
+    },
+    {
+      "note_id": "p0n345",
+      "pitch": 46,
+      "onset": 39.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_27",
+      "segment_label": "measure_14_beat_1",
+      "measure_num": 14
+    },
+    {
+      "note_id": "p0n350",
+      "pitch": 51,
+      "onset": 39.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_27",
+      "segment_label": "measure_14_beat_1",
+      "measure_num": 14
+    },
+    {
+      "note_id": "p0n354",
+      "pitch": 53,
+      "onset": 40.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_27",
+      "segment_label": "measure_14_beat_1",
+      "measure_num": 14
+    },
+    {
+      "note_id": "p0n359",
+      "pitch": 55,
+      "onset": 40.5,
+      "duration": 1.0,
+      "node_id": "staff_2_voice_5_seg_28",
+      "segment_label": "measure_14_beat_2",
+      "measure_num": 14
+    },
+    {
+      "note_id": "p0n367",
+      "pitch": 53,
+      "onset": 41.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_28",
+      "segment_label": "measure_14_beat_2",
+      "measure_num": 14
+    },
+    {
+      "note_id": "p0n372",
+      "pitch": 56,
+      "onset": 42.0,
+      "duration": 1.0,
+      "node_id": "staff_2_voice_5_seg_29",
+      "segment_label": "measure_15_beat_1",
+      "measure_num": 15
+    },
+    {
+      "note_id": "p0n381",
+      "pitch": 55,
+      "onset": 43.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_29",
+      "segment_label": "measure_15_beat_1",
+      "measure_num": 15
+    },
+    {
+      "note_id": "p0n386",
+      "pitch": 55,
+      "onset": 43.5,
+      "duration": 1.0,
+      "node_id": "staff_2_voice_5_seg_30",
+      "segment_label": "measure_15_beat_2",
+      "measure_num": 15
+    },
+    {
+      "note_id": "p0n394",
+      "pitch": 53,
+      "onset": 44.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_30",
+      "segment_label": "measure_15_beat_2",
+      "measure_num": 15
+    },
+    {
+      "note_id": "p0n398",
+      "pitch": 51,
+      "onset": 45.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_31",
+      "segment_label": "measure_16_beat_1",
+      "measure_num": 16
+    },
+    {
+      "note_id": "p0n403",
+      "pitch": 51,
+      "onset": 45.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_31",
+      "segment_label": "measure_16_beat_1",
+      "measure_num": 16
+    },
+    {
+      "note_id": "p0n408",
+      "pitch": 51,
+      "onset": 46.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_31",
+      "segment_label": "measure_16_beat_1",
+      "measure_num": 16
+    },
+    {
+      "note_id": "p0n413",
+      "pitch": 51,
+      "onset": 46.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_32",
+      "segment_label": "measure_16_beat_2",
+      "measure_num": 16
+    },
+    {
+      "note_id": "p0n418",
+      "pitch": 56,
+      "onset": 47.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_32",
+      "segment_label": "measure_16_beat_2",
+      "measure_num": 16
+    },
+    {
+      "note_id": "p0n423",
+      "pitch": 55,
+      "onset": 47.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_32",
+      "segment_label": "measure_16_beat_2",
+      "measure_num": 16
+    },
+    {
+      "note_id": "p0n428",
+      "pitch": 55,
+      "onset": 48.0,
+      "duration": 0.25,
+      "node_id": "staff_1_voice_2_seg_33",
+      "segment_label": "measure_17_beat_1",
+      "measure_num": 17
+    },
+    {
+      "note_id": "p0n431",
+      "pitch": 53,
+      "onset": 48.25,
+      "duration": 0.25,
+      "node_id": "staff_1_voice_2_seg_33",
+      "segment_label": "measure_17_beat_1",
+      "measure_num": 17
+    },
+    {
+      "note_id": "p0n434",
+      "pitch": 51,
+      "onset": 48.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_33",
+      "segment_label": "measure_17_beat_1",
+      "measure_num": 17
+    },
+    {
+      "note_id": "p0n439",
+      "pitch": 50,
+      "onset": 49.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_33",
+      "segment_label": "measure_17_beat_1",
+      "measure_num": 17
+    },
+    {
+      "note_id": "p0n445",
+      "pitch": 39,
+      "onset": 49.5,
+      "duration": 1.5,
+      "node_id": "staff_2_voice_5_seg_34",
+      "segment_label": "measure_17_beat_2",
+      "measure_num": 17
+    },
+    {
+      "note_id": "p0n457",
+      "pitch": 36,
+      "onset": 51.0,
+      "duration": 1.5,
+      "node_id": "staff_2_voice_5_seg_35",
+      "segment_label": "measure_18_beat_1",
+      "measure_num": 18
+    },
+    {
+      "note_id": "p0n469",
+      "pitch": 41,
+      "onset": 52.5,
+      "duration": 1.5,
+      "node_id": "staff_2_voice_5_seg_36",
+      "segment_label": "measure_18_beat_2",
+      "measure_num": 18
+    },
+    {
+      "note_id": "p0n487",
+      "pitch": 41,
+      "onset": 54.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_37",
+      "segment_label": "measure_19_beat_1",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n492",
+      "pitch": 41,
+      "onset": 55.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_37",
+      "segment_label": "measure_19_beat_1",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n498",
+      "pitch": 64,
+      "onset": 55.666666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n499",
+      "pitch": 67,
+      "onset": 55.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n500",
+      "pitch": 70,
+      "onset": 56.0,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n501",
+      "pitch": 64,
+      "onset": 56.166666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n502",
+      "pitch": 67,
+      "onset": 56.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n503",
+      "pitch": 60,
+      "onset": 56.5,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n506",
+      "pitch": 65,
+      "onset": 56.666666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n507",
+      "pitch": 69,
+      "onset": 56.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_38",
+      "segment_label": "measure_19_beat_2",
+      "measure_num": 19
+    },
+    {
+      "note_id": "p0n508",
+      "pitch": 73,
+      "onset": 57.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_39",
+      "segment_label": "measure_20_beat_1",
+      "measure_num": 20
+    },
+    {
+      "note_id": "p0n513",
+      "pitch": 72,
+      "onset": 57.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_39",
+      "segment_label": "measure_20_beat_1",
+      "measure_num": 20
+    },
+    {
+      "note_id": "p0n518",
+      "pitch": 70,
+      "onset": 58.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_39",
+      "segment_label": "measure_20_beat_1",
+      "measure_num": 20
+    },
+    {
+      "note_id": "p0n523",
+      "pitch": 68,
+      "onset": 58.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_40",
+      "segment_label": "measure_20_beat_2",
+      "measure_num": 20
+    },
+    {
+      "note_id": "p0n528",
+      "pitch": 67,
+      "onset": 59.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_40",
+      "segment_label": "measure_20_beat_2",
+      "measure_num": 20
+    },
+    {
+      "note_id": "p0n533",
+      "pitch": 65,
+      "onset": 59.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_40",
+      "segment_label": "measure_20_beat_2",
+      "measure_num": 20
+    },
+    {
+      "note_id": "p0n541",
+      "pitch": 64,
+      "onset": 60.166666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n542",
+      "pitch": 67,
+      "onset": 60.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n543",
+      "pitch": 70,
+      "onset": 60.5,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n544",
+      "pitch": 67,
+      "onset": 60.666666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n545",
+      "pitch": 64,
+      "onset": 60.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n548",
+      "pitch": 68,
+      "onset": 61.166666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n550",
+      "pitch": 65,
+      "onset": 61.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_41",
+      "segment_label": "measure_21_beat_1",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n554",
+      "pitch": 64,
+      "onset": 61.666666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n555",
+      "pitch": 67,
+      "onset": 61.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n556",
+      "pitch": 70,
+      "onset": 62.0,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n557",
+      "pitch": 67,
+      "onset": 62.166666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n558",
+      "pitch": 64,
+      "onset": 62.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n560",
+      "pitch": 60,
+      "onset": 62.5,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n561",
+      "pitch": 58,
+      "onset": 62.666666666666664,
+      "duration": 0.1666666666666643,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n562",
+      "pitch": 55,
+      "onset": 62.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_42",
+      "segment_label": "measure_21_beat_2",
+      "measure_num": 21
+    },
+    {
+      "note_id": "p0n573",
+      "pitch": 55,
+      "onset": 64.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_43",
+      "segment_label": "measure_22_beat_1",
+      "measure_num": 22
+    },
+    {
+      "note_id": "p0n578",
+      "pitch": 56,
+      "onset": 64.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_44",
+      "segment_label": "measure_22_beat_2",
+      "measure_num": 22
+    },
+    {
+      "note_id": "p0n587",
+      "pitch": 55,
+      "onset": 65.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_44",
+      "segment_label": "measure_22_beat_2",
+      "measure_num": 22
+    },
+    {
+      "note_id": "p0n592",
+      "pitch": 58,
+      "onset": 66.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_45",
+      "segment_label": "measure_23_beat_1",
+      "measure_num": 23
+    },
+    {
+      "note_id": "p0n601",
+      "pitch": 56,
+      "onset": 67.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_45",
+      "segment_label": "measure_23_beat_1",
+      "measure_num": 23
+    },
+    {
+      "note_id": "p0n606",
+      "pitch": 56,
+      "onset": 67.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_46",
+      "segment_label": "measure_23_beat_2",
+      "measure_num": 23
+    },
+    {
+      "note_id": "p0n614",
+      "pitch": 55,
+      "onset": 68.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_46",
+      "segment_label": "measure_23_beat_2",
+      "measure_num": 23
+    },
+    {
+      "note_id": "p0n619",
+      "pitch": 53,
+      "onset": 69.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_47",
+      "segment_label": "measure_24_beat_1",
+      "measure_num": 24
+    },
+    {
+      "note_id": "p0n624",
+      "pitch": 53,
+      "onset": 69.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_47",
+      "segment_label": "measure_24_beat_1",
+      "measure_num": 24
+    },
+    {
+      "note_id": "p0n629",
+      "pitch": 53,
+      "onset": 70.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_47",
+      "segment_label": "measure_24_beat_1",
+      "measure_num": 24
+    },
+    {
+      "note_id": "p0n634",
+      "pitch": 53,
+      "onset": 70.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_48",
+      "segment_label": "measure_24_beat_2",
+      "measure_num": 24
+    },
+    {
+      "note_id": "p0n639",
+      "pitch": 58,
+      "onset": 71.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_48",
+      "segment_label": "measure_24_beat_2",
+      "measure_num": 24
+    },
+    {
+      "note_id": "p0n644",
+      "pitch": 56,
+      "onset": 71.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_48",
+      "segment_label": "measure_24_beat_2",
+      "measure_num": 24
+    },
+    {
+      "note_id": "p0n649",
+      "pitch": 56,
+      "onset": 72.0,
+      "duration": 0.25,
+      "node_id": "staff_1_voice_2_seg_49",
+      "segment_label": "measure_25_beat_1",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n652",
+      "pitch": 55,
+      "onset": 72.25,
+      "duration": 0.25,
+      "node_id": "staff_1_voice_2_seg_49",
+      "segment_label": "measure_25_beat_1",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n655",
+      "pitch": 53,
+      "onset": 72.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_49",
+      "segment_label": "measure_25_beat_1",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n660",
+      "pitch": 52,
+      "onset": 73.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_49",
+      "segment_label": "measure_25_beat_1",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n668",
+      "pitch": 56,
+      "onset": 73.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_50",
+      "segment_label": "measure_25_beat_2",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n669",
+      "pitch": 59,
+      "onset": 73.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_50",
+      "segment_label": "measure_25_beat_2",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n672",
+      "pitch": 56,
+      "onset": 74.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_50",
+      "segment_label": "measure_25_beat_2",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n673",
+      "pitch": 59,
+      "onset": 74.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_50",
+      "segment_label": "measure_25_beat_2",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n674",
+      "pitch": 65,
+      "onset": 74.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_50",
+      "segment_label": "measure_25_beat_2",
+      "measure_num": 25
+    },
+    {
+      "note_id": "p0n678",
+      "pitch": 65,
+      "onset": 75.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_1_seg_51",
+      "segment_label": "measure_26_beat_1",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n687",
+      "pitch": 67,
+      "onset": 76.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_51",
+      "segment_label": "measure_26_beat_1",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n689",
+      "pitch": 67,
+      "onset": 76.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_51",
+      "segment_label": "measure_26_beat_1",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n691",
+      "pitch": 68,
+      "onset": 76.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_51",
+      "segment_label": "measure_26_beat_1",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n693",
+      "pitch": 68,
+      "onset": 76.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_52",
+      "segment_label": "measure_26_beat_2",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n699",
+      "pitch": 67,
+      "onset": 77.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_52",
+      "segment_label": "measure_26_beat_2",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n703",
+      "pitch": 67,
+      "onset": 77.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_52",
+      "segment_label": "measure_26_beat_2",
+      "measure_num": 26
+    },
+    {
+      "note_id": "p0n707",
+      "pitch": 67,
+      "onset": 78.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_1_seg_53",
+      "segment_label": "measure_27_beat_1",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n716",
+      "pitch": 68,
+      "onset": 79.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_53",
+      "segment_label": "measure_27_beat_1",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n718",
+      "pitch": 68,
+      "onset": 79.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_53",
+      "segment_label": "measure_27_beat_1",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n720",
+      "pitch": 70,
+      "onset": 79.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_53",
+      "segment_label": "measure_27_beat_1",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n722",
+      "pitch": 70,
+      "onset": 79.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_54",
+      "segment_label": "measure_27_beat_2",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n728",
+      "pitch": 68,
+      "onset": 80.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_54",
+      "segment_label": "measure_27_beat_2",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n732",
+      "pitch": 73,
+      "onset": 80.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_54",
+      "segment_label": "measure_27_beat_2",
+      "measure_num": 27
+    },
+    {
+      "note_id": "p0n737",
+      "pitch": 73,
+      "onset": 81.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_55",
+      "segment_label": "measure_28_beat_1",
+      "measure_num": 28
+    },
+    {
+      "note_id": "p0n742",
+      "pitch": 72,
+      "onset": 81.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_55",
+      "segment_label": "measure_28_beat_1",
+      "measure_num": 28
+    },
+    {
+      "note_id": "p0n746",
+      "pitch": 72,
+      "onset": 82.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_55",
+      "segment_label": "measure_28_beat_1",
+      "measure_num": 28
+    },
+    {
+      "note_id": "p0n750",
+      "pitch": 72,
+      "onset": 82.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_56",
+      "segment_label": "measure_28_beat_2",
+      "measure_num": 28
+    },
+    {
+      "note_id": "p0n754",
+      "pitch": 71,
+      "onset": 83.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_56",
+      "segment_label": "measure_28_beat_2",
+      "measure_num": 28
+    },
+    {
+      "note_id": "p0n758",
+      "pitch": 71,
+      "onset": 83.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_56",
+      "segment_label": "measure_28_beat_2",
+      "measure_num": 28
+    },
+    {
+      "note_id": "p0n763",
+      "pitch": 71,
+      "onset": 84.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n765",
+      "pitch": 68,
+      "onset": 84.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n766",
+      "pitch": 65,
+      "onset": 84.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n767",
+      "pitch": 62,
+      "onset": 84.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n768",
+      "pitch": 68,
+      "onset": 84.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n769",
+      "pitch": 65,
+      "onset": 84.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n771",
+      "pitch": 70,
+      "onset": 85.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n773",
+      "pitch": 65,
+      "onset": 85.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n775",
+      "pitch": 62,
+      "onset": 85.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_57",
+      "segment_label": "measure_29_beat_1",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n787",
+      "pitch": 63,
+      "onset": 86.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_58",
+      "segment_label": "measure_29_beat_2",
+      "measure_num": 29
+    },
+    {
+      "note_id": "p0n792",
+      "pitch": 64,
+      "onset": 87.0,
+      "duration": 1.0,
+      "node_id": "staff_2_voice_5_seg_59",
+      "segment_label": "measure_30_beat_1",
+      "measure_num": 30
+    },
+    {
+      "note_id": "p0n801",
+      "pitch": 63,
+      "onset": 88.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_59",
+      "segment_label": "measure_30_beat_1",
+      "measure_num": 30
+    },
+    {
+      "note_id": "p0n806",
+      "pitch": 63,
+      "onset": 88.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_60",
+      "segment_label": "measure_30_beat_2",
+      "measure_num": 30
+    },
+    {
+      "note_id": "p0n810",
+      "pitch": 61,
+      "onset": 89.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_60",
+      "segment_label": "measure_30_beat_2",
+      "measure_num": 30
+    },
+    {
+      "note_id": "p0n815",
+      "pitch": 59,
+      "onset": 89.5,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_60",
+      "segment_label": "measure_30_beat_2",
+      "measure_num": 30
+    },
+    {
+      "note_id": "p0n820",
+      "pitch": 58,
+      "onset": 90.0,
+      "duration": 1.0,
+      "node_id": "staff_2_voice_5_seg_61",
+      "segment_label": "measure_31_beat_1",
+      "measure_num": 31
+    },
+    {
+      "note_id": "p0n829",
+      "pitch": 56,
+      "onset": 91.0,
+      "duration": 0.5,
+      "node_id": "staff_2_voice_5_seg_61",
+      "segment_label": "measure_31_beat_1",
+      "measure_num": 31
+    },
+    {
+      "note_id": "p0n833",
+      "pitch": 56,
+      "onset": 91.5,
+      "duration": 1.5,
+      "node_id": "staff_2_voice_5_seg_62",
+      "segment_label": "measure_31_beat_2",
+      "measure_num": 31
+    },
+    {
+      "note_id": "p0n846",
+      "pitch": 61,
+      "onset": 93.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n847",
+      "pitch": 58,
+      "onset": 93.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n848",
+      "pitch": 61,
+      "onset": 93.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n849",
+      "pitch": 58,
+      "onset": 93.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n850",
+      "pitch": 61,
+      "onset": 93.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n852",
+      "pitch": 63,
+      "onset": 94.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n854",
+      "pitch": 61,
+      "onset": 94.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n855",
+      "pitch": 58,
+      "onset": 94.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_2_seg_63",
+      "segment_label": "measure_32_beat_1",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n861",
+      "pitch": 60,
+      "onset": 94.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n862",
+      "pitch": 58,
+      "onset": 94.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n868",
+      "pitch": 60,
+      "onset": 95.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n869",
+      "pitch": 63,
+      "onset": 95.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n870",
+      "pitch": 61,
+      "onset": 95.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n875",
+      "pitch": 63,
+      "onset": 95.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n876",
+      "pitch": 67,
+      "onset": 95.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_64",
+      "segment_label": "measure_32_beat_2",
+      "measure_num": 32
+    },
+    {
+      "note_id": "p0n882",
+      "pitch": 68,
+      "onset": 96.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n883",
+      "pitch": 63,
+      "onset": 96.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n884",
+      "pitch": 62,
+      "onset": 96.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n885",
+      "pitch": 65,
+      "onset": 96.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n886",
+      "pitch": 63,
+      "onset": 96.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n892",
+      "pitch": 67,
+      "onset": 97.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n893",
+      "pitch": 63,
+      "onset": 97.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_65",
+      "segment_label": "measure_33_beat_1",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n899",
+      "pitch": 68,
+      "onset": 97.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n900",
+      "pitch": 65,
+      "onset": 97.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n901",
+      "pitch": 70,
+      "onset": 98.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n904",
+      "pitch": 67,
+      "onset": 98.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n905",
+      "pitch": 63,
+      "onset": 98.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n911",
+      "pitch": 63,
+      "onset": 98.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n912",
+      "pitch": 68,
+      "onset": 98.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_66",
+      "segment_label": "measure_33_beat_2",
+      "measure_num": 33
+    },
+    {
+      "note_id": "p0n918",
+      "pitch": 68,
+      "onset": 99.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n919",
+      "pitch": 63,
+      "onset": 99.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n920",
+      "pitch": 62,
+      "onset": 99.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n921",
+      "pitch": 65,
+      "onset": 99.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n922",
+      "pitch": 63,
+      "onset": 99.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n926",
+      "pitch": 67,
+      "onset": 100.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n927",
+      "pitch": 61,
+      "onset": 100.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_67",
+      "segment_label": "measure_34_beat_1",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n933",
+      "pitch": 60,
+      "onset": 100.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_68",
+      "segment_label": "measure_34_beat_2",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n934",
+      "pitch": 68,
+      "onset": 100.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_68",
+      "segment_label": "measure_34_beat_2",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n939",
+      "pitch": 63,
+      "onset": 101.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_68",
+      "segment_label": "measure_34_beat_2",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n940",
+      "pitch": 66,
+      "onset": 101.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_68",
+      "segment_label": "measure_34_beat_2",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n945",
+      "pitch": 60,
+      "onset": 101.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_68",
+      "segment_label": "measure_34_beat_2",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n946",
+      "pitch": 66,
+      "onset": 101.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_68",
+      "segment_label": "measure_34_beat_2",
+      "measure_num": 34
+    },
+    {
+      "note_id": "p0n951",
+      "pitch": 65,
+      "onset": 102.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_69",
+      "segment_label": "measure_35_beat_1",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n952",
+      "pitch": 63,
+      "onset": 102.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_69",
+      "segment_label": "measure_35_beat_1",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n957",
+      "pitch": 64,
+      "onset": 102.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_69",
+      "segment_label": "measure_35_beat_1",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n958",
+      "pitch": 67,
+      "onset": 102.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_69",
+      "segment_label": "measure_35_beat_1",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n963",
+      "pitch": 63,
+      "onset": 103.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_69",
+      "segment_label": "measure_35_beat_1",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n964",
+      "pitch": 68,
+      "onset": 103.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_69",
+      "segment_label": "measure_35_beat_1",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n969",
+      "pitch": 65,
+      "onset": 103.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_70",
+      "segment_label": "measure_35_beat_2",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n972",
+      "pitch": 61,
+      "onset": 103.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_70",
+      "segment_label": "measure_35_beat_2",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n977",
+      "pitch": 60,
+      "onset": 104.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_70",
+      "segment_label": "measure_35_beat_2",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n978",
+      "pitch": 63,
+      "onset": 104.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_70",
+      "segment_label": "measure_35_beat_2",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n983",
+      "pitch": 58,
+      "onset": 104.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_70",
+      "segment_label": "measure_35_beat_2",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n984",
+      "pitch": 61,
+      "onset": 104.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_70",
+      "segment_label": "measure_35_beat_2",
+      "measure_num": 35
+    },
+    {
+      "note_id": "p0n989",
+      "pitch": 65,
+      "onset": 105.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n990",
+      "pitch": 60,
+      "onset": 105.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n991",
+      "pitch": 65,
+      "onset": 105.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n992",
+      "pitch": 60,
+      "onset": 105.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n993",
+      "pitch": 65,
+      "onset": 105.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n998",
+      "pitch": 70,
+      "onset": 106.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n999",
+      "pitch": 68,
+      "onset": 106.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_71",
+      "segment_label": "measure_36_beat_1",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1000",
+      "pitch": 68,
+      "onset": 106.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1004",
+      "pitch": 67,
+      "onset": 106.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1005",
+      "pitch": 63,
+      "onset": 106.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1010",
+      "pitch": 68,
+      "onset": 107.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1011",
+      "pitch": 66,
+      "onset": 107.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1012",
+      "pitch": 66,
+      "onset": 107.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1016",
+      "pitch": 65,
+      "onset": 107.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1017",
+      "pitch": 61,
+      "onset": 107.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_72",
+      "segment_label": "measure_36_beat_2",
+      "measure_num": 36
+    },
+    {
+      "note_id": "p0n1023",
+      "pitch": 67,
+      "onset": 108.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_73",
+      "segment_label": "measure_37_beat_1",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1024",
+      "pitch": 64,
+      "onset": 108.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_73",
+      "segment_label": "measure_37_beat_1",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1030",
+      "pitch": 67,
+      "onset": 108.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_73",
+      "segment_label": "measure_37_beat_1",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1031",
+      "pitch": 64,
+      "onset": 108.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_73",
+      "segment_label": "measure_37_beat_1",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1037",
+      "pitch": 68,
+      "onset": 109.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_73",
+      "segment_label": "measure_37_beat_1",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1038",
+      "pitch": 64,
+      "onset": 109.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_73",
+      "segment_label": "measure_37_beat_1",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1044",
+      "pitch": 63,
+      "onset": 109.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1045",
+      "pitch": 67,
+      "onset": 109.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1046",
+      "pitch": 70,
+      "onset": 110.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1047",
+      "pitch": 67,
+      "onset": 110.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1048",
+      "pitch": 63,
+      "onset": 110.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1054",
+      "pitch": 63,
+      "onset": 110.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1055",
+      "pitch": 68,
+      "onset": 110.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_74",
+      "segment_label": "measure_37_beat_2",
+      "measure_num": 37
+    },
+    {
+      "note_id": "p0n1061",
+      "pitch": 61,
+      "onset": 111.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_75",
+      "segment_label": "measure_38_beat_1",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1062",
+      "pitch": 65,
+      "onset": 111.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_75",
+      "segment_label": "measure_38_beat_1",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1068",
+      "pitch": 63,
+      "onset": 111.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_75",
+      "segment_label": "measure_38_beat_1",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1069",
+      "pitch": 69,
+      "onset": 111.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_75",
+      "segment_label": "measure_38_beat_1",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1075",
+      "pitch": 65,
+      "onset": 112.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_75",
+      "segment_label": "measure_38_beat_1",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1076",
+      "pitch": 70,
+      "onset": 112.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_75",
+      "segment_label": "measure_38_beat_1",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1082",
+      "pitch": 68,
+      "onset": 112.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1083",
+      "pitch": 63,
+      "onset": 112.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1084",
+      "pitch": 68,
+      "onset": 113.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1085",
+      "pitch": 63,
+      "onset": 113.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1086",
+      "pitch": 68,
+      "onset": 113.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1087",
+      "pitch": 62,
+      "onset": 113.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1088",
+      "pitch": 65,
+      "onset": 113.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1089",
+      "pitch": 63,
+      "onset": 113.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_76",
+      "segment_label": "measure_38_beat_2",
+      "measure_num": 38
+    },
+    {
+      "note_id": "p0n1094",
+      "pitch": 67,
+      "onset": 114.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1095",
+      "pitch": 61,
+      "onset": 114.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1096",
+      "pitch": 67,
+      "onset": 114.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1097",
+      "pitch": 61,
+      "onset": 114.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1098",
+      "pitch": 67,
+      "onset": 114.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1099",
+      "pitch": 62,
+      "onset": 115.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1100",
+      "pitch": 65,
+      "onset": 115.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1101",
+      "pitch": 63,
+      "onset": 115.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_77",
+      "segment_label": "measure_39_beat_1",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1106",
+      "pitch": 60,
+      "onset": 115.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1107",
+      "pitch": 61,
+      "onset": 115.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1108",
+      "pitch": 62,
+      "onset": 116.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1109",
+      "pitch": 65,
+      "onset": 116.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1110",
+      "pitch": 63,
+      "onset": 116.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1111",
+      "pitch": 67,
+      "onset": 116.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1114",
+      "pitch": 68,
+      "onset": 116.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1115",
+      "pitch": 72,
+      "onset": 116.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_78",
+      "segment_label": "measure_39_beat_2",
+      "measure_num": 39
+    },
+    {
+      "note_id": "p0n1116",
+      "pitch": 70,
+      "onset": 117.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1119",
+      "pitch": 60,
+      "onset": 117.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1120",
+      "pitch": 61,
+      "onset": 117.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1121",
+      "pitch": 62,
+      "onset": 117.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1123",
+      "pitch": 65,
+      "onset": 117.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1124",
+      "pitch": 63,
+      "onset": 117.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1125",
+      "pitch": 67,
+      "onset": 118.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1127",
+      "pitch": 70,
+      "onset": 118.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1128",
+      "pitch": 73,
+      "onset": 118.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_79",
+      "segment_label": "measure_40_beat_1",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1129",
+      "pitch": 72,
+      "onset": 118.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1133",
+      "pitch": 60,
+      "onset": 118.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1134",
+      "pitch": 61,
+      "onset": 118.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1135",
+      "pitch": 62,
+      "onset": 119.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1137",
+      "pitch": 65,
+      "onset": 119.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1138",
+      "pitch": 63,
+      "onset": 119.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1139",
+      "pitch": 68,
+      "onset": 119.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1141",
+      "pitch": 72,
+      "onset": 119.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1142",
+      "pitch": 75,
+      "onset": 119.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_80",
+      "segment_label": "measure_40_beat_2",
+      "measure_num": 40
+    },
+    {
+      "note_id": "p0n1143",
+      "pitch": 73,
+      "onset": 120.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1147",
+      "pitch": 60,
+      "onset": 120.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1148",
+      "pitch": 61,
+      "onset": 120.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1149",
+      "pitch": 62,
+      "onset": 120.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1151",
+      "pitch": 65,
+      "onset": 120.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1152",
+      "pitch": 63,
+      "onset": 120.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1153",
+      "pitch": 67,
+      "onset": 121.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1155",
+      "pitch": 70,
+      "onset": 121.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1156",
+      "pitch": 77,
+      "onset": 121.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_81",
+      "segment_label": "measure_41_beat_1",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1157",
+      "pitch": 75,
+      "onset": 121.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1162",
+      "pitch": 62,
+      "onset": 121.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1163",
+      "pitch": 63,
+      "onset": 121.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1164",
+      "pitch": 68,
+      "onset": 122.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1166",
+      "pitch": 72,
+      "onset": 122.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1167",
+      "pitch": 75,
+      "onset": 122.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1168",
+      "pitch": 80,
+      "onset": 122.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1170",
+      "pitch": 84,
+      "onset": 122.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1171",
+      "pitch": 82,
+      "onset": 122.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_82",
+      "segment_label": "measure_41_beat_2",
+      "measure_num": 41
+    },
+    {
+      "note_id": "p0n1172",
+      "pitch": 80,
+      "onset": 123.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1174",
+      "pitch": 79,
+      "onset": 123.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1175",
+      "pitch": 77,
+      "onset": 123.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1176",
+      "pitch": 75,
+      "onset": 123.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1177",
+      "pitch": 74,
+      "onset": 123.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1178",
+      "pitch": 77,
+      "onset": 123.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1179",
+      "pitch": 75,
+      "onset": 124.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1180",
+      "pitch": 73,
+      "onset": 124.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1181",
+      "pitch": 72,
+      "onset": 124.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_83",
+      "segment_label": "measure_42_beat_1",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1182",
+      "pitch": 70,
+      "onset": 124.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1184",
+      "pitch": 68,
+      "onset": 124.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1185",
+      "pitch": 67,
+      "onset": 124.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1186",
+      "pitch": 70,
+      "onset": 125.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1188",
+      "pitch": 68,
+      "onset": 125.16666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1189",
+      "pitch": 67,
+      "onset": 125.33333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1190",
+      "pitch": 65,
+      "onset": 125.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1192",
+      "pitch": 63,
+      "onset": 125.66666666666666,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1193",
+      "pitch": 61,
+      "onset": 125.83333333333333,
+      "duration": 0.1666666666666714,
+      "node_id": "staff_1_voice_1_seg_84",
+      "segment_label": "measure_42_beat_2",
+      "measure_num": 42
+    },
+    {
+      "note_id": "p0n1195",
+      "pitch": 60,
+      "onset": 126.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_85",
+      "segment_label": "measure_43_beat_1",
+      "measure_num": 43
+    },
+    {
+      "note_id": "p0n1204",
+      "pitch": 58,
+      "onset": 127.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_85",
+      "segment_label": "measure_43_beat_1",
+      "measure_num": 43
+    },
+    {
+      "note_id": "p0n1210",
+      "pitch": 61,
+      "onset": 127.5,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_86",
+      "segment_label": "measure_43_beat_2",
+      "measure_num": 43
+    },
+    {
+      "note_id": "p0n1218",
+      "pitch": 60,
+      "onset": 128.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_86",
+      "segment_label": "measure_43_beat_2",
+      "measure_num": 43
+    },
+    {
+      "note_id": "p0n1224",
+      "pitch": 60,
+      "onset": 129.0,
+      "duration": 1.0,
+      "node_id": "staff_1_voice_2_seg_87",
+      "segment_label": "measure_44_beat_1",
+      "measure_num": 44
+    },
+    {
+      "note_id": "p0n1232",
+      "pitch": 58,
+      "onset": 130.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_87",
+      "segment_label": "measure_44_beat_1",
+      "measure_num": 44
+    },
+    {
+      "note_id": "p0n1238",
+      "pitch": 56,
+      "onset": 130.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_88",
+      "segment_label": "measure_44_beat_2",
+      "measure_num": 44
+    },
+    {
+      "note_id": "p0n1242",
+      "pitch": 56,
+      "onset": 131.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_88",
+      "segment_label": "measure_44_beat_2",
+      "measure_num": 44
+    },
+    {
+      "note_id": "p0n1247",
+      "pitch": 56,
+      "onset": 131.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_88",
+      "segment_label": "measure_44_beat_2",
+      "measure_num": 44
+    },
+    {
+      "note_id": "p0n1252",
+      "pitch": 56,
+      "onset": 132.0,
+      "duration": 1.5,
+      "node_id": "staff_1_voice_2_seg_89",
+      "segment_label": "measure_45_beat_1",
+      "measure_num": 45
+    },
+    {
+      "note_id": "p0n1268",
+      "pitch": 56,
+      "onset": 133.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_90",
+      "segment_label": "measure_45_beat_2",
+      "measure_num": 45
+    },
+    {
+      "note_id": "p0n1274",
+      "pitch": 56,
+      "onset": 134.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_90",
+      "segment_label": "measure_45_beat_2",
+      "measure_num": 45
+    },
+    {
+      "note_id": "p0n1279",
+      "pitch": 56,
+      "onset": 134.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_90",
+      "segment_label": "measure_45_beat_2",
+      "measure_num": 45
+    },
+    {
+      "note_id": "p0n1285",
+      "pitch": 56,
+      "onset": 135.0,
+      "duration": 1.5,
+      "node_id": "staff_1_voice_2_seg_91",
+      "segment_label": "measure_46_beat_1",
+      "measure_num": 46
+    },
+    {
+      "note_id": "p0n1300",
+      "pitch": 55,
+      "onset": 136.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_92",
+      "segment_label": "measure_46_beat_2",
+      "measure_num": 46
+    },
+    {
+      "note_id": "p0n1307",
+      "pitch": 55,
+      "onset": 137.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_92",
+      "segment_label": "measure_46_beat_2",
+      "measure_num": 46
+    },
+    {
+      "note_id": "p0n1311",
+      "pitch": 56,
+      "onset": 137.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_2_seg_92",
+      "segment_label": "measure_46_beat_2",
+      "measure_num": 46
+    },
+    {
+      "note_id": "p0n1316",
+      "pitch": 55,
+      "onset": 138.0,
+      "duration": 1.5,
+      "node_id": "staff_1_voice_2_seg_93",
+      "segment_label": "measure_47_beat_1",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1328",
+      "pitch": 55,
+      "onset": 139.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1333",
+      "pitch": 61,
+      "onset": 139.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1334",
+      "pitch": 58,
+      "onset": 139.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1335",
+      "pitch": 55,
+      "onset": 140.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1337",
+      "pitch": 61,
+      "onset": 140.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1338",
+      "pitch": 58,
+      "onset": 140.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1339",
+      "pitch": 56,
+      "onset": 140.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1342",
+      "pitch": 61,
+      "onset": 140.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1343",
+      "pitch": 58,
+      "onset": 140.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_94",
+      "segment_label": "measure_47_beat_2",
+      "measure_num": 47
+    },
+    {
+      "note_id": "p0n1352",
+      "pitch": 58,
+      "onset": 141.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_95",
+      "segment_label": "measure_48_beat_1",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1353",
+      "pitch": 55,
+      "onset": 141.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_2_voice_1_seg_95",
+      "segment_label": "measure_48_beat_1",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1354",
+      "pitch": 51,
+      "onset": 142.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_95",
+      "segment_label": "measure_48_beat_1",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1356",
+      "pitch": 49,
+      "onset": 142.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_95",
+      "segment_label": "measure_48_beat_1",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1357",
+      "pitch": 46,
+      "onset": 142.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_2_voice_1_seg_95",
+      "segment_label": "measure_48_beat_1",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1358",
+      "pitch": 44,
+      "onset": 142.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1360",
+      "pitch": 48,
+      "onset": 142.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1361",
+      "pitch": 49,
+      "onset": 142.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1362",
+      "pitch": 50,
+      "onset": 143.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1363",
+      "pitch": 53,
+      "onset": 143.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1364",
+      "pitch": 51,
+      "onset": 143.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1365",
+      "pitch": 50,
+      "onset": 143.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1366",
+      "pitch": 51,
+      "onset": 143.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1367",
+      "pitch": 55,
+      "onset": 143.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_2_voice_1_seg_96",
+      "segment_label": "measure_48_beat_2",
+      "measure_num": 48
+    },
+    {
+      "note_id": "p0n1368",
+      "pitch": 56,
+      "onset": 144.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1370",
+      "pitch": 60,
+      "onset": 144.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1371",
+      "pitch": 61,
+      "onset": 144.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1372",
+      "pitch": 62,
+      "onset": 144.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1374",
+      "pitch": 65,
+      "onset": 144.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1375",
+      "pitch": 63,
+      "onset": 144.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1376",
+      "pitch": 62,
+      "onset": 145.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1378",
+      "pitch": 63,
+      "onset": 145.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1379",
+      "pitch": 67,
+      "onset": 145.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_97",
+      "segment_label": "measure_49_beat_1",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1380",
+      "pitch": 68,
+      "onset": 145.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1382",
+      "pitch": 72,
+      "onset": 145.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1383",
+      "pitch": 73,
+      "onset": 145.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1384",
+      "pitch": 74,
+      "onset": 146.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1385",
+      "pitch": 77,
+      "onset": 146.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1386",
+      "pitch": 75,
+      "onset": 146.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1387",
+      "pitch": 74,
+      "onset": 146.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1388",
+      "pitch": 75,
+      "onset": 146.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1389",
+      "pitch": 79,
+      "onset": 146.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_98",
+      "segment_label": "measure_49_beat_2",
+      "measure_num": 49
+    },
+    {
+      "note_id": "p0n1390",
+      "pitch": 80,
+      "onset": 147.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1393",
+      "pitch": 84,
+      "onset": 147.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1394",
+      "pitch": 85,
+      "onset": 147.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1395",
+      "pitch": 86,
+      "onset": 147.5,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1397",
+      "pitch": 89,
+      "onset": 147.66666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1398",
+      "pitch": 87,
+      "onset": 147.83333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1399",
+      "pitch": 86,
+      "onset": 148.0,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1402",
+      "pitch": 87,
+      "onset": 148.16666666666666,
+      "duration": 0.1666666666666572,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1403",
+      "pitch": 91,
+      "onset": 148.33333333333331,
+      "duration": 0.16666666666668561,
+      "node_id": "staff_1_voice_1_seg_99",
+      "segment_label": "measure_50_beat_1",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1404",
+      "pitch": 92,
+      "onset": 148.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_100",
+      "segment_label": "measure_50_beat_2",
+      "measure_num": 50
+    },
+    {
+      "note_id": "p0n1410",
+      "pitch": 63,
+      "onset": 150.0,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_101",
+      "segment_label": "measure_51_beat_1",
+      "measure_num": 51
+    },
+    {
+      "note_id": "p0n1423",
+      "pitch": 63,
+      "onset": 151.5,
+      "duration": 0.5,
+      "node_id": "staff_1_voice_1_seg_102",
+      "segment_label": "measure_51_beat_2",
+      "measure_num": 51
+    }
+  ]
+}

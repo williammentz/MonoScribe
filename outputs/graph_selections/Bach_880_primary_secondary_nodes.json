@@ -5,7 +5,7 @@
     "segment_label": "measure_1",
     "primary_node": "staff_1_voice_1_seg_1",
     "primary_score_type": "start_utility",
-    "primary_score": 0.3516496817270915,
+    "primary_score": 0.5944006641705831,
     "secondary_node": null,
     "secondary_score_type": "start_utility",
     "secondary_score": null,
@@ -18,7 +18,7 @@
     "previous_primary": "staff_1_voice_1_seg_1",
     "primary_node": "staff_1_voice_1_seg_2",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6032510266535812,
+    "primary_score": 1.0881265144607035,
     "secondary_node": null,
     "secondary_score_type": "incoming_edge",
     "secondary_score": null,
@@ -31,7 +31,7 @@
     "previous_primary": "staff_1_voice_1_seg_2",
     "primary_node": "staff_1_voice_1_seg_3",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5600593852500121,
+    "primary_score": 0.9463559297449662,
     "secondary_node": null,
     "secondary_score_type": "incoming_edge",
     "secondary_score": null,
@@ -44,7 +44,7 @@
     "previous_primary": "staff_1_voice_1_seg_3",
     "primary_node": "staff_1_voice_1_seg_4",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.559505488226811,
+    "primary_score": 0.7510575770880236,
     "secondary_node": null,
     "secondary_score_type": "incoming_edge",
     "secondary_score": null,
@@ -57,11 +57,11 @@
     "previous_primary": "staff_1_voice_1_seg_4",
     "primary_node": "staff_1_voice_1_seg_5",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5429398924112321,
+    "primary_score": 0.705107565684752,
     "secondary_node": "staff_1_voice_2_seg_5",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6404899398485819,
-    "delta_to_secondary": 0.09755004743734985
+    "secondary_score": 1.1828558466651224,
+    "delta_to_secondary": 0.4777482809803705
   },
   {
     "layer_index": 6,
@@ -70,11 +70,11 @@
     "previous_primary": "staff_1_voice_1_seg_5",
     "primary_node": "staff_1_voice_2_seg_6",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6266598062382804,
+    "primary_score": 0.8548922006680508,
     "secondary_node": "staff_1_voice_1_seg_6",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7203262496325705,
-    "delta_to_secondary": 0.09366644339429009
+    "secondary_score": 1.0024195915520793,
+    "delta_to_secondary": 0.14752739088402844
   },
   {
     "layer_index": 7,
@@ -83,11 +83,11 @@
     "previous_primary": "staff_1_voice_2_seg_6",
     "primary_node": "staff_1_voice_2_seg_7",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5274734790126482,
+    "primary_score": 0.9279079867131783,
     "secondary_node": "staff_1_voice_1_seg_7",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.8123506460752752,
-    "delta_to_secondary": 0.284877167062627
+    "secondary_score": 1.226246809899205,
+    "delta_to_secondary": 0.29833882318602667
   },
   {
     "layer_index": 8,
@@ -96,11 +96,11 @@
     "previous_primary": "staff_1_voice_2_seg_7",
     "primary_node": "staff_1_voice_2_seg_8",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5011907547712326,
+    "primary_score": 0.6758821054841533,
     "secondary_node": "staff_1_voice_1_seg_8",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7388691729307175,
-    "delta_to_secondary": 0.23767841815948487
+    "secondary_score": 0.9740181155638261,
+    "delta_to_secondary": 0.29813601007967283
   },
   {
     "layer_index": 9,
@@ -109,11 +109,11 @@
     "previous_primary": "staff_1_voice_2_seg_8",
     "primary_node": "staff_1_voice_2_seg_9",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5445711349447568,
+    "primary_score": 0.7322157973592931,
     "secondary_node": "staff_1_voice_1_seg_9",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5511236846446992,
-    "delta_to_secondary": 0.006552549699942345
+    "secondary_score": 1.0256367258953327,
+    "delta_to_secondary": 0.2934209285360396
   },
   {
     "layer_index": 10,
@@ -122,11 +122,11 @@
     "previous_primary": "staff_1_voice_2_seg_9",
     "primary_node": "staff_1_voice_2_seg_10",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4718307508362664,
+    "primary_score": 0.6658856497268484,
     "secondary_node": "staff_1_voice_1_seg_10",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6146338394946522,
-    "delta_to_secondary": 0.1428030886583858
+    "secondary_score": 0.9590426111612658,
+    "delta_to_secondary": 0.2931569614344174
   },
   {
     "layer_index": 11,
@@ -135,11 +135,11 @@
     "previous_primary": "staff_1_voice_2_seg_10",
     "primary_node": "staff_1_voice_2_seg_11",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.507457329498397,
+    "primary_score": 0.8132948775484106,
     "secondary_node": "staff_1_voice_1_seg_11",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7395553813378017,
-    "delta_to_secondary": 0.2320980518394048
+    "secondary_score": 1.2049188946232652,
+    "delta_to_secondary": 0.3916240170748546
   },
   {
     "layer_index": 12,
@@ -148,50 +148,50 @@
     "previous_primary": "staff_1_voice_2_seg_11",
     "primary_node": "staff_1_voice_2_seg_12",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.45418533504009245,
+    "primary_score": 0.6513840210979636,
     "secondary_node": "staff_1_voice_1_seg_12",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6401943445205688,
-    "delta_to_secondary": 0.18600900948047633
+    "secondary_score": 1.0595987690217568,
+    "delta_to_secondary": 0.4082147479237932
   },
   {
     "layer_index": 13,
     "measure_num": 13,
     "segment_label": "measure_13",
     "previous_primary": "staff_1_voice_2_seg_12",
-    "primary_node": "staff_1_voice_1_seg_13",
+    "primary_node": "staff_1_voice_2_seg_13",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5474062285489506,
-    "secondary_node": "staff_1_voice_2_seg_13",
+    "primary_score": 0.7779108212451743,
+    "secondary_node": "staff_1_voice_1_seg_13",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5265111161602868,
-    "delta_to_secondary": -0.020895112388663817
+    "secondary_score": 0.9001031378302911,
+    "delta_to_secondary": 0.12219231658511676
   },
   {
     "layer_index": 14,
     "measure_num": 14,
     "segment_label": "measure_14",
-    "previous_primary": "staff_1_voice_1_seg_13",
-    "primary_node": "staff_1_voice_1_seg_14",
+    "previous_primary": "staff_1_voice_2_seg_13",
+    "primary_node": "staff_1_voice_2_seg_14",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.37921123822530106,
+    "primary_score": 0.8458098266913434,
     "secondary_node": "staff_2_voice_5_seg_14",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.631676142414411,
-    "delta_to_secondary": 0.2524649041891099
+    "secondary_score": 1.1788530589956228,
+    "delta_to_secondary": 0.33304323230427935
   },
   {
     "layer_index": 15,
     "measure_num": 15,
     "segment_label": "measure_15",
-    "previous_primary": "staff_1_voice_1_seg_14",
+    "previous_primary": "staff_1_voice_2_seg_14",
     "primary_node": "staff_1_voice_2_seg_15",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5490019030041164,
-    "secondary_node": "staff_2_voice_5_seg_15",
+    "primary_score": 0.7443377076977431,
+    "secondary_node": "staff_1_voice_1_seg_15",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6194844534827604,
-    "delta_to_secondary": 0.07048255047864393
+    "secondary_score": 0.9841252174040285,
+    "delta_to_secondary": 0.23978750970628537
   },
   {
     "layer_index": 16,
@@ -200,219 +200,219 @@
     "previous_primary": "staff_1_voice_2_seg_15",
     "primary_node": "staff_1_voice_2_seg_16",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5370619032118055,
+    "primary_score": 0.7749658560813075,
     "secondary_node": "staff_1_voice_1_seg_16",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5879053928785853,
-    "delta_to_secondary": 0.05084348966677987
+    "secondary_score": 0.8716809522172417,
+    "delta_to_secondary": 0.09671509613593421
   },
   {
     "layer_index": 17,
     "measure_num": 17,
     "segment_label": "measure_17",
     "previous_primary": "staff_1_voice_2_seg_16",
-    "primary_node": "staff_1_voice_1_seg_17",
+    "primary_node": "staff_2_voice_5_seg_17",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5174953604737917,
+    "primary_score": 0.8639886612241918,
     "secondary_node": "staff_1_voice_2_seg_17",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.46721757782830126,
-    "delta_to_secondary": -0.05027778264549049
+    "secondary_score": 0.8162022204260633,
+    "delta_to_secondary": -0.04778644079812855
   },
   {
     "layer_index": 18,
     "measure_num": 18,
     "segment_label": "measure_18",
-    "previous_primary": "staff_1_voice_1_seg_17",
-    "primary_node": "staff_1_voice_1_seg_18",
+    "previous_primary": "staff_2_voice_5_seg_17",
+    "primary_node": "staff_2_voice_5_seg_18",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.32723147670427954,
-    "secondary_node": "staff_2_voice_5_seg_18",
+    "primary_score": 0.668329282624252,
+    "secondary_node": "staff_1_voice_1_seg_18",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5493951298296451,
-    "delta_to_secondary": 0.22216365312536557
+    "secondary_score": 1.1299917697906494,
+    "delta_to_secondary": 0.46166248716639746
   },
   {
     "layer_index": 19,
     "measure_num": 19,
     "segment_label": "measure_19",
-    "previous_primary": "staff_1_voice_1_seg_18",
-    "primary_node": "staff_1_voice_1_seg_19",
+    "previous_primary": "staff_2_voice_5_seg_18",
+    "primary_node": "staff_2_voice_5_seg_19",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5657333180308342,
+    "primary_score": 0.8538654914408019,
     "secondary_node": "staff_1_voice_2_seg_19",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6973233275943332,
-    "delta_to_secondary": 0.1315900095634991
+    "secondary_score": 1.0410269576868023,
+    "delta_to_secondary": 0.18716146624600039
   },
   {
     "layer_index": 20,
     "measure_num": 20,
     "segment_label": "measure_20",
-    "previous_primary": "staff_1_voice_1_seg_19",
-    "primary_node": "staff_1_voice_2_seg_20",
+    "previous_primary": "staff_2_voice_5_seg_19",
+    "primary_node": "staff_2_voice_5_seg_20",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.43563468853632603,
-    "secondary_node": "staff_1_voice_1_seg_20",
+    "primary_score": 0.6847216123884374,
+    "secondary_node": "staff_1_voice_2_seg_20",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.4967327797412872,
-    "delta_to_secondary": 0.06109809120496118
+    "secondary_score": 1.0724554549564016,
+    "delta_to_secondary": 0.38773384256796417
   },
   {
     "layer_index": 21,
     "measure_num": 21,
     "segment_label": "measure_21",
-    "previous_primary": "staff_1_voice_2_seg_20",
-    "primary_node": "staff_1_voice_2_seg_21",
+    "previous_primary": "staff_2_voice_5_seg_20",
+    "primary_node": "staff_2_voice_5_seg_21",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.31393683354059854,
-    "secondary_node": "staff_2_voice_5_seg_21",
+    "primary_score": 0.5825291230823055,
+    "secondary_node": "staff_1_voice_2_seg_21",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5756445899605751,
-    "delta_to_secondary": 0.26170775641997657
+    "secondary_score": 1.3098956277876188,
+    "delta_to_secondary": 0.7273665047053133
   },
   {
     "layer_index": 22,
     "measure_num": 22,
     "segment_label": "measure_22",
-    "previous_primary": "staff_1_voice_2_seg_21",
-    "primary_node": "staff_1_voice_2_seg_22",
+    "previous_primary": "staff_2_voice_5_seg_21",
+    "primary_node": "staff_2_voice_5_seg_22",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5765349219242731,
-    "secondary_node": "staff_2_voice_5_seg_22",
+    "primary_score": 0.9157190371944448,
+    "secondary_node": "staff_1_voice_1_seg_22",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7432690763639079,
-    "delta_to_secondary": 0.1667341544396348
+    "secondary_score": 1.1586298455343103,
+    "delta_to_secondary": 0.24291080833986545
   },
   {
     "layer_index": 23,
     "measure_num": 23,
     "segment_label": "measure_23",
-    "previous_primary": "staff_1_voice_2_seg_22",
-    "primary_node": "staff_1_voice_2_seg_23",
+    "previous_primary": "staff_2_voice_5_seg_22",
+    "primary_node": "staff_2_voice_5_seg_23",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5352939416964848,
-    "secondary_node": "staff_2_voice_5_seg_23",
+    "primary_score": 0.9054107708461356,
+    "secondary_node": "staff_1_voice_1_seg_23",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6267583675682544,
-    "delta_to_secondary": 0.09146442587176962
+    "secondary_score": 1.1836540673718308,
+    "delta_to_secondary": 0.2782432965256951
   },
   {
     "layer_index": 24,
     "measure_num": 24,
     "segment_label": "measure_24",
-    "previous_primary": "staff_1_voice_2_seg_23",
-    "primary_node": "staff_1_voice_2_seg_24",
+    "previous_primary": "staff_2_voice_5_seg_23",
+    "primary_node": "staff_2_voice_5_seg_24",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.44621366163094833,
-    "secondary_node": "staff_2_voice_5_seg_24",
+    "primary_score": 0.6709321990157618,
+    "secondary_node": "staff_1_voice_2_seg_24",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5012710134188334,
-    "delta_to_secondary": 0.05505735178788507
+    "secondary_score": 0.8519971538222196,
+    "delta_to_secondary": 0.1810649548064578
   },
   {
     "layer_index": 25,
     "measure_num": 25,
     "segment_label": "measure_25",
-    "previous_primary": "staff_1_voice_2_seg_24",
-    "primary_node": "staff_1_voice_2_seg_25",
+    "previous_primary": "staff_2_voice_5_seg_24",
+    "primary_node": "staff_2_voice_5_seg_25",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5969522948066394,
-    "secondary_node": "staff_2_voice_5_seg_25",
+    "primary_score": 0.6002113217657262,
+    "secondary_node": "staff_1_voice_2_seg_25",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.657971363266309,
-    "delta_to_secondary": 0.061019068459669645
+    "secondary_score": 1.1860204792835494,
+    "delta_to_secondary": 0.5858091575178231
   },
   {
     "layer_index": 26,
     "measure_num": 26,
     "segment_label": "measure_26",
-    "previous_primary": "staff_1_voice_2_seg_25",
-    "primary_node": "staff_1_voice_2_seg_26",
+    "previous_primary": "staff_2_voice_5_seg_25",
+    "primary_node": "staff_2_voice_5_seg_26",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6099050477147102,
+    "primary_score": 0.6783627370541746,
     "secondary_node": "staff_1_voice_1_seg_26",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6250545606017113,
-    "delta_to_secondary": 0.01514951288700106
+    "secondary_score": 1.366778314294237,
+    "delta_to_secondary": 0.6884155772400623
   },
   {
     "layer_index": 27,
     "measure_num": 27,
     "segment_label": "measure_27",
-    "previous_primary": "staff_1_voice_2_seg_26",
-    "primary_node": "staff_1_voice_1_seg_27",
+    "previous_primary": "staff_2_voice_5_seg_26",
+    "primary_node": "staff_2_voice_5_seg_27",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5492153843243917,
+    "primary_score": 0.7315620128855561,
     "secondary_node": "staff_1_voice_2_seg_27",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5046929327150186,
-    "delta_to_secondary": -0.04452245160937307
+    "secondary_score": 1.1644555974638822,
+    "delta_to_secondary": 0.43289358457832605
   },
   {
     "layer_index": 28,
     "measure_num": 28,
     "segment_label": "measure_28",
-    "previous_primary": "staff_1_voice_1_seg_27",
-    "primary_node": "staff_1_voice_1_seg_28",
+    "previous_primary": "staff_2_voice_5_seg_27",
+    "primary_node": "staff_2_voice_5_seg_28",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5068784677320057,
-    "secondary_node": "staff_1_voice_2_seg_28",
+    "primary_score": 0.8513491264617805,
+    "secondary_node": "staff_1_voice_1_seg_28",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6889334506458706,
-    "delta_to_secondary": 0.1820549829138649
+    "secondary_score": 1.0334450807234254,
+    "delta_to_secondary": 0.18209595426164493
   },
   {
     "layer_index": 29,
     "measure_num": 29,
     "segment_label": "measure_29",
-    "previous_primary": "staff_1_voice_1_seg_28",
-    "primary_node": "staff_1_voice_1_seg_29",
+    "previous_primary": "staff_2_voice_5_seg_28",
+    "primary_node": "staff_2_voice_5_seg_29",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.3702245126167933,
+    "primary_score": 1.162872434113965,
     "secondary_node": "staff_1_voice_2_seg_29",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6617994164427121,
-    "delta_to_secondary": 0.29157490382591883
+    "secondary_score": 1.1089174910928263,
+    "delta_to_secondary": -0.05395494302113857
   },
   {
     "layer_index": 30,
     "measure_num": 30,
     "segment_label": "measure_30",
-    "previous_primary": "staff_1_voice_1_seg_29",
-    "primary_node": "staff_1_voice_2_seg_30",
+    "previous_primary": "staff_2_voice_5_seg_29",
+    "primary_node": "staff_2_voice_5_seg_30",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6780680805444717,
-    "secondary_node": "staff_1_voice_1_seg_30",
+    "primary_score": 0.733877010417707,
+    "secondary_node": "staff_1_voice_2_seg_30",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6520244553685188,
-    "delta_to_secondary": -0.026043625175952823
+    "secondary_score": 1.1102646330992383,
+    "delta_to_secondary": 0.37638762268153125
   },
   {
     "layer_index": 31,
     "measure_num": 31,
     "segment_label": "measure_31",
-    "previous_primary": "staff_1_voice_2_seg_30",
-    "primary_node": "staff_2_voice_5_seg_31",
+    "previous_primary": "staff_2_voice_5_seg_30",
+    "primary_node": "staff_2_voice_6_seg_31",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5713735158244768,
-    "secondary_node": "staff_2_voice_6_seg_31",
+    "primary_score": 0.6735261848478606,
+    "secondary_node": "staff_2_voice_5_seg_31",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6588633974393209,
-    "delta_to_secondary": 0.08748988161484406
+    "secondary_score": 1.0473257953470403,
+    "delta_to_secondary": 0.37379961049917965
   },
   {
     "layer_index": 32,
     "measure_num": 32,
     "segment_label": "measure_32",
-    "previous_primary": "staff_2_voice_5_seg_31",
+    "previous_primary": "staff_2_voice_6_seg_31",
     "primary_node": "staff_2_voice_6_seg_32",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5426703333854676,
+    "primary_score": 0.8503847788680683,
     "secondary_node": "staff_2_voice_5_seg_32",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6087277990248467,
-    "delta_to_secondary": 0.0660574656393792
+    "secondary_score": 0.8187413309409162,
+    "delta_to_secondary": -0.031643447927152124
   },
   {
     "layer_index": 33,
@@ -421,11 +421,11 @@
     "previous_primary": "staff_2_voice_6_seg_32",
     "primary_node": "staff_2_voice_6_seg_33",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.13631142775217692,
+    "primary_score": 0.6134111563364665,
     "secondary_node": "staff_2_voice_5_seg_33",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7259351270066366,
-    "delta_to_secondary": 0.5896236992544597
+    "secondary_score": 1.1233217894428909,
+    "delta_to_secondary": 0.5099106331064244
   },
   {
     "layer_index": 34,
@@ -434,89 +434,89 @@
     "previous_primary": "staff_2_voice_6_seg_33",
     "primary_node": "staff_2_voice_6_seg_34",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.539309116701285,
+    "primary_score": 0.7774598506815507,
     "secondary_node": "staff_2_voice_5_seg_34",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6960035416401095,
-    "delta_to_secondary": 0.15669442493882446
+    "secondary_score": 1.0344497332368234,
+    "delta_to_secondary": 0.2569898825552728
   },
   {
     "layer_index": 35,
     "measure_num": 35,
     "segment_label": "measure_35",
     "previous_primary": "staff_2_voice_6_seg_34",
-    "primary_node": "staff_2_voice_5_seg_35",
+    "primary_node": "staff_2_voice_6_seg_35",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6058745235204696,
-    "secondary_node": "staff_2_voice_6_seg_35",
+    "primary_score": 0.7815459342436357,
+    "secondary_node": "staff_2_voice_5_seg_35",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5438162940740585,
-    "delta_to_secondary": -0.06205822944641104
+    "secondary_score": 1.0659343691486303,
+    "delta_to_secondary": 0.28438843490499455
   },
   {
     "layer_index": 36,
     "measure_num": 36,
     "segment_label": "measure_36",
-    "previous_primary": "staff_2_voice_5_seg_35",
-    "primary_node": "staff_2_voice_5_seg_36",
+    "previous_primary": "staff_2_voice_6_seg_35",
+    "primary_node": "staff_2_voice_6_seg_36",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.2888018806775411,
-    "secondary_node": "staff_2_voice_6_seg_36",
+    "primary_score": 0.8163021356770487,
+    "secondary_node": "staff_2_voice_5_seg_36",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6493925104538599,
-    "delta_to_secondary": 0.36059062977631884
+    "secondary_score": 1.0654305795828503,
+    "delta_to_secondary": 0.24912844390580158
   },
   {
     "layer_index": 37,
     "measure_num": 37,
     "segment_label": "measure_37",
-    "previous_primary": "staff_2_voice_5_seg_36",
-    "primary_node": "staff_2_voice_5_seg_37",
+    "previous_primary": "staff_2_voice_6_seg_36",
+    "primary_node": "staff_2_voice_6_seg_37",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5038810468382305,
-    "secondary_node": "staff_2_voice_6_seg_37",
+    "primary_score": 0.6267273942629497,
+    "secondary_node": "staff_2_voice_5_seg_37",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5042751948038737,
-    "delta_to_secondary": 0.0003941479656431879
+    "secondary_score": 1.1273627250784577,
+    "delta_to_secondary": 0.500635330815508
   },
   {
     "layer_index": 38,
     "measure_num": 38,
     "segment_label": "measure_38",
-    "previous_primary": "staff_2_voice_5_seg_37",
-    "primary_node": "staff_1_voice_2_seg_38",
+    "previous_primary": "staff_2_voice_6_seg_37",
+    "primary_node": "staff_2_voice_5_seg_38",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.44312001566092174,
+    "primary_score": 0.7292162222392632,
     "secondary_node": "staff_2_voice_2_seg_38",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5672907466689745,
-    "delta_to_secondary": 0.12417073100805276
+    "secondary_score": 1.1607439648021352,
+    "delta_to_secondary": 0.43152774256287196
   },
   {
     "layer_index": 39,
     "measure_num": 39,
     "segment_label": "measure_39",
-    "previous_primary": "staff_1_voice_2_seg_38",
-    "primary_node": "staff_1_voice_2_seg_39",
+    "previous_primary": "staff_2_voice_5_seg_38",
+    "primary_node": "staff_2_voice_5_seg_39",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5034381588300069,
-    "secondary_node": "staff_1_voice_1_seg_39",
+    "primary_score": 0.8556019009062739,
+    "secondary_node": "staff_1_voice_2_seg_39",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5612402598063152,
-    "delta_to_secondary": 0.057802100976308335
+    "secondary_score": 1.1794083588051074,
+    "delta_to_secondary": 0.32380645789883356
   },
   {
     "layer_index": 40,
     "measure_num": 40,
     "segment_label": "measure_40",
-    "previous_primary": "staff_1_voice_2_seg_39",
+    "previous_primary": "staff_2_voice_5_seg_39",
     "primary_node": "staff_2_voice_5_seg_40",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.3885367943180932,
+    "primary_score": 0.6463268266181754,
     "secondary_node": "staff_1_voice_2_seg_40",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5723807892865604,
-    "delta_to_secondary": 0.18384399496846726
+    "secondary_score": 1.1153730590536137,
+    "delta_to_secondary": 0.4690462324354383
   },
   {
     "layer_index": 41,
@@ -525,11 +525,11 @@
     "previous_primary": "staff_2_voice_5_seg_40",
     "primary_node": "staff_2_voice_5_seg_41",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.25354151527086893,
+    "primary_score": 0.7074489346056274,
     "secondary_node": "staff_1_voice_2_seg_41",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7150573319858974,
-    "delta_to_secondary": 0.46151581671502845
+    "secondary_score": 1.1348729689313908,
+    "delta_to_secondary": 0.42742403432576337
   },
   {
     "layer_index": 42,
@@ -538,11 +538,11 @@
     "previous_primary": "staff_2_voice_5_seg_41",
     "primary_node": "staff_2_voice_5_seg_42",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.3984148691097895,
+    "primary_score": 0.728648576411334,
     "secondary_node": "staff_1_voice_2_seg_42",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6796726640727785,
-    "delta_to_secondary": 0.28125779496298897
+    "secondary_score": 1.1526252477759062,
+    "delta_to_secondary": 0.4239766713645723
   },
   {
     "layer_index": 43,
@@ -551,11 +551,11 @@
     "previous_primary": "staff_2_voice_5_seg_42",
     "primary_node": "staff_2_voice_5_seg_43",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6161908169587452,
-    "secondary_node": "staff_1_voice_1_seg_43",
+    "primary_score": 0.8387590856263132,
+    "secondary_node": "staff_1_voice_2_seg_43",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7122655898332595,
-    "delta_to_secondary": 0.09607477287451427
+    "secondary_score": 1.1673757337259525,
+    "delta_to_secondary": 0.3286166480996393
   },
   {
     "layer_index": 44,
@@ -564,11 +564,11 @@
     "previous_primary": "staff_2_voice_5_seg_43",
     "primary_node": "staff_2_voice_5_seg_44",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.45941275689336986,
+    "primary_score": 0.7657133684615897,
     "secondary_node": "staff_1_voice_2_seg_44",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5921114411618974,
-    "delta_to_secondary": 0.13269868426852754
+    "secondary_score": 1.0283000130846045,
+    "delta_to_secondary": 0.26258664462301484
   },
   {
     "layer_index": 45,
@@ -577,11 +577,11 @@
     "previous_primary": "staff_2_voice_5_seg_44",
     "primary_node": "staff_2_voice_5_seg_45",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5412728220224382,
+    "primary_score": 0.7605893969084276,
     "secondary_node": "staff_1_voice_1_seg_45",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7026469079688902,
-    "delta_to_secondary": 0.16137408594645197
+    "secondary_score": 1.1002851049750397,
+    "delta_to_secondary": 0.3396957080666121
   },
   {
     "layer_index": 46,
@@ -590,11 +590,11 @@
     "previous_primary": "staff_2_voice_5_seg_45",
     "primary_node": "staff_2_voice_5_seg_46",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5104922925432522,
+    "primary_score": 0.709661234373396,
     "secondary_node": "staff_1_voice_1_seg_46",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6469237178564071,
-    "delta_to_secondary": 0.13643142531315489
+    "secondary_score": 1.194078505039215,
+    "delta_to_secondary": 0.4844172706658191
   },
   {
     "layer_index": 47,
@@ -603,11 +603,11 @@
     "previous_primary": "staff_2_voice_5_seg_46",
     "primary_node": "staff_2_voice_5_seg_47",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5057901581128439,
+    "primary_score": 0.7396749143347595,
     "secondary_node": "staff_1_voice_2_seg_47",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7248992217083772,
-    "delta_to_secondary": 0.21910906359553328
+    "secondary_score": 1.0322951752579574,
+    "delta_to_secondary": 0.29262026092319793
   },
   {
     "layer_index": 48,
@@ -616,11 +616,11 @@
     "previous_primary": "staff_2_voice_5_seg_47",
     "primary_node": "staff_2_voice_5_seg_48",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5082974622646967,
+    "primary_score": 0.5923542752410426,
     "secondary_node": "staff_1_voice_1_seg_48",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6846413734886381,
-    "delta_to_secondary": 0.17634391122394133
+    "secondary_score": 1.2313297873795634,
+    "delta_to_secondary": 0.6389755121385209
   },
   {
     "layer_index": 49,
@@ -629,11 +629,11 @@
     "previous_primary": "staff_2_voice_5_seg_48",
     "primary_node": "staff_2_voice_5_seg_49",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5698319832483928,
+    "primary_score": 0.6591479156956528,
     "secondary_node": "staff_1_voice_2_seg_49",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7280050535996756,
-    "delta_to_secondary": 0.1581730703512828
+    "secondary_score": 1.172728432489164,
+    "delta_to_secondary": 0.5135805167935112
   },
   {
     "layer_index": 50,
@@ -642,11 +642,11 @@
     "previous_primary": "staff_2_voice_5_seg_49",
     "primary_node": "staff_2_voice_5_seg_50",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4529381796717643,
+    "primary_score": 0.6740110620404735,
     "secondary_node": "staff_1_voice_2_seg_50",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7025888770818711,
-    "delta_to_secondary": 0.24965069741010681
+    "secondary_score": 1.346405339241028,
+    "delta_to_secondary": 0.6723942772005546
   },
   {
     "layer_index": 51,
@@ -655,11 +655,11 @@
     "previous_primary": "staff_2_voice_5_seg_50",
     "primary_node": "staff_2_voice_5_seg_51",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5121927092472712,
+    "primary_score": 0.6930514429554795,
     "secondary_node": "staff_1_voice_1_seg_51",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7097045588493347,
-    "delta_to_secondary": 0.19751184960206347
+    "secondary_score": 1.1963015896623785,
+    "delta_to_secondary": 0.503250146706899
   },
   {
     "layer_index": 52,
@@ -668,11 +668,11 @@
     "previous_primary": "staff_2_voice_5_seg_51",
     "primary_node": "staff_2_voice_6_seg_52",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6889294954637686,
+    "primary_score": 0.887062869740255,
     "secondary_node": "staff_2_voice_5_seg_52",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7234364494681358,
-    "delta_to_secondary": 0.03450695400436721
+    "secondary_score": 1.2292143803654296,
+    "delta_to_secondary": 0.3421515106251747
   },
   {
     "layer_index": 53,
@@ -681,11 +681,11 @@
     "previous_primary": "staff_2_voice_6_seg_52",
     "primary_node": "staff_2_voice_6_seg_53",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5556257888674736,
+    "primary_score": 0.7320890765298497,
     "secondary_node": "staff_2_voice_5_seg_53",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5320031748049789,
-    "delta_to_secondary": -0.023622614062494662
+    "secondary_score": 1.143180618788859,
+    "delta_to_secondary": 0.41109154225900923
   },
   {
     "layer_index": 54,
@@ -694,50 +694,50 @@
     "previous_primary": "staff_2_voice_6_seg_53",
     "primary_node": "staff_2_voice_5_seg_54",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5120686650276184,
-    "secondary_node": "staff_1_voice_1_seg_54",
+    "primary_score": 0.6888848135417158,
+    "secondary_node": "staff_1_voice_2_seg_54",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.655221293701066,
-    "delta_to_secondary": 0.14315262867344758
+    "secondary_score": 1.2449121115334107,
+    "delta_to_secondary": 0.5560272979916949
   },
   {
     "layer_index": 55,
     "measure_num": 55,
     "segment_label": "measure_55",
     "previous_primary": "staff_2_voice_5_seg_54",
-    "primary_node": "staff_2_voice_5_seg_55",
+    "primary_node": "staff_1_voice_2_seg_55",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.44558455033434763,
-    "secondary_node": "staff_1_voice_1_seg_55",
+    "primary_score": 1.1331829592134013,
+    "secondary_node": "staff_2_voice_5_seg_55",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6407161762317022,
-    "delta_to_secondary": 0.19513162589735455
+    "secondary_score": 1.0978566841344641,
+    "delta_to_secondary": -0.03532627507893715
   },
   {
     "layer_index": 56,
     "measure_num": 56,
     "segment_label": "measure_56",
-    "previous_primary": "staff_2_voice_5_seg_55",
-    "primary_node": "staff_2_voice_6_seg_56",
+    "previous_primary": "staff_1_voice_2_seg_55",
+    "primary_node": "staff_2_voice_5_seg_56",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.435559782716963,
-    "secondary_node": "staff_2_voice_5_seg_56",
+    "primary_score": 0.8381208402640892,
+    "secondary_node": "staff_1_voice_1_seg_56",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6387815435727437,
-    "delta_to_secondary": 0.20322176085578075
+    "secondary_score": 1.0360087387489552,
+    "delta_to_secondary": 0.197887898484866
   },
   {
     "layer_index": 57,
     "measure_num": 57,
     "segment_label": "measure_57",
-    "previous_primary": "staff_2_voice_6_seg_56",
+    "previous_primary": "staff_2_voice_5_seg_56",
     "primary_node": "staff_1_voice_1_seg_57",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6778831412394842,
-    "secondary_node": "staff_2_voice_6_seg_57",
+    "primary_score": 0.8091811391440304,
+    "secondary_node": "staff_2_voice_5_seg_57",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.638829289873441,
-    "delta_to_secondary": -0.039053851366043224
+    "secondary_score": 0.8015608250492752,
+    "delta_to_secondary": -0.007620314094755276
   },
   {
     "layer_index": 58,
@@ -746,11 +746,11 @@
     "previous_primary": "staff_1_voice_1_seg_57",
     "primary_node": "staff_1_voice_2_seg_58",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5185519436995188,
+    "primary_score": 0.7317394177118938,
     "secondary_node": "staff_1_voice_1_seg_58",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5889320148362053,
-    "delta_to_secondary": 0.07038007113668643
+    "secondary_score": 0.8386104073187317,
+    "delta_to_secondary": 0.10687098960683794
   },
   {
     "layer_index": 59,
@@ -759,11 +759,11 @@
     "previous_primary": "staff_1_voice_2_seg_58",
     "primary_node": "staff_1_voice_2_seg_59",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.48860664433903167,
+    "primary_score": 0.7783527135246933,
     "secondary_node": "staff_1_voice_1_seg_59",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6244040860070121,
-    "delta_to_secondary": 0.13579744166798047
+    "secondary_score": 1.131550129856726,
+    "delta_to_secondary": 0.35319741633203283
   },
   {
     "layer_index": 60,
@@ -772,11 +772,11 @@
     "previous_primary": "staff_1_voice_2_seg_59",
     "primary_node": "staff_1_voice_2_seg_60",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4035888450841109,
-    "secondary_node": "staff_2_voice_5_seg_60",
+    "primary_score": 0.7513826363917553,
+    "secondary_node": "staff_1_voice_1_seg_60",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6004577800631523,
-    "delta_to_secondary": 0.1968689349790414
+    "secondary_score": 1.0013291438420615,
+    "delta_to_secondary": 0.24994650745030622
   },
   {
     "layer_index": 61,
@@ -785,11 +785,11 @@
     "previous_primary": "staff_1_voice_2_seg_60",
     "primary_node": "staff_1_voice_2_seg_61",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.24807175894578296,
+    "primary_score": 0.8731215865323038,
     "secondary_node": "staff_1_voice_1_seg_61",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6442864147822063,
-    "delta_to_secondary": 0.39621465583642335
+    "secondary_score": 0.8925046621308182,
+    "delta_to_secondary": 0.019383075598514488
   },
   {
     "layer_index": 62,
@@ -798,11 +798,11 @@
     "previous_primary": "staff_1_voice_2_seg_61",
     "primary_node": "staff_1_voice_2_seg_62",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4446982559230592,
+    "primary_score": 0.8029410063618363,
     "secondary_node": "staff_1_voice_1_seg_62",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5865897314416038,
-    "delta_to_secondary": 0.14189147551854453
+    "secondary_score": 0.8662389476491947,
+    "delta_to_secondary": 0.06329794128735844
   },
   {
     "layer_index": 63,
@@ -811,11 +811,11 @@
     "previous_primary": "staff_1_voice_2_seg_62",
     "primary_node": "staff_1_voice_2_seg_63",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5341805805762608,
+    "primary_score": 0.7732031516956561,
     "secondary_node": "staff_1_voice_1_seg_63",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5596207317378785,
-    "delta_to_secondary": 0.025440151161617686
+    "secondary_score": 0.8298605958018641,
+    "delta_to_secondary": 0.05665744410620799
   },
   {
     "layer_index": 64,
@@ -824,11 +824,11 @@
     "previous_primary": "staff_1_voice_2_seg_63",
     "primary_node": "staff_1_voice_2_seg_64",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5249519033564461,
+    "primary_score": 0.7877490347684031,
     "secondary_node": "staff_1_voice_1_seg_64",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.538065923915969,
-    "delta_to_secondary": 0.013114020559522821
+    "secondary_score": 0.8856699158145924,
+    "delta_to_secondary": 0.09792088104618935
   },
   {
     "layer_index": 65,
@@ -837,89 +837,89 @@
     "previous_primary": "staff_1_voice_2_seg_64",
     "primary_node": "staff_1_voice_2_seg_65",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5752136511935129,
+    "primary_score": 0.5482636576951152,
     "secondary_node": "staff_1_voice_1_seg_65",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6168534553713267,
-    "delta_to_secondary": 0.04163980417781388
+    "secondary_score": 0.8880982835485478,
+    "delta_to_secondary": 0.3398346258534326
   },
   {
     "layer_index": 66,
     "measure_num": 66,
     "segment_label": "measure_66",
     "previous_primary": "staff_1_voice_2_seg_65",
-    "primary_node": "staff_1_voice_1_seg_66",
+    "primary_node": "staff_1_voice_2_seg_66",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5036469295620919,
-    "secondary_node": "staff_2_voice_5_seg_66",
+    "primary_score": 0.6850401579731642,
+    "secondary_node": "staff_1_voice_1_seg_66",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.4612877716620763,
-    "delta_to_secondary": -0.0423591579000156
+    "secondary_score": 0.856057503006675,
+    "delta_to_secondary": 0.17101734503351085
   },
   {
     "layer_index": 67,
     "measure_num": 67,
     "segment_label": "measure_67",
-    "previous_primary": "staff_1_voice_1_seg_66",
-    "primary_node": "staff_1_voice_1_seg_67",
+    "previous_primary": "staff_1_voice_2_seg_66",
+    "primary_node": "staff_1_voice_2_seg_67",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6094502712289491,
+    "primary_score": 1.0187119713335326,
     "secondary_node": "staff_2_voice_5_seg_67",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6985067738427055,
-    "delta_to_secondary": 0.08905650261375642
+    "secondary_score": 1.063813957677345,
+    "delta_to_secondary": 0.04510198634381246
   },
   {
     "layer_index": 68,
     "measure_num": 68,
     "segment_label": "measure_68",
-    "previous_primary": "staff_1_voice_1_seg_67",
-    "primary_node": "staff_1_voice_1_seg_68",
+    "previous_primary": "staff_1_voice_2_seg_67",
+    "primary_node": "staff_1_voice_2_seg_68",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.47128944678439033,
-    "secondary_node": "staff_1_voice_2_seg_68",
+    "primary_score": 0.7481753688870054,
+    "secondary_node": "staff_1_voice_1_seg_68",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7427388926347097,
-    "delta_to_secondary": 0.2714494458503194
+    "secondary_score": 0.9470285083910432,
+    "delta_to_secondary": 0.19885313950403782
   },
   {
     "layer_index": 69,
     "measure_num": 69,
     "segment_label": "measure_69",
-    "previous_primary": "staff_1_voice_1_seg_68",
-    "primary_node": "staff_1_voice_1_seg_69",
+    "previous_primary": "staff_1_voice_2_seg_68",
+    "primary_node": "staff_2_voice_5_seg_69",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5511357853809993,
-    "secondary_node": "staff_2_voice_5_seg_69",
+    "primary_score": 0.8748821133917029,
+    "secondary_node": "staff_1_voice_1_seg_69",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6612561956048011,
-    "delta_to_secondary": 0.11012041022380181
+    "secondary_score": 1.0743896608099792,
+    "delta_to_secondary": 0.19950754741827637
   },
   {
     "layer_index": 70,
     "measure_num": 70,
     "segment_label": "measure_70",
-    "previous_primary": "staff_1_voice_1_seg_69",
-    "primary_node": "staff_1_voice_1_seg_70",
+    "previous_primary": "staff_2_voice_5_seg_69",
+    "primary_node": "staff_2_voice_5_seg_70",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.28747065862019855,
+    "primary_score": 0.6819531663800731,
     "secondary_node": "staff_1_voice_2_seg_70",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6755193601051968,
-    "delta_to_secondary": 0.3880487014849982
+    "secondary_score": 1.0558672469673733,
+    "delta_to_secondary": 0.37391408058730025
   },
   {
     "layer_index": 71,
     "measure_num": 71,
     "segment_label": "measure_71",
-    "previous_primary": "staff_1_voice_1_seg_70",
+    "previous_primary": "staff_2_voice_5_seg_70",
     "primary_node": "staff_2_voice_5_seg_71",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5382325155039628,
+    "primary_score": 0.5985961243058696,
     "secondary_node": "staff_1_voice_2_seg_71",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6119486942887307,
-    "delta_to_secondary": 0.07371617878476788
+    "secondary_score": 0.8986083154425476,
+    "delta_to_secondary": 0.300012191136678
   },
   {
     "layer_index": 72,
@@ -928,11 +928,11 @@
     "previous_primary": "staff_2_voice_5_seg_71",
     "primary_node": "staff_2_voice_5_seg_72",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4949497164123588,
+    "primary_score": 0.7542641427179779,
     "secondary_node": "staff_1_voice_2_seg_72",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6890249392224682,
-    "delta_to_secondary": 0.19407522281010942
+    "secondary_score": 1.0662464575032995,
+    "delta_to_secondary": 0.31198231478532157
   },
   {
     "layer_index": 73,
@@ -941,11 +941,11 @@
     "previous_primary": "staff_2_voice_5_seg_72",
     "primary_node": "staff_2_voice_2_seg_73",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.519604184726874,
+    "primary_score": 1.058378796866446,
     "secondary_node": "staff_2_voice_6_seg_73",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5458019842704137,
-    "delta_to_secondary": 0.026197799543539735
+    "secondary_score": 0.8732913156350454,
+    "delta_to_secondary": -0.18508748123140062
   },
   {
     "layer_index": 74,
@@ -954,50 +954,50 @@
     "previous_primary": "staff_2_voice_2_seg_73",
     "primary_node": "staff_2_voice_5_seg_74",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.316798628701104,
+    "primary_score": 0.6647584563553937,
     "secondary_node": "staff_2_voice_6_seg_74",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5792627031604449,
-    "delta_to_secondary": 0.26246407445934095
+    "secondary_score": 1.0720900317936233,
+    "delta_to_secondary": 0.4073315754382296
   },
   {
     "layer_index": 75,
     "measure_num": 75,
     "segment_label": "measure_75",
     "previous_primary": "staff_2_voice_5_seg_74",
-    "primary_node": "staff_2_voice_6_seg_75",
+    "primary_node": "staff_2_voice_5_seg_75",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4131698697805405,
-    "secondary_node": "staff_2_voice_5_seg_75",
+    "primary_score": 0.7866902648800551,
+    "secondary_node": "staff_2_voice_6_seg_75",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5782890972163942,
-    "delta_to_secondary": 0.16511922743585372
+    "secondary_score": 0.8346887003291737,
+    "delta_to_secondary": 0.04799843544911864
   },
   {
     "layer_index": 76,
     "measure_num": 76,
     "segment_label": "measure_76",
-    "previous_primary": "staff_2_voice_6_seg_75",
-    "primary_node": "staff_2_voice_6_seg_76",
+    "previous_primary": "staff_2_voice_5_seg_75",
+    "primary_node": "staff_2_voice_5_seg_76",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.17525428334871926,
-    "secondary_node": "staff_2_voice_5_seg_76",
+    "primary_score": 0.8007756262415588,
+    "secondary_node": "staff_2_voice_6_seg_76",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7164015264974699,
-    "delta_to_secondary": 0.5411472431487506
+    "secondary_score": 0.8077804605166118,
+    "delta_to_secondary": 0.00700483427505294
   },
   {
     "layer_index": 77,
     "measure_num": 77,
     "segment_label": "measure_77",
-    "previous_primary": "staff_2_voice_6_seg_76",
+    "previous_primary": "staff_2_voice_5_seg_76",
     "primary_node": "staff_2_voice_5_seg_77",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.7109168956677119,
-    "secondary_node": "staff_2_voice_6_seg_77",
+    "primary_score": 0.8821012251304858,
+    "secondary_node": "staff_1_voice_1_seg_77",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7,
-    "delta_to_secondary": -0.010916895667711923
+    "secondary_score": 1.1317788292362232,
+    "delta_to_secondary": 0.24967760410573736
   },
   {
     "layer_index": 78,
@@ -1006,11 +1006,11 @@
     "previous_primary": "staff_2_voice_5_seg_77",
     "primary_node": "staff_2_voice_5_seg_78",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.20963566104571024,
+    "primary_score": 0.7783894161383311,
     "secondary_node": "staff_1_voice_1_seg_78",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7764166512091955,
-    "delta_to_secondary": 0.5667809901634853
+    "secondary_score": 1.1619013586188809,
+    "delta_to_secondary": 0.38351194248054976
   },
   {
     "layer_index": 79,
@@ -1019,11 +1019,11 @@
     "previous_primary": "staff_2_voice_5_seg_78",
     "primary_node": "staff_2_voice_5_seg_79",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5166683869560559,
+    "primary_score": 0.6433216186906352,
     "secondary_node": "staff_1_voice_1_seg_79",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6956159243981044,
-    "delta_to_secondary": 0.1789475374420485
+    "secondary_score": 1.2642358484593306,
+    "delta_to_secondary": 0.6209142297686954
   },
   {
     "layer_index": 80,
@@ -1032,11 +1032,11 @@
     "previous_primary": "staff_2_voice_5_seg_79",
     "primary_node": "staff_2_voice_5_seg_80",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.540305037498474,
+    "primary_score": 0.6954051656072789,
     "secondary_node": "staff_1_voice_1_seg_80",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6582136746909883,
-    "delta_to_secondary": 0.11790863719251432
+    "secondary_score": 1.1900253931079248,
+    "delta_to_secondary": 0.4946202275006458
   },
   {
     "layer_index": 81,
@@ -1045,11 +1045,11 @@
     "previous_primary": "staff_2_voice_5_seg_80",
     "primary_node": "staff_2_voice_5_seg_81",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.49720847427845,
-    "secondary_node": "staff_2_voice_6_seg_81",
+    "primary_score": 0.6746219343488866,
+    "secondary_node": "staff_1_voice_1_seg_81",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.8999999999999999,
-    "delta_to_secondary": 0.4027915257215499
+    "secondary_score": 1.4270188140598212,
+    "delta_to_secondary": 0.7523968797109346
   },
   {
     "layer_index": 82,
@@ -1058,76 +1058,76 @@
     "previous_primary": "staff_2_voice_5_seg_81",
     "primary_node": "staff_2_voice_5_seg_82",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5078319052855174,
+    "primary_score": 0.6712624708811442,
     "secondary_node": "staff_2_voice_6_seg_82",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6045180255174637,
-    "delta_to_secondary": 0.09668612023194634
+    "secondary_score": 0.8632165343111211,
+    "delta_to_secondary": 0.1919540634299769
   },
   {
     "layer_index": 83,
     "measure_num": 83,
     "segment_label": "measure_83",
     "previous_primary": "staff_2_voice_5_seg_82",
-    "primary_node": "staff_2_voice_5_seg_83",
+    "primary_node": "staff_1_voice_1_seg_83",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.562821297844251,
-    "secondary_node": "staff_2_voice_6_seg_83",
+    "primary_score": 1.1676785255020314,
+    "secondary_node": "staff_2_voice_5_seg_83",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6655180394649505,
-    "delta_to_secondary": 0.10269674162069953
+    "secondary_score": 0.8318345149358114,
+    "delta_to_secondary": -0.33584401056622004
   },
   {
     "layer_index": 84,
     "measure_num": 84,
     "segment_label": "measure_84",
-    "previous_primary": "staff_2_voice_5_seg_83",
-    "primary_node": "staff_2_voice_5_seg_84",
+    "previous_primary": "staff_1_voice_1_seg_83",
+    "primary_node": "staff_1_voice_1_seg_84",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5170612593905793,
-    "secondary_node": "staff_1_voice_1_seg_84",
+    "primary_score": 0.6962535708691134,
+    "secondary_node": "staff_2_voice_5_seg_84",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7671427299578986,
-    "delta_to_secondary": 0.2500814705673192
+    "secondary_score": 1.1840659597907404,
+    "delta_to_secondary": 0.4878123889216269
   },
   {
     "layer_index": 85,
     "measure_num": 85,
     "segment_label": "measure_85",
-    "previous_primary": "staff_2_voice_5_seg_84",
-    "primary_node": "staff_2_voice_5_seg_85",
+    "previous_primary": "staff_1_voice_1_seg_84",
+    "primary_node": "staff_1_voice_1_seg_85",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5076296508312226,
-    "secondary_node": "staff_2_voice_6_seg_85",
+    "primary_score": 0.6335869052554622,
+    "secondary_node": "staff_2_voice_5_seg_85",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7,
-    "delta_to_secondary": 0.19237034916877738
+    "secondary_score": 1.1844104728915474,
+    "delta_to_secondary": 0.5508235676360852
   },
   {
     "layer_index": 86,
     "measure_num": 86,
     "segment_label": "measure_86",
-    "previous_primary": "staff_2_voice_5_seg_85",
-    "primary_node": "staff_2_voice_6_seg_86",
+    "previous_primary": "staff_1_voice_1_seg_85",
+    "primary_node": "staff_1_voice_3_seg_86",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.46825717886288953,
-    "secondary_node": "staff_2_voice_5_seg_86",
+    "primary_score": 0.8474450947660388,
+    "secondary_node": "staff_1_voice_2_seg_86",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5591691687703133,
-    "delta_to_secondary": 0.09091198990742377
+    "secondary_score": 0.9375251513538939,
+    "delta_to_secondary": 0.09008005658785512
   },
   {
     "layer_index": 87,
     "measure_num": 87,
     "segment_label": "measure_87",
-    "previous_primary": "staff_2_voice_6_seg_86",
+    "previous_primary": "staff_1_voice_3_seg_86",
     "primary_node": "staff_1_voice_1_seg_87",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5926163132985434,
-    "secondary_node": "staff_2_voice_6_seg_87",
+    "primary_score": 0.8298136941230658,
+    "secondary_node": "staff_1_voice_2_seg_87",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5339202384154002,
-    "delta_to_secondary": -0.05869607488314321
+    "secondary_score": 0.8312512925176909,
+    "delta_to_secondary": 0.0014375983946250948
   },
   {
     "layer_index": 88,
@@ -1136,11 +1136,11 @@
     "previous_primary": "staff_1_voice_1_seg_87",
     "primary_node": "staff_1_voice_1_seg_88",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.531905705233415,
+    "primary_score": 0.7217473864103808,
     "secondary_node": "staff_1_voice_2_seg_88",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6074875851472218,
-    "delta_to_secondary": 0.07558187991380683
+    "secondary_score": 1.0693384698846122,
+    "delta_to_secondary": 0.3475910834742314
   },
   {
     "layer_index": 89,
@@ -1149,140 +1149,140 @@
     "previous_primary": "staff_1_voice_1_seg_88",
     "primary_node": "staff_1_voice_1_seg_89",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5754513238867124,
+    "primary_score": 0.7163814737941279,
     "secondary_node": "staff_1_voice_2_seg_89",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7704310943682989,
-    "delta_to_secondary": 0.19497977048158655
+    "secondary_score": 1.0742810310739461,
+    "delta_to_secondary": 0.35789955727981826
   },
   {
     "layer_index": 90,
     "measure_num": 90,
     "segment_label": "measure_90",
     "previous_primary": "staff_1_voice_1_seg_89",
-    "primary_node": "staff_2_voice_5_seg_90",
+    "primary_node": "staff_1_voice_1_seg_90",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.6123157547993792,
-    "secondary_node": "staff_1_voice_1_seg_90",
+    "primary_score": 0.866815820426652,
+    "secondary_node": "staff_1_voice_2_seg_90",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5735831638177236,
-    "delta_to_secondary": -0.0387325909816556
+    "secondary_score": 1.0128158317548244,
+    "delta_to_secondary": 0.14600001132817242
   },
   {
     "layer_index": 91,
     "measure_num": 91,
     "segment_label": "measure_91",
-    "previous_primary": "staff_2_voice_5_seg_90",
-    "primary_node": "staff_2_voice_5_seg_91",
+    "previous_primary": "staff_1_voice_1_seg_90",
+    "primary_node": "staff_1_voice_1_seg_91",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5184218238625261,
+    "primary_score": 0.7641050685084227,
     "secondary_node": "staff_1_voice_2_seg_91",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6995068351427713,
-    "delta_to_secondary": 0.18108501128024523
+    "secondary_score": 0.8321085272864862,
+    "delta_to_secondary": 0.06800345877806346
   },
   {
     "layer_index": 92,
     "measure_num": 92,
     "segment_label": "measure_92",
-    "previous_primary": "staff_2_voice_5_seg_91",
-    "primary_node": "staff_2_voice_5_seg_92",
+    "previous_primary": "staff_1_voice_1_seg_91",
+    "primary_node": "staff_1_voice_1_seg_92",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4932460757593313,
+    "primary_score": 0.7619839642084005,
     "secondary_node": "staff_1_voice_2_seg_92",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7715521392368134,
-    "delta_to_secondary": 0.2783060634774821
+    "secondary_score": 0.8428515292994389,
+    "delta_to_secondary": 0.08086756509103832
   },
   {
     "layer_index": 93,
     "measure_num": 93,
     "segment_label": "measure_93",
-    "previous_primary": "staff_2_voice_5_seg_92",
-    "primary_node": "staff_2_voice_5_seg_93",
+    "previous_primary": "staff_1_voice_1_seg_92",
+    "primary_node": "staff_1_voice_1_seg_93",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5852451644010014,
+    "primary_score": 0.49868839446342356,
     "secondary_node": "staff_1_voice_2_seg_93",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6493591248989106,
-    "delta_to_secondary": 0.06411396049790918
+    "secondary_score": 1.1323688248793284,
+    "delta_to_secondary": 0.6336804304159049
   },
   {
     "layer_index": 94,
     "measure_num": 94,
     "segment_label": "measure_94",
-    "previous_primary": "staff_2_voice_5_seg_93",
-    "primary_node": "staff_2_voice_5_seg_94",
+    "previous_primary": "staff_1_voice_1_seg_93",
+    "primary_node": "staff_1_voice_1_seg_94",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.4520710696776708,
-    "secondary_node": "staff_1_voice_1_seg_94",
+    "primary_score": 0.7443286951443162,
+    "secondary_node": "staff_2_voice_5_seg_94",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6593401460183992,
-    "delta_to_secondary": 0.2072690763407284
+    "secondary_score": 1.095363122676358,
+    "delta_to_secondary": 0.35103442753204184
   },
   {
     "layer_index": 95,
     "measure_num": 95,
     "segment_label": "measure_95",
-    "previous_primary": "staff_2_voice_5_seg_94",
-    "primary_node": "staff_2_voice_5_seg_95",
+    "previous_primary": "staff_1_voice_1_seg_94",
+    "primary_node": "staff_1_voice_1_seg_95",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5010252763827641,
+    "primary_score": 0.7945049784400247,
     "secondary_node": "staff_1_voice_2_seg_95",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.6677196657657624,
-    "delta_to_secondary": 0.1666943893829983
+    "secondary_score": 0.9793919741746151,
+    "delta_to_secondary": 0.18488699573459044
   },
   {
     "layer_index": 96,
     "measure_num": 96,
     "segment_label": "measure_96",
-    "previous_primary": "staff_2_voice_5_seg_95",
-    "primary_node": "staff_2_voice_5_seg_96",
+    "previous_primary": "staff_1_voice_1_seg_95",
+    "primary_node": "staff_1_voice_1_seg_96",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5064522301157315,
-    "secondary_node": "staff_1_voice_1_seg_96",
+    "primary_score": 0.7691755246935469,
+    "secondary_node": "staff_1_voice_2_seg_96",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.7333619038263957,
-    "delta_to_secondary": 0.22690967371066417
+    "secondary_score": 1.0899442068555136,
+    "delta_to_secondary": 0.32076868216196674
   },
   {
     "layer_index": 97,
     "measure_num": 97,
     "segment_label": "measure_97",
-    "previous_primary": "staff_2_voice_5_seg_96",
-    "primary_node": "staff_1_voice_2_seg_97",
+    "previous_primary": "staff_1_voice_1_seg_96",
+    "primary_node": "staff_1_voice_1_seg_97",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.5910195777813594,
-    "secondary_node": "staff_2_voice_5_seg_97",
+    "primary_score": 0.8663418592828692,
+    "secondary_node": "staff_1_voice_2_seg_97",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.5133274232347806,
-    "delta_to_secondary": -0.07769215454657874
+    "secondary_score": 1.1304520012754382,
+    "delta_to_secondary": 0.264110141992569
   },
   {
     "layer_index": 98,
     "measure_num": 98,
     "segment_label": "measure_98",
-    "previous_primary": "staff_1_voice_2_seg_97",
-    "primary_node": "staff_1_voice_2_seg_98",
+    "previous_primary": "staff_1_voice_1_seg_97",
+    "primary_node": "staff_1_voice_1_seg_98",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.31839635918537773,
-    "secondary_node": "staff_1_voice_1_seg_98",
+    "primary_score": 0.7376075613137447,
+    "secondary_node": "staff_1_voice_2_seg_98",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.46143208762009935,
-    "delta_to_secondary": 0.14303572843472162
+    "secondary_score": 0.9630207234259808,
+    "delta_to_secondary": 0.22541316211223605
   },
   {
     "layer_index": 99,
     "measure_num": 99,
     "segment_label": "measure_99",
-    "previous_primary": "staff_1_voice_2_seg_98",
+    "previous_primary": "staff_1_voice_1_seg_98",
     "primary_node": "staff_1_voice_1_seg_99",
     "primary_score_type": "incoming_edge",
-    "primary_score": 0.2779788474241892,
+    "primary_score": 0.5494019717881173,
     "secondary_node": "staff_1_voice_2_seg_99",
     "secondary_score_type": "incoming_edge",
-    "secondary_score": 0.3843009779850642,
-    "delta_to_secondary": 0.10632213056087497
+    "secondary_score": 0.6584390253731699,
+    "delta_to_secondary": 0.10903705358505256
   }
 ]
